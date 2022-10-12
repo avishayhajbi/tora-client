@@ -1,0 +1,107 @@
+.wrapper{
+    padding:10px;
+}
+.form{
+
+}
+.form .form-check-inline{
+    margin-right: 0;
+}
+.form .form-check-inline input{
+    margin-left: 5px;
+}
+.form input[type="checkbox"]:checked:after,
+.form input[type="radio"]:checked:after{
+    right: 10px;
+}
+.form .form-group{
+    text-align: right;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+    color: black !important;
+}
+/*input[type=date]::-webkit-calendar-picker-indicator */
+input[type=date]::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.invalidInput{
+    color: #ca7878;
+}
+.invalidInputBorder{
+    border-color : red;
+}
+
+.privacyButton{
+    padding: 0 5px;
+    background: transparent;
+    color: black;
+    border: none;
+}
+
+.color-a{
+    color: #547aa6 !important;
+    text-decoration: underline !important;
+}
+
+.form li {
+    padding-right: 15px;
+}
+
+
+
+/*date input*/
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+input {
+    position: relative;
+    width: 150px; height: 20px;
+    color: white;
+}
+input, select, textarea {
+    box-shadow: 0 0 5px !important;
+    border-color: var(--primary-color) !important;
+}
+input:before {
+    position: absolute;
+    /*top: 3px; left: 3px;*/
+    content: attr(data-date);
+    display: inline-block;
+    color: black;
+}
+
+input::-webkit-datetime-edit,
+input::-webkit-inner-spin-button,
+input::-webkit-date-and-time-value,
+input::-webkit-clear-button {
+    display: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    /*top: 3px;*/
+    right: 0;
+    color: black;
+    opacity: 1;
+}
