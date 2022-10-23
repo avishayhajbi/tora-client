@@ -45,9 +45,11 @@ class Login extends Component {
                 <h3 className="loginTitle display-flex flex justify-content-center align-content-center width100 padd15px">
                     ממשק מנהל
                 </h3>
+                <div className='flex-100 padd15'>
                 <Form fields={getLoginForm()} callback={this.submit.bind(this)} loading={this.state.loading}
                       forgetPass={true} history={this.props.history} hidePolicy={true} submitText={"התחבר"}
                 />
+                </div>
             </div>
         )
     }
