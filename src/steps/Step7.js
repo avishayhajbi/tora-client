@@ -134,7 +134,7 @@ export const Step7 = ({nextStep, actions, app}) => {
             className='step0 d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center  text-center height-inherit'>
             <h1 className="paddBottom10px">
                 דף תשלום
-                <span> (₪{amount}) </span>
+                {amount !== 0 && <span style={{fontSize: '20px', fontWeight: '300'}}> (₪{amount}) </span>}
             </h1>
             <div className='width100' style={{height: '500px'}}>
                 <iframe id="NedarimFrame" className='w-100' frameBorder='none' scrolling="no" src="about:blank"/>
