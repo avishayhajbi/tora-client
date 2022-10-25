@@ -14,7 +14,6 @@ import moment from "moment";
 import {VersesRange} from "../components/VersesRange";
 import {booksMap} from "../utils";
 
-let skip = 0;
 export const ByDate = ({donate, book, selectedVerses, searchType, callback, actions}) => {
     const [verses, setVerses] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -118,13 +117,18 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
 
     const submit = (data) => {
         clearTimeout(timeoutRef);
-        setSearchLoading(true);
         setVerses([]);
+        setSearchLoading(true);
         setHasMoreAnswers(true);
-        skip = 0;
         timeoutRef = setTimeout(() => {
             const tmp = moment(data.date.value, 'YYYY/MM/DD');
-            setSearch(tmp.add('years', 13).format('YYYY/MM/DD'));
+            const format = tmp.add('years', 13).format('YYYY/MM/DD')
+            if (search !== format) {
+                setSearch(format);
+            } else {
+                setSearchLoading(false);
+                setHasMoreAnswers(false);
+            }
         }, 1000);
     }
 

@@ -49,7 +49,7 @@ export const getDonateForm = () => {
             settings: {pattern: '[0-9]*', required: true},
             type: 'tel',
         },
-        message: {
+        address: {
             value: '',
             settings: {rows: 3},
             title: 'כתובת',
