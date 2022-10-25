@@ -64,7 +64,7 @@ export const Step7 = ({nextStep, actions, app}) => {
             })
     }
     const payed = () => {
-        // nextStep();
+        nextStep();
     }
 
     const getAmount = () => {
