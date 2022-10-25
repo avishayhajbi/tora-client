@@ -15,8 +15,8 @@ let MosadId = 0;
 let ApiValid = '';
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    MosadId = 0; // 4000810;
-    ApiValid = ''; // 'LnUOSuFSPc';
+    MosadId = 0;
+    ApiValid = 'j+iyEFN3bE';
 } else {
     MosadId = 4000810;
     ApiValid = 'LnUOSuFSPc';
@@ -102,7 +102,7 @@ export const Step7 = ({nextStep, actions, app}) => {
                 'PaymentType': 'Ragil',
                 'Currency': '1',
 
-                'Zeout': '',
+                'Zeout':  document.getElementById('Zeout').value,
                 'FirstName': app.donate.name,
                 'LastName': app.donate.lastName,
                 'Street': app.donate.address,
@@ -134,10 +134,57 @@ export const Step7 = ({nextStep, actions, app}) => {
             className='step0 d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center  text-center height-inherit'>
             <h1 className="paddBottom10px">
                 דף תשלום
-                {amount !== 0 && <span style={{fontSize: '20px', fontWeight: '300'}}> (₪{amount}) </span>}
             </h1>
-            <div className='width100' style={{height: '500px'}}>
-                <iframe id="NedarimFrame" className='w-100' frameBorder='none' scrolling="no" src="about:blank"/>
+            <div className='width100' style={{marginBottom: '150px'}}>
+                {amount !== 0 && <React.Fragment>
+                    <div
+                     style={{
+                         "verticalAlign": "top",
+                         "textAlign": "right",
+                         "margin": "15px 0px 15px 0px",
+                         "minWidth":"100%",
+                         "-webkitBoxSizing": "border-box",
+                     }}>
+                    <span
+                          style={{
+                              "textAlign": "right",
+                              "minWidth": "100%",
+                              "marginRight": "1px",
+                              "color": "#808080",
+                          }}>סכום:</span>
+                    <br/>
+                    <input disabled={true} type="number" name="Amount" style={{
+                        color: 'black',
+                        width: '-webkit-fill-available',
+                        height: '23.5px',
+                    }} value={amount} className="TextBox"/>
+                </div>
+                    <div
+                        style={{
+                            "verticalAlign": "top",
+                            "textAlign": "right",
+                            "margin": "15px 0px 15px 0px",
+                            "minWidth":"100%",
+                            "-webkitBoxSizing": "border-box",
+                        }}>
+                    <span
+                        style={{
+                            "textAlign": "right",
+                            "minWidth": "100%",
+                            "marginRight": "1px",
+                            "color": "#808080",
+                        }}>תעודת זהות:</span>
+                        <br/>
+                        <input type="tel" id='Zeout' name="Zeout" style={{
+                            color: 'black',
+                            width: '-webkit-fill-available',
+                            height: '23.5px',
+                        }} className="TextBox"/>
+                    </div>
+                </React.Fragment>}
+                <iframe id="NedarimFrame" className='w-100' style={{
+                    border: "1px solid",
+                }} scrolling="no" src="about:blank"/>
                 <div id="WaitNedarimFrame">
                     <Loader/>
                     <br/>Connecting to PCI Server...
@@ -146,15 +193,15 @@ export const Step7 = ({nextStep, actions, app}) => {
                 <div id="OkDiv"
                      style={{display: 'none'}}
                 >
-                    - העסקה בוצעה בהצלחה
+                    העסקה בוצעה בהצלחה
                 </div>
 
-                {<div id="PayBtDiv" style={{display: 'none'}}>
+                <div id="PayBtDiv" style={{display: 'none'}}>
                     <Button id="PayBt" className="btn" onClick={PayBtClick}>
                         ביצוע תשלום
                     </Button>
                     <div id="ErrorDiv" className='paddTop10px'></div>
-                </div>}
+                </div>
                 <div
                     style={{display: 'none'}}
                     id="WaitPay">
@@ -162,7 +209,7 @@ export const Step7 = ({nextStep, actions, app}) => {
                     <br/>מבצע חיוב, נא להמתין...
                 </div>
 
-                <div id="Result" dir="ltr"></div>
+                <div id="Result"></div>
             </div>
         </div>
     )

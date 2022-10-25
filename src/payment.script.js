@@ -13,7 +13,7 @@ window.onload = function () {
 export function loadPaymentScripts() {
     if (window.addEventListener) { window.addEventListener("message", ReadPostMessage, false); } else { window.attachEvent("onmessage", ReadPostMessage); }
     document.getElementById('NedarimFrame').onload = function () { /*console.log('StartNedarim'); */PostNedarim({'Name':'GetHeight'}) }
-    document.getElementById('NedarimFrame').src = "https://matara.pro/nedarimplus/iframe?language=he";
+    document.getElementById('NedarimFrame').src = "https://matara.pro/nedarimplus/iframe?language=he&Captcha=1";
     document.getElementById('PayBtDiv').style.display = 'block';
 
 
