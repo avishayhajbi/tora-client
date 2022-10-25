@@ -13,13 +13,14 @@ import {Loader} from "../components/Loader";
 
 let MosadId = 0;
 let ApiValid = '';
-
+let domain = 'https://1b10-93-173-224-240.ngrok.io';
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     MosadId = 0;
     ApiValid = 'j+iyEFN3bE';
 } else {
     MosadId = 4000810;
     ApiValid = 'LnUOSuFSPc';
+    domain = window.DOMAIN;
 }
 
 export const Step7 = ({nextStep, actions, app}) => {
@@ -120,7 +121,7 @@ export const Step7 = ({nextStep, actions, app}) => {
                 'Param2': '',
                 'ForceUpdateMatching': '1', //מיועד לקמפיין אם מעוניינים שהמידע יידחף ליעד, למרות שזה לא נהוג באייפרם
 
-                'CallBack': window.DOMAIN + '/payment', //מיועד לקבלת WEBHOOK לאחר כל עסקה / סירוב
+                'CallBack': domain + '/payment', //מיועד לקבלת WEBHOOK לאחר כל עסקה / סירוב
                 'CallBackMailError': 'toraletter@gmail.com', //מיועד לקבלת התראה על תקלת בשליחת קאלבק למייל של המפתח במקום למייל של אנשי הקשר של המוסד
 
                 // 'Tokef': document.getElementById('Tokef').value //אם אתם מנהלים את התוקף בדף שלכם (מיועד למי שרוצה להפריד בין חודש לשנה ורוצה לעצב מותאם אישית)
