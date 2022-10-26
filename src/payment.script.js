@@ -26,7 +26,7 @@ function ReadPostMessage(event) {
     switch (event.data.Name) {
         case 'Height':
             //Here you get the height of iframe | event.data.Value
-            document.getElementById('NedarimFrame').style.height = (parseInt(event.data.Value) + 15) + "px";
+            document.getElementById('NedarimFrame').style.height = (parseInt(event.data.Value - 150) + 15) + "px";
             document.getElementById('WaitNedarimFrame').style.display = 'none';
             break;
 

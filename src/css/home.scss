@@ -103,3 +103,11 @@
   background: white;
   box-shadow: 0px 3px 10px var(--primary-color-light);
 }
+
+.step7 {
+  #NedarimFrame {
+    &.hasBorder {
+      border: 1px solid red;
+    }
+  }
+}

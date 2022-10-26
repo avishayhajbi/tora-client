@@ -194,7 +194,7 @@ const REST = {
         const tmp = moment(date, 'YYYY/MM/DD');
         // https://www.hebcal.com/home/195/jewish-calendar-rest-api
         // &maj=on&min=on&mod=on&nx=on&ss=on&mf=on&c=on&M=on&D=on
-        return axios.get(`https://www.hebcal.com/hebcal?v=1&yt=G&cfg=json&start=${tmp.add('week', 1).format('YYYY-MM-DD')}&end=${tmp.add("week", 1).add('minute', 1).format('YYYY-MM-DD')}&s=on&lg=he`, {
+        return axios.get(`https://www.hebcal.com/hebcal?v=1&yt=G&cfg=json&start=${tmp.format('YYYY-MM-DD')}&end=${tmp.endOf('week').format('YYYY-MM-DD')}&s=on&lg=he`, {
             cors: true,
             headers: {},
         })

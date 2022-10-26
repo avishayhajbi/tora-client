@@ -1,9 +1,6 @@
 import React, {Component, useEffect, useState} from "react";
 import {Button, Form} from 'react-bootstrap';
 import rest from '../rest';
-import {TakenBy} from "../components/TakenBy";
-import {AvailableBooks} from "../components/AvailableBooks";
-import {VerseLocation} from "../components/VerseLocation";
 import OtherBooksModal from "../components/OtherBooksModal";
 import {getByDateForm} from "../config";
 import {default as MyForm} from "../components/Form";
@@ -13,6 +10,7 @@ import {gematriyaNumbers} from "../utils";
 import moment from "moment";
 import {VersesRange} from "../components/VersesRange";
 import {booksMap} from "../utils";
+import {HDate} from '@hebcal/core';
 
 export const ByDate = ({donate, book, selectedVerses, searchType, callback, actions}) => {
     const [verses, setVerses] = useState([]);
@@ -121,8 +119,11 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
         setSearchLoading(true);
         setHasMoreAnswers(true);
         timeoutRef = setTimeout(() => {
+            debugger
             const tmp = moment(data.date.value, 'YYYY/MM/DD');
-            const format = tmp.add('years', 13).format('YYYY/MM/DD')
+            const hdate = new HDate(new Date(tmp));
+            const date13 = hdate.add(13, 'y').greg();
+            const format = moment(date13).format('YYYY/MM/DD');
             if (search !== format) {
                 setSearch(format);
             } else {

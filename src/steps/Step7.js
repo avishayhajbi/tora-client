@@ -11,15 +11,12 @@ import {Loader} from "../components/Loader";
  * create a long polling with the generated ID to check if it's done
  */
 
-let MosadId = 0;
-let ApiValid = '';
+const MosadId = process.env.REACT_APP_MOSADID;
+const ApiValid = process.env.REACT_APP_APIVALID;
 let domain = 'https://1b10-93-173-224-240.ngrok.io';
+console.log(MosadId)
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    MosadId = 0;
-    ApiValid = 'j+iyEFN3bE';
 } else {
-    MosadId = 4000810;
-    ApiValid = 'LnUOSuFSPc';
     domain = window.DOMAIN;
 }
 
@@ -90,6 +87,10 @@ export const Step7 = ({nextStep, actions, app}) => {
     }
 
     const PayBtClick = () => {
+        if (!amount || amount === 0) {
+            alert('תם הזמן, נא רענן את הדף ונסה שנית');
+            return;
+        }
         document.getElementById('Result').innerHTML = ''
         document.getElementById('PayBtDiv').style.display = 'none';
         document.getElementById('OkDiv').style.display = 'none';
@@ -132,7 +133,7 @@ export const Step7 = ({nextStep, actions, app}) => {
 
     return (
         <div
-            className='step0 d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center  text-center height-inherit'>
+            className='step7 d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center  text-center height-inherit'>
             <h1 className="paddBottom10px">
                 דף תשלום
             </h1>
@@ -183,9 +184,7 @@ export const Step7 = ({nextStep, actions, app}) => {
                         }} className="TextBox"/>
                     </div>
                 </React.Fragment>}
-                <iframe id="NedarimFrame" className='w-100' style={{
-                    border: "1px solid",
-                }} scrolling="no" src="about:blank"/>
+                <iframe id="NedarimFrame" className={`w-100 ${amount !== 0 ? 'hasBorder' : ''}`} frameBorder='none'  src="about:blank"/>
                 <div id="WaitNedarimFrame">
                     <Loader/>
                     <br/>Connecting to PCI Server...
