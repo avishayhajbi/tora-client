@@ -10,7 +10,7 @@ import {gematriyaNumbers} from "../utils";
 import moment from "moment";
 import {VersesRange} from "../components/VersesRange";
 import {booksMap} from "../utils";
-import {HDate} from '@hebcal/core';
+import {HDate, Sedra} from '@hebcal/core';
 
 export const ByDate = ({donate, book, selectedVerses, searchType, callback, actions}) => {
     const [verses, setVerses] = useState([]);
@@ -119,11 +119,12 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
         setSearchLoading(true);
         setHasMoreAnswers(true);
         timeoutRef = setTimeout(() => {
-            debugger
             const tmp = moment(data.date.value, 'YYYY/MM/DD');
             const hdate = new HDate(new Date(tmp));
-            const date13 = hdate.add(13, 'y').greg();
-            const format = moment(date13).format('YYYY/MM/DD');
+            const date13 = hdate.add(13, 'y');
+            // const sedra = new Sedra(date13.year, true);
+            // console.log(sedra.lookup(date13));
+            const format = moment(date13.greg()).format('YYYY/MM/DD');
             if (search !== format) {
                 setSearch(format);
             } else {

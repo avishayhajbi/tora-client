@@ -47,7 +47,7 @@ export const Step5 = ({nextStep, app, actions}) => {
 
     const nextStepButton = () => {
         let canContinue = selectedVerses.find(v => !v.bless?.length);
-        if (!canContinue) {
+        if (!canContinue && selectedVerses.length) {
             rest.checkAvailability(
                 app.selectedBook._id,
                 selectedVerses.filter(v => !v.range).map(v => v._id),

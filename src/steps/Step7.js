@@ -14,7 +14,7 @@ import {Loader} from "../components/Loader";
 const MosadId = process.env.REACT_APP_MOSADID;
 const ApiValid = process.env.REACT_APP_APIVALID;
 let domain = 'https://1b10-93-173-224-240.ngrok.io';
-console.log(MosadId)
+
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 } else {
     domain = window.DOMAIN;
