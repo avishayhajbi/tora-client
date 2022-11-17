@@ -10,6 +10,7 @@ export const LOCAL_STORAGE = keyMirror({
     LOGIN_INFO: null,
     TOKEN: null,
     USERNAME: null,
+    CART_INFO: null,
 })
 
 export const getLoginForm = () => {

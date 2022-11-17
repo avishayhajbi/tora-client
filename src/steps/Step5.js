@@ -1,10 +1,12 @@
 import React, {Component, useEffect, useState} from "react";
 import NextButton from "../components/NextButton";
 import {Hello} from "../components/Hello";
-import {Button, Form} from "react-bootstrap";
+import {Button, Form, Navbar} from "react-bootstrap";
 import {countWeight} from "../utils";
 import rest from "../rest";
 import {VersesRange} from "../components/VersesRange";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import * as ICONS from "@fortawesome/free-solid-svg-icons";
 
 export const Step5 = ({nextStep, app, actions}) => {
     // const [blessFor, setBlessFor] = useState({});
@@ -46,24 +48,52 @@ export const Step5 = ({nextStep, app, actions}) => {
     }
 
     const nextStepButton = () => {
-        let canContinue = selectedVerses.find(v => !v.bless?.length);
+        const canContinue = selectedVerses.find(v => !v.bless?.length);
         if (!canContinue && selectedVerses.length) {
-            rest.checkAvailability(
-                app.selectedBook._id,
-                selectedVerses.filter(v => !v.range).map(v => v._id),
-                selectedVerses.filter(v => v.range),
-                true,
-            )
-            .then(response => {
-                if (response.success) {
-                    nextStep();
-                } else if (response.data) {
+            const selectedIds = selectedVerses.map(v => v._id);
+            if (app.cart.find(v => selectedIds.includes(v._id))) {
+                alert('המוצר כבר נמצא בסל');
+            } else {
+                actions.addToCart(selectedVerses);
+                rest.checkAvailability(
+                    app.selectedBook._id,
+                    selectedVerses.filter(v => !v.range).map(v => v._id),
+                    selectedVerses.filter(v => v.range),
+                    true,
+                )
+                    .then(response => {
+                        if (response.success) {
+                            nextStep();
+                        } else if (response.data) {
 
-                }
-            })
-            .catch(err => {
+                        }
+                    })
+                    .catch(err => {
 
-            })
+                    })
+            }
+        }
+    }
+
+    const removeItem = (index) => {
+        const text = "האם אתה בטוח?";
+        if (window.confirm(text) == true) {
+            selectedVerses.splice(index, 1);
+            actions.setSelectedVerses(selectedVerses);
+            toUpdate.splice(index, 1);
+        }
+    }
+
+    const addToCart = () => {
+        const canContinue = selectedVerses.find(v => !v.bless?.length);
+        if (!canContinue) {
+            const selectedIds = selectedVerses.map(v => v._id);
+            if (app.cart.find(v => selectedIds.includes(v._id))) {
+                alert('המוצר כבר נמצא בסל');
+            } else {
+                actions.addToCart(selectedVerses);
+                window.history.back();
+            }
         }
     }
 
@@ -99,15 +129,19 @@ export const Step5 = ({nextStep, app, actions}) => {
             className='step5 d-flex flex-column flex-100 padd10 justify-content-start align-content-center align-items-center text-center height-inherit'>
             <Hello donate={app.donate}/>
 
-            <div className='width100'>
-                {selectedVerses && selectedVerses.filter(v => !v.range).map((val, index) => {
-                    return <React.Fragment key={index}>
+            <ol className='width100'>
+                {selectedVerses && selectedVerses.map((val, index) => {
+                    return <li key={index}>
                         <Form.Group controlId={'verse'} key={val._id}>
-                            <Form.Label>אנא בדוק שזהו הפסוק שבחר לבך</Form.Label>
-                            <Form.Control className='text-center' as='textarea' placeholder={'הפסוק שנבחר'}
-                                          value={val.text} name='verse' disabled={true}/>
+                            <Form.Label className='d-flex flex-row align-content-center align-items-center'>
+                                <FontAwesomeIcon onClick={() => removeItem(val._id)} className='pointer marginLeft5px' icon={ICONS.faTrash}/>
+                                אנא בדוק שזהו הפסוק שבחר לבך
+                            </Form.Label>
+                            {!val.range && <Form.Control className='text-center' as='textarea' placeholder={'הפסוק שנבחר'}
+                                          value={val.text} name='verse' disabled={true}/>}
+                            {val.range && <VersesRange val={val} withBook={true}/>}
                         </Form.Group>
-                        <div className='d-flex flex-row layout-align-space-around align-items-center'>
+                        {!val.range && <div className='d-flex flex-row layout-align-space-around align-items-center'>
                             <div
                                 className='d-flex flex-column justify-content-center align-content-center align-items-center'>
                                 <div>
@@ -120,42 +154,16 @@ export const Step5 = ({nextStep, app, actions}) => {
                                 <div>סה"כ לתשלום:</div>
                                 {<div>₪{countWeight(val.textWithout)}</div>}
                             </div>
-                        </div>
+                        </div>}
                         {getBlessElem(val)}
                         <hr/>
-                    </React.Fragment>
+                    </li>
                 })}
-            </div>
+            </ol>
 
-            <div className='width100'>
-                {selectedVerses && selectedVerses.filter(v => v.range).map((val, index) => {
-                    return <React.Fragment key={index}>
-                        <Form.Group controlId={'verse'} key={val._id}>
-                            <Form.Label>אנא בדוק שזוהי בחירתך</Form.Label>
-                            <VersesRange val={val} withBook={true}/>
-                        </Form.Group>
-                            <div className='d-flex flex-row layout-align-space-around align-items-center'>
-                            <div
-                                className='d-flex flex-column justify-content-center align-content-center align-items-center'>
-                                <div>
-                                    סה"כ אותיות:
-                                </div>
-                                {<div>{toUpdate[index] || 0}</div>}
-                            </div>
-                            <div
-                                className='d-flex flex-column justify-content-center align-content-center align-items-center'>
-                                <div>סה"כ לתשלום:</div>
-                                {<div>₪{toUpdate[index] || 0}</div>}
-                            </div>
-                        </div>
-                        {getBlessElem(val)}
-                        <hr/>
-                    </React.Fragment>
-                })}
-            </div>
-
-            <div className="width100 marginTop30px">
+            <div className="d-flex flex-row width100 marginTop30px layout-align-space-between">
                 <NextButton clicked={nextStepButton} text={'לחץ למצווה'}/>
+                <NextButton clicked={addToCart} text={'הוסף לסל והמשך בחיפוש'}/>
             </div>
         </div>
     )

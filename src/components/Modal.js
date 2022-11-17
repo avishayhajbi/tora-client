@@ -57,7 +57,8 @@ class MyModal extends Component {
                         <h3 className={"primary"}>{this.props.title}</h3>
                     </Modal.Title>
                 </Modal.Header>
-                {<Modal.Body className={'text-right'}>{this.props.children}</Modal.Body>}
+                {(this.props.children) && <Modal.Body className={'text-right'}>{this.props.children}</Modal.Body>}
+                {!(this.props.children) && <Modal.Body className={'text-right'}>{this.props.body}</Modal.Body>}
                 {!this.props.hideFooter && <Modal.Footer className={'modalFooter flex-100 layout layout-row layout-align-space-between-center'}>
                     {this.props.buttons && this.props.buttons.map((btn,i)=><Button key={`_${i}`} variant={btn.class || 'primary'} onClick={btn.callback || this.props.onHide || this.handleClose.bind(this)}>{btn.name || 'OK'}</Button>)}
                 </Modal.Footer>}

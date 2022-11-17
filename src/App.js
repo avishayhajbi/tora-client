@@ -16,7 +16,9 @@ import {ButtonToolbar, ButtonGroup, Button, Navbar, Nav, NavDropdown, Container,
 import $ from 'jquery';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import * as ICONS from "@fortawesome/free-solid-svg-icons";
-import {logout} from "./store/app/actions";
+import {Cart} from "./components/Cart";
+import Badge from "react-bootstrap/Badge";
+import rest from "./rest";
 
 /*let { history } = this.props;
 history.push({
@@ -141,6 +143,15 @@ class App extends React.Component{
         }
     }
 
+    async openCart() {
+
+        this.props.actions.updateModal({
+            show: true,
+            title: 'הפסוקים שלי',
+            body: <Cart verses={this.props.app.cart} actions={this.props.actions}/>,
+        })
+    }
+
     render () {
         return (
             <React.Fragment>
@@ -162,6 +173,10 @@ class App extends React.Component{
                         <Nav className="mr-auto">
                             {false && !this.props.app.token && <Button variant="outline-light" onClick={this.goToLogin.bind(this)}>התחבר</Button>}
                             {this.props.app.token && <Button variant="outline-light" onClick={this.logout.bind(this)}>התנתק</Button>}
+                            <div className='pointer' onClick={this.openCart.bind(this)}>
+                                <Badge text="white" style={{color: 'white'}}>({this.props.app.cart.length})</Badge>
+                                <FontAwesomeIcon className='marginLeft5px' icon={ICONS.faShoppingCart} color={'white'}></FontAwesomeIcon>
+                            </div>
                         </Nav>
 
                     </Navbar.Collapse>

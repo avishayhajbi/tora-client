@@ -44,6 +44,11 @@ export default function appReducer(state = initialState, action) {
             break;
         }
 
+        case APP.ADD_TO_CART: {
+            newState.cart = action.data;
+            break;
+        }
+
         case APP.SET_BLESS_FOR: {
             newState.blessFor = action.data;
             break;

@@ -281,6 +281,9 @@ body[dir="ltr"] .paddEnd0px, body[dir="rtl"] .paddStart0px {
 .marginLeft5px {
     margin-left: 5px;
 }
+.marginRight5px {
+    margin-right: 5px;
+}
 
 .marginTop30px {
     margin-top: 30px;

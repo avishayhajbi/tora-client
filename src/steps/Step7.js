@@ -22,12 +22,20 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 
 export const Step7 = ({nextStep, actions, app}) => {
     const [amount, setAmount] = useState(0);
-    const selectedVerses = app.selectedVerses;
+    const [selectedVerses, setSelectedVerses] = useState([]);
     const uniqueId = uuidv4();
 
     useEffect(() => {
-        getAmount();
+        setSelectedVerses(app.cart);
     }, []);
+
+    useEffect(() => {
+        setSelectedVerses(app.cart);
+    }, [app.cart]);
+
+    useEffect(() => {
+        getAmount();
+    }, [selectedVerses]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -73,7 +81,7 @@ export const Step7 = ({nextStep, actions, app}) => {
         )
             .then(response => {
                 if (response.success) {
-                    rest.getSelectedVersesPriceAndAmount(selectedVerses, app.selectedBook/*, uniqueId*/)
+                    rest.getSelectedVersesPriceAndAmount(selectedVerses/*, uniqueId*/)
                         .then(res => {
                             setAmount(res.price);
                         })

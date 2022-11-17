@@ -12,6 +12,7 @@ const InitialState = {
         _id: '',
     },
     payment: null,
+    cart: [],
 };
 
 export default InitialState;

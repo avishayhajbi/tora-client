@@ -23,7 +23,7 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
     const [replaceVerse, setReplaceVerse] = useState(null);
     const [error, setError] = useState('');
     const [hasMoreAnswers, setHasMoreAnswers] = useState(true);
-    const [selectedBook, setSelectedBook] = useState(null);
+    const [selectedAliyaBook, setSelectedAliyaBook] = useState(null);
     const [parasha, setParasha] = useState(null);
     const [aliya, setAliya] = useState(null);
 
@@ -35,7 +35,7 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
         const value = e.target.checked;
         const prevVerses = chosenVerses;
         if (value === true) {
-            prevVerses.push(val);
+            prevVerses.push({...val, bookId: book._id});
         } else {
             const index = prevVerses.findIndex(v => v._id === val._id);
             prevVerses.splice(index, 1);
@@ -47,17 +47,17 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
     }
 
     const onBookSelected = (event) => {
-        setSelectedBook(Tora[Number(event.target.value)]);
+        setSelectedAliyaBook(Tora[Number(event.target.value)]);
         setParasha(null);
         setAliya(null);
     }
     const onParashaSelected = (event) => {
-        setParasha(selectedBook[event.target.selectedIndex]);
-        const aliyot = Object.values(selectedBook.parasha[Number(event.target.value)].aliyot).map((val, index) => {
+        setParasha(selectedAliyaBook[event.target.selectedIndex]);
+        const aliyot = Object.values(selectedAliyaBook.parasha[Number(event.target.value)].aliyot).map((val, index) => {
             return {
                 range: true,
-                _id: index,
-                book: selectedBook.book,
+                _id: `${book._id}_${val.start.chapter}:${val.start.verse}-${val.end.chapter}:${val.end.verse}`,
+                book: selectedAliyaBook.book,
                 code: val,
                 transformed: [`פרק ${gematriyaNumbers(val.start.chapter)} פסוק ${gematriyaNumbers(val.start.verse)}`, `פרק ${gematriyaNumbers(val.end.chapter)} פסוק ${gematriyaNumbers(val.end.verse)}`],
             };
@@ -73,8 +73,8 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
                 <Form.Group controlId='select_book' className='form-group'>
                     <Form.Label>בחר חומש</Form.Label>
                     <Form.Control as="select" onChange={(event) => onBookSelected(event)}
-                         name='select_book'>
-                        <option selected={true} key={'-1'}>בחר חומש</option>
+                         name='select_book' defaultValue={'-1'}>
+                        <option key={'-1'}>בחר חומש</option>
                         {
                             Tora.map((b, bi) => {
                                 return <option key={bi} value={bi}>{b.name}</option>
@@ -86,11 +86,11 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
                 <Form.Group controlId='select_parasha' className='form-group'>
                     <Form.Label>בחר פרשה</Form.Label>
                     <Form.Control as="select" onChange={(event) => onParashaSelected(event)}
-                                  disabled={!selectedBook}
-                                  name='select_parasha'>
-                        <option selected={!selectedBook} key={'-1'}>בחר פרשה</option>
+                                  disabled={!selectedAliyaBook}
+                                  name='select_parasha' defaultValue={selectedAliyaBook}>
+                        <option key={'-1'}>בחר פרשה</option>
                         {
-                            selectedBook?.parasha.map((b, bi) => {
+                            selectedAliyaBook?.parasha.map((b, bi) => {
                                 return <option key={bi} value={bi}>{b.name}</option>
                             })
                         }

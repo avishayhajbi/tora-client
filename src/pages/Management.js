@@ -98,7 +98,7 @@ class Management extends Component {
             })
     }
     removeBookPermanently(book) {
-        let text = "האם אתה בטוח?";
+        const text = "האם אתה בטוח?";
         if (window.confirm(text) == true) {
             rest.removeBookPermanently(book._id)
                 .then((data) => {

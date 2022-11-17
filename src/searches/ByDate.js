@@ -53,7 +53,7 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
                                     const code = transformAliya(tmp);
                                     return {
                                         range: true,
-                                        _id: vi,
+                                        _id: `${book._id}_${code.start.chapter}:${code.start.verse}-${code.end.chapter}:${code.end.verse}`,
                                         book: booksMap[bookName],
                                         code,
                                         transformed: [`פרק ${gematriyaNumbers(code.start.chapter)} פסוק ${gematriyaNumbers(code.start.verse)}`, `פרק ${gematriyaNumbers(code.end.chapter)} פסוק ${gematriyaNumbers(code.end.verse)}`],
@@ -82,7 +82,7 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
         const value = e.target.checked;
         const prevVerses = chosenVerses;
         if (value === true) {
-            prevVerses.push(val);
+            prevVerses.push({...val, bookId: book._id});
         } else {
             const index = prevVerses.findIndex(v => v._id === val._id);
             prevVerses.splice(index, 1);

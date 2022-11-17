@@ -84,7 +84,7 @@ export const Step4 = ({nextStep, app, location, actions}) => {
     }
 
     const getTotalAmount = () => {
-        rest.getSelectedVersesPriceAndAmount(app.selectedVerses, app.selectedBook)
+        rest.getSelectedVersesPriceAndAmount(app.selectedVerses)
             .then(res => {
                 setAmount(res.price);
             })

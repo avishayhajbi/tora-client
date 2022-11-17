@@ -203,14 +203,14 @@ const REST = {
             })
             .then(responseMiddleware)
     },
-    getSelectedVersesPriceAndAmount: (selectedVerses, selectedBook) => {
+    getSelectedVersesPriceAndAmount: (selectedVerses) => {
         return axios.post(`${DOMAIN}/verses/price`, {
-            selectedBook: selectedBook._id,
             verses: selectedVerses.filter(v => !v.range).map(v => v._id).filter(v => v),
             ranges: selectedVerses.filter(v => v.range).map(v => {
                 return {
                     book: v.book,
                     code: v.code,
+                    bookId: v.bookId,
                 }
             }).filter(v => v),
         }, {

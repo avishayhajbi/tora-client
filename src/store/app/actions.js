@@ -55,6 +55,17 @@ export function init() {
             } catch (err) {
             }
         }
+        let cart_info = window.sessionStorage.getItem(LOCAL_STORAGE.CART_INFO);
+        if (cart_info) {
+            try {
+                cart_info = JSON.parse(cart_info);
+                dispatch({
+                    type: APP.ADD_TO_CART,
+                    data: cart_info
+                })
+            } catch (err) {
+            }
+        }
     }
 }
 
@@ -95,6 +106,7 @@ export function resetAppData() {
         window.sessionStorage.removeItem(LOCAL_STORAGE.DONATE_INFO);
         window.sessionStorage.removeItem(LOCAL_STORAGE.BOOK_INFO);
         window.sessionStorage.removeItem(LOCAL_STORAGE.VERSES_INFO);
+        window.sessionStorage.removeItem(LOCAL_STORAGE.CART_INFO);
         dispatch({
             type: APP.CLEAR_ALL,
             data: {},
@@ -115,6 +127,10 @@ export function logout() {
 
 export function updateModal(data) {
     return (dispatch, getState) => {
+        if (data.update) {
+            const modal = getState().app.modal;
+            data = {...modal, ...data};
+        }
         dispatch({
             type: APP.UPDATE_MODAL,
             data: data
@@ -153,6 +169,35 @@ export function setSelectedVerses(data) {
         })
     }
 }
+
+export function addToCart(data) {
+    return (dispatch, getState) => {
+        const cart = getState().app.cart;
+        const all = [...cart, ...data];
+        window.sessionStorage.setItem(LOCAL_STORAGE.CART_INFO, JSON.stringify(all));
+        dispatch({
+            type: APP.ADD_TO_CART,
+            data: all
+        })
+    }
+}
+
+export function removeFromCart(id) {
+    return (dispatch, getState) => {
+        const cart = getState().app.cart;
+        const index = cart.findIndex(v => v._id === id);
+        if (index !== -1) {
+            cart.splice(index, 1);
+        }
+        const all = [...cart];
+        window.sessionStorage.setItem(LOCAL_STORAGE.CART_INFO, JSON.stringify(all));
+        dispatch({
+            type: APP.ADD_TO_CART,
+            data: all
+        })
+    }
+}
+
 
 export function setBlessFor(data) {
     return (dispatch, getState) => {
