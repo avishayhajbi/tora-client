@@ -101,7 +101,12 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
             document.querySelectorAll('input[type="radio"]').forEach(v=> v.checked = false);
             e.currentTarget.checked = true;
             if (values.find(v => v.taken)) {
-                alert('אחד מהפסוקים שבחרת כבר תפוס, אנא בחר ספר תורה אחר שבו תוכל לרכוש את הפסוק');
+                actions.updateModal({
+                    show: true,
+                    title: 'שים לב',
+                    body: 'אחד מהפסוקים שבחרת כבר תפוס, אנא בחר ספר תורה אחר שבו תוכל לרכוש את הפסוק',
+                    hideFooter: true,
+                });
                 e.target.checked = false;
             } else {
                 prevVerses.push(...values);

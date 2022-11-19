@@ -52,7 +52,12 @@ export const Step5 = ({nextStep, app, actions}) => {
         if (!canContinue && selectedVerses.length) {
             const selectedIds = selectedVerses.map(v => v._id);
             if (app.cart.find(v => selectedIds.includes(v._id))) {
-                alert('המוצר כבר נמצא בסל');
+                actions.updateModal({
+                    show: true,
+                    title: 'שים לב',
+                    body: 'המוצר כבר נמצא בסל',
+                    hideFooter: true,
+                });
             } else {
                 actions.addToCart(selectedVerses);
                 rest.checkAvailability(

@@ -27,8 +27,11 @@ class MyForm extends Component {
     }
 
     componentDidMount() {
-        if (this.state.fields.id) {
-            this.validateField(this.FIELDS_MIRROR.id, '');
+        if (this.props.triggerSubmitOnCreate) {
+            setTimeout(() => {
+                this.validateForm();
+                this.updateOnChanges();
+            }, 1000 * 3)
         }
     }
 

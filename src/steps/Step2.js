@@ -1,4 +1,4 @@
-import React, {Component, useRef, useState} from "react";
+import React, {Component, useEffect, useRef, useState} from "react";
 import NextButton from "../components/NextButton";
 import {getDonateForm, getContributionForm} from "../config";
 import Form from "../components/Form";
@@ -57,14 +57,16 @@ export const Step2 = ({nextStep, actions, app}) => {
                       everyChangeUpdate={true}
                       submitText={""}
                       callback={submit}
+                      triggerSubmitOnCreate={true}
                 reff={inputEl1}/>
             </div>
             {formData?.donateForSomeoneElse?.value && <div>
-                <h5>קיום התרומה של שם:</h5>
+                <h5>קיום התרומה על שם:</h5>
                 <Form fields={contributionForm}
                       everyChangeUpdate={true}
                       submitText={""}
                       callback={contributionSubmit}
+                      triggerSubmitOnCreate={true}
                 reff={inputEl2}/>
             </div>}
             <div className="width100">
