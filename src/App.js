@@ -91,7 +91,13 @@ class App extends React.Component{
 
     componentDidMount() {
         window.addEventListener('locationchange', (e) => {
-            this.setState({location: window.location.pathname})
+            this.setState({location: window.location.pathname});
+            if (window.gtag) {
+                window.gtag('event', 'screen_view', {
+                    'app_name': 'tora-letter',
+                    'screen_name': window.location.pathname
+                });
+            }
         });
     }
 

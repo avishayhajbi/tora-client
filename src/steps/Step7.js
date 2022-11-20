@@ -60,6 +60,15 @@ export const Step7 = ({nextStep, actions, app}) => {
         rest.checkIFPaymentIsDone(id)
             .then((response) => {
                 if (response && response.success) {
+                    if (window.gtag) {
+                        window.gtag('event', 'purchase', {
+                            name: app.donate.name,
+                            phone: app.donate.phone,
+                            email: app.donate.email,
+                            amount,
+                            uniqueId,
+                        });
+                    }
                     payed();
                 } else {
                     setTimeout(() => {

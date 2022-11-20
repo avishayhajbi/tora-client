@@ -58,7 +58,7 @@ class MyForm extends Component {
     }
 
     validateForm() {
-        this.setState({formInvalid: !(this.props.reff?.current || this.refs.formRef).checkValidity()});
+        this.setState({formInvalid: !(this.props.reff?.current || this.refs.formRef)?.checkValidity()});
     }
 
     getFormFields() {
