@@ -40,6 +40,13 @@ export const Cart = ({verses, actions}) => {
                                 callback: () => {
                                     window.location.href = '/7?step=7';
                                 }
+                            },
+                            {
+                                name: 'נקה הכל',
+                                callback: () => {
+                                    actions.clearCart();
+                                    setSelectedVerses([]);
+                                }
                             }
                         ]
                     })

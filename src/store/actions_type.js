@@ -16,5 +16,6 @@ export default {
     SET_PAYMENT:null,
     CLEAR_ALL:null,
     ADD_TO_CART:null,
+    CLEAR_CART:null,
   }),
 }

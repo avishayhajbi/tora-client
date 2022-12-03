@@ -198,6 +198,16 @@ export function removeFromCart(id) {
     }
 }
 
+export function clearCart() {
+    return (dispatch, getState) => {
+        window.sessionStorage.removeItem(LOCAL_STORAGE.CART_INFO);
+        dispatch({
+            type: APP.CLEAR_CART,
+            data: []
+        })
+    }
+}
+
 
 export function setBlessFor(data) {
     return (dispatch, getState) => {
