@@ -102,6 +102,22 @@ export const getContributionForm = () => {
     return cloneDeep(form);
 };
 
+export const BooksCategoriesKeys = {
+    'synagogues': 'synagogues',
+    'tombsOfTheRighteous': 'tombsOfTheRighteous',
+    'hospitals': 'hospitals',
+    'IDF': 'IDF',
+    'other': 'other',
+}
+
+export const BooksCategoriesValues = {
+    [BooksCategoriesKeys.synagogues]: 'בתי כנסיות',
+    [BooksCategoriesKeys.tombsOfTheRighteous]: 'קברות צדיקים',
+    [BooksCategoriesKeys.hospitals]: 'בתי חולים',
+    [BooksCategoriesKeys.IDF]: 'בסיסי צה״ל',
+    [BooksCategoriesKeys.other]: 'שונות',
+}
+
 export const getBookForm = () => {
     let form = {
         address: {
@@ -133,6 +149,20 @@ export const getBookForm = () => {
             title: 'משקל',
             type: 'tel',
             settings: {pattern: '[0-9]*'},
+        },
+        category: {
+            value: '',
+            title: ' קטגוריה',
+            type: 'select',
+            settings: {},
+            options: [
+                {key: '', value: 'בחר קטגוריה'},
+                {key: BooksCategoriesKeys.synagogues, value: BooksCategoriesValues[BooksCategoriesKeys.synagogues]},
+                {key: BooksCategoriesKeys.tombsOfTheRighteous, value: BooksCategoriesValues[BooksCategoriesKeys.tombsOfTheRighteous]},
+                {key: BooksCategoriesKeys.hospitals, value: BooksCategoriesValues[BooksCategoriesKeys.hospitals]},
+                {key: BooksCategoriesKeys.IDF, value: BooksCategoriesValues[BooksCategoriesKeys.IDF]},
+                {key: BooksCategoriesKeys.other, value: BooksCategoriesValues[BooksCategoriesKeys.other]},
+            ]
         },
     }
     return cloneDeep(form);

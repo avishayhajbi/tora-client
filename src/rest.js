@@ -70,6 +70,16 @@ const REST = {
             })
             .then(responseMiddleware)
     },
+    getBooksByCategory: (category) => {
+        return axios.get(`${DOMAIN}/book?category=${category}`, {
+            json: true,
+            headers: {...headers}
+        })
+            .then(response => {
+                return response.data;
+            })
+            .then(responseMiddleware)
+    },
     getManagementBooks: () => {
         return axios.get(`${DOMAIN}/book/management`, {
             json: true,
