@@ -58,6 +58,7 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
     const fetchVerses = () => {
         const name = search.trim();
         if (name) {
+            setLoading(true);
             setError('');
             setGematri(gematriyaLetters(name));
             rest.search(searchType, {name, bookId: book?._id, skip, radioValue})
