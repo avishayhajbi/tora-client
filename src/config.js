@@ -61,13 +61,7 @@ export const getDonateForm = () => {
             title: 'אימייל',
             type: 'email',
             settings: {},
-        },
-        donateForSomeoneElse: {
-            value: '',
-            settings: {inline: true},
-            title: 'לתרום על שם מישהו אחר',
-            type: 'checkbox',
-        },
+        }
     }
     return cloneDeep(form);
 };
