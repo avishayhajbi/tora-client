@@ -9,16 +9,33 @@ import OtherBooksModal from "../components/OtherBooksModal";
 import {Loader} from "../components/Loader";
 import {LoadMore} from "../components/LoadMore";
 import {VerseDisplay} from "../components/VerseDisplay";
+import MyForm from "../components/Form";
+import {getEnterYourNameForm} from "../config";
 
 export const VerseYourName = ({donate, book, selectedVerses, searchType, callback, actions}) => {
     const [skip, setSkip] = useState(0);
     const [verses, setVerses] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [searchLoading, setSearchLoading] = useState(false);
+    const [search, setSearch] = useState('');
     const [chosenVerses, setChosenVerses] = useState([]);
     const [replaceVerse, setReplaceVerse] = useState(null);
     const [error, setError] = useState('');
     const [hasMoreAnswers, setHasMoreAnswers] = useState(true);
 
+    const freeSearchForm = getEnterYourNameForm();
+    let timeoutRef = null;
+
+    const submit = (data) => {
+        clearTimeout(timeoutRef);
+        setSearchLoading(true);
+        setVerses([]);
+        setHasMoreAnswers(true);
+        setSkip(0);
+        timeoutRef = setTimeout(() => {
+            setSearch(data.search.value);
+        }, 1000);
+    }
 
     useEffect(() => {
         actions.setSelectedVerses([]);
@@ -28,30 +45,33 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
         if (!loading) {
             fetchVerses();
         }
-    }, []);
+    }, [search]);
 
     const fetchVerses = () => {
-        setLoading(true);
-        const name = (donate.contributionName || donate.name).trim();
-        rest.search(searchType, {name, bookId: book?._id, skip})
-            .then(response => {
-                console.log(response.data);
-                setVerses(verses.concat(response.data));
-                setLoading(false);
-                setSkip(() => {
-                    return skip + 1;
+        const name = search.trim();
+        if (name) {
+            setLoading(true);
+            rest.search(searchType, {name, bookId: book?._id, skip})
+                .then(response => {
+                    console.log(response.data);
+                    setVerses(verses.concat(response.data));
+                    setLoading(false);
+                    setSearchLoading(false);
+                    setSkip(() => {
+                        return skip + 1;
+                    })
+                    if (!response.hasMore) {
+                        setHasMoreAnswers(false);
+                    }
+                    if (!response.data.length && !verses.length) {
+                        throw new Error('');
+                    }
+                    setError('');
                 })
-                if (!response.hasMore) {
-                    setHasMoreAnswers(false);
-                }
-                if (!response.data.length && !verses.length) {
-                    throw new Error('');
-                }
-                setError('');
-            })
-            .catch(err => {
-                setError('לא נמצאו תוצאות');
-            })
+                .catch(err => {
+                    setError('לא נמצאו תוצאות');
+                })
+        }
     }
 
     const selectedVerse = (e, val) => {
@@ -90,6 +110,11 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
 
     return (
         <div className='d-flex flex-column flex-100 justify-content-center align-content-center'>
+            <MyForm fields={freeSearchForm}
+                    loading={searchLoading}
+                    submitText={"חפש"}
+                    callback={submit}
+            />
             {error && <p>{error}</p>}
             {verses.map((val, index) => {
                 return (<div key={`_${val._id}`} className='marginTop30px flex-row'>

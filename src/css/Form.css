@@ -14,6 +14,9 @@
 .form input[type="radio"]:checked:after{
     right: 10px;
 }
+.form input[type="radio"]:after {
+    margin-top: 8px;
+}
 .form .form-group{
     text-align: right;
     width: 100%;

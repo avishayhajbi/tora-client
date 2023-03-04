@@ -55,10 +55,10 @@ class Home extends Component {
         switch(step) {
             case 0: return <Step0 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 1: return <Step1 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 2: return <Step2 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 3: return <Step6 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 4: return <Step3 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 5: return <Step4 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 2: return <Step6 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 3: return <Step3 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 4: return <Step4 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 5: return <Step2 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 6: return <Step5 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 7: return <Step7 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 8: return <Step8 nextStep={this.nextStep.bind(this)} {...this.props}/>;

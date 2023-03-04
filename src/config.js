@@ -173,6 +173,40 @@ export const getFreeSearchForm = () => {
     }
     return cloneDeep(form);
 };
+export const getEnterYourNameForm = () => {
+    let form = {
+        search: {
+            value: '',
+            title: 'שם:',
+            placeholder: 'הזינו את שמכם..',
+            type: 'search',
+            settings: {required: true}
+        },
+    }
+    return cloneDeep(form);
+};
+export const freeSearchFormWithButtons = () => {
+    const tmp = getEnterYourNameForm();
+    let form = {
+        ...tmp,
+        // todo: adding complex buttons here
+        radioValue: {
+            type: 'radio',
+            value: '',
+            title: '',
+            settings: {multiple: false},
+            selected: '3',
+            options: [
+                { value: 'צירוף 1', key: '1' },
+                { value: '2 צירופים', key: '2' },
+                { value: '3 צירופים', key: '3' },
+                { value: '4 צירופים', key: '4' },
+                { value: '5 צירופים', key: '5' },
+            ]
+        }
+    }
+    return cloneDeep(form);
+};
 export const getAmountForm = () => {
     let form = {
         search: {

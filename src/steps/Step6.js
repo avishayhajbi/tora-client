@@ -42,7 +42,6 @@ export const Step6 = ({nextStep, app, actions}) => {
     return (
         <div
             className='step6 flex-column flex-100 padd10 justify-content-center align-content-center align-items-center text-center height-inherit'>
-            <Hello donate={app.donate}/>
             <h3 className='width100'>
                 היכן תרצה להכניס את הספר:
             </h3>

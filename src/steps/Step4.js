@@ -102,7 +102,6 @@ export const Step4 = ({nextStep, app, location, actions}) => {
     return (
         <div
             className='step4 flex-column flex-100 padd10 justify-content-center align-content-center align-items-center text-center height-inherit'>
-            <Hello donate={app.donate}/>
             <div
                 className='d-flex flex-wrap justify-content-around justify-content-center align-content-center align-items-center'>
                 {/*<MyList callback={reachedBottom}>*/}

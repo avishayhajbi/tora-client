@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from 'redux';
 import moment from "moment";
 import $ from 'jquery';
+import ToggleButton from "react-bootstrap/ToggleButton";
 
 const actions = [
     app_actions,
@@ -106,6 +107,29 @@ class MyForm extends Component {
                     </Form.Group>
                     break;
                 }
+                case 'radio':{
+                    if (!this.state.fields[key].value) {
+                        this.state.fields[key].value = this.FIELDS[key]?.selected;
+                    }
+                    field = <Form.Group ref={`parent_${key}`} key={key} controlId={key}>
+                        <Form.Label>{this.FIELDS[key].title} {this.FIELDS[key]?.settings?.required && '*'}</Form.Label>
+                            {this.FIELDS[key].options.map((radio, idx)=>{
+                                return <Form.Check
+                                    onChange={(event) => this.handleRadioInput(event)}
+                                    inline
+                                    key={idx}
+                                    id={`radio-${key}-${idx}`}
+                                    type="radio"
+                                    variant={'outline-info'}
+                                    name={key}
+                                    value={radio.key}
+                                    checked={this.state.fields[key].value === radio.key}
+                                    label={radio.value}
+                                />
+                            })}
+                    </Form.Group>
+                    break;
+                }
                 case 'file':{
                     field = <Form.Group ref={`parent_${key}`} key={key} controlId={key}>
                         <Form.Label>{this.FIELDS[key].title}</Form.Label>
@@ -153,6 +177,15 @@ class MyForm extends Component {
     handleCheckboxInput (e) {
         const name = e.target.name;
         const value = e.target.checked;
+        let fields = this.state.fields;
+        fields[name].value = value;
+        this.setState({fields},() => { this.validateField(name, value) });
+        this.updateOnChanges();
+    }
+
+    handleRadioInput (e) {
+        const name = e.target.name;
+        const value = e.target.value;
         let fields = this.state.fields;
         fields[name].value = value;
         this.setState({fields},() => { this.validateField(name, value) });

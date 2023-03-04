@@ -11,7 +11,6 @@ export const Step3 = ({nextStep, app}) => {
     return (
         <div
             className='step3 d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center text-center height-inherit'>
-            <Hello donate={app.donate}/>
             <h4 className="paddBottom10px">
                 לפניך מספר אפשרויות, בחר באפשרות המתאימה להמשך:
             </h4>
