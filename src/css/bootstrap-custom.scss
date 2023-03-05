@@ -1,0 +1,21 @@
+
+$primary: #000A3D;
+$secondary: #018AC5;
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+
+// $custom-colors:(
+//     "new-blue": #000A3D
+
+// );
+// $theme-colors: map-merge($theme-colors, $custom-colors);
+
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+h2{
+    font-weight: 900;
+    font-size: 1.5rem;
+}
