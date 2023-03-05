@@ -216,6 +216,20 @@ export const getAmountForm = () => {
             type: 'number',
             settings: {min: 0, required: true}
         },
+        radioValue: {
+            type: 'radio',
+            value: '',
+            title: '',
+            settings: {multiple: false},
+            selected: '1',
+            options: [
+                { value: 'צירוף 1', key: '1' },
+                { value: '2 צירופים', key: '2' },
+                { value: '3 צירופים', key: '3' },
+                { value: '4 צירופים', key: '4' },
+                { value: '5 צירופים', key: '5' },
+            ]
+        }
     }
     return cloneDeep(form);
 };

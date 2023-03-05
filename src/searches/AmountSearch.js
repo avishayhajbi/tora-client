@@ -26,14 +26,6 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     const [hasMoreAnswers, setHasMoreAnswers] = useState(true);
     const [radioValue, setRadioValue] = useState('1');
 
-    const radios = [
-        { name: 'צירוף 1', value: '1' },
-        { name: '2 צירופים', value: '2' },
-        { name: '3 צירופים', value: '3' },
-        { name: '4 צירופים', value: '4' },
-        { name: '5 צירופים', value: '5' },
-    ];
-
     const amountForm = getAmountForm();
     let timeoutRef = null;
     // let axiosSession;
@@ -44,18 +36,12 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
 
     useEffect(() => {
         if (!loading) {
+            setVerses([]);
+            setHasMoreAnswers(true);
+            setSkip(0);
             fetchVerses();
         }
-    }, [search]);
-
-    /*useEffect(() => {
-        if (axiosSession) {
-            axiosSession.cancel();
-            axiosSession = null;
-        }
-        setLoading(false);
-        setSearchLoading(false);
-    }, [radioValue]);*/
+    }, [radioValue, search]);
 
     const fetchVerses = () => {
         const amount = Number(search) || 0;
@@ -79,12 +65,6 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
                 })
         } else {
             setSearchLoading(false);
-        }
-    }
-
-    const getNewComplex = (e) => {
-        if (!loading) {
-            setRadioValue(e.currentTarget.value);
         }
     }
 
@@ -155,19 +135,24 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     }
 
     const submit = (data) => {
-        if (!searchLoading) {
+        if (
+            data.search.value !== String(search) ||
+            data.radioValue.value !== radioValue
+        ) {
             setSearchLoading(true);
             setVerses([]);
             setHasMoreAnswers(true);
             setSkip(0);
             setTimeout(() => {
-                if (search !== data.search.value) {
-                    setSearch(data.search.value);
-                } else if (!loading) {
-                    fetchVerses();
+                if (data.search.value !== String(search)) {
+                    setSearch(() => data.search.value);
+                }
+                if (data.radioValue.value !== radioValue) {
+                    setRadioValue(() => data.radioValue.value);
                 }
             }, 1000)
         }
+
     }
 
     const getVersesView = (values, index) => {
@@ -191,23 +176,6 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
 
     return (
         <div className='d-flex flex-column flex-100 justify-content-center align-content-center'>
-            <ButtonGroup className='hideCheckbox d-flex flex-row flex-100 justify-content-center align-content-center flex-wrap'>
-                {radios.map((radio, idx) => (
-                    <ToggleButton
-                        disabled={loading || searchLoading}
-                        key={idx}
-                        id={`radio-${idx}`}
-                        type="radio"
-                        variant={'outline-info'}
-                        name="radio"
-                        value={radio.value}
-                        checked={radioValue === radio.value}
-                        onChange={getNewComplex}
-                    >
-                        {radio.name}
-                    </ToggleButton>
-                ))}
-            </ButtonGroup>
             <MyForm fields={amountForm}
                   loading={searchLoading}
                   submitText={"חפש"}
