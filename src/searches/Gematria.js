@@ -25,23 +25,6 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
     const freeSearchFormWithButtonsForm = freeSearchFormWithButtons();
     let timeoutRef = null;
 
-    const submit = (data) => {
-        if (
-            data.search.value !== search ||
-            data.radioValue.value !== radioValue
-        ) {
-            clearTimeout(timeoutRef);
-            setSearchLoading(true);
-            setVerses([]);
-            setHasMoreAnswers(true);
-            setSkip(0);
-            timeoutRef = setTimeout(() => {
-                setSearch(data.search.value);
-                setRadioValue(data.radioValue.value);
-            }, 1000);
-        }
-    }
-
     useEffect(() => {
         actions.setSelectedVerses([]);
     }, [])
@@ -145,6 +128,27 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
             // }
             setVerses(prevVerses);
             console.log('prevVerses', prevVerses)
+        }
+    }
+
+    const submit = (data) => {
+        if (
+            data.search.value !== search ||
+            data.radioValue.value !== radioValue
+        ) {
+            clearTimeout(timeoutRef);
+            setSearchLoading(true);
+            setVerses([]);
+            setHasMoreAnswers(true);
+            setSkip(0);
+            timeoutRef = setTimeout(() => {
+                if (data.search.value !== search) {
+                    setSearch(data.search.value);
+                }
+                if (data.radioValue.value !== radioValue) {
+                    setRadioValue(data.radioValue.value);
+                }
+            }, 1000);
         }
     }
 
