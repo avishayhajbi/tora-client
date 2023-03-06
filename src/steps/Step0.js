@@ -1,15 +1,15 @@
 import React, {Component, useEffect} from "react";
+import HeaderIcon from "../assets/header-icon.svg"
 import NextButton from "../components/NextButton";
 
 export const Step0 = ({nextStep, actions}) => {
     return (
-        <div className='step0 d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center  text-center height-inherit'>
-            <h1 className="paddBottom10px">
-                 מעלות כתיבת
-            </h1>
-            <h1 className="paddBottom10px">
-                אות בספר תורה
-            </h1>
+        <div className='step0 d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center  text-center height-inherit bg-primary text-white'>
+
+            <img src={HeaderIcon} alt="Header Icon" />
+            <h2 className="paddBottom10px">
+            מעלות כתיבת אות בספר תורה     
+            </h2>
             <p className="paddBottom10px">
                 ב"י בדעת הטור: גם בזמן הזה יש מצווה דאורייתא בכתיבת ספר תורה... (יו"ד ער ד"ה וכתב)
             </p>
@@ -25,6 +25,7 @@ export const Step0 = ({nextStep, actions}) => {
             <div className="width100">
                 <NextButton clicked={nextStep} text={'לחץ למצווה'}/>
             </div>
+            <button className="btn my-btn">Test</button>
         </div>
     )
 };

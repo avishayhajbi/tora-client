@@ -65,18 +65,19 @@
     display: flex;*/
 
     width: -webkit-fill-available;
-    margin: 15px;
-    border-radius: 5px;
+    /* margin: 15px; */
+    /* border-radius: 5px; */
     overflow: auto;
     text-align: right;
     height: inherit;
-    opacity: .95;
+    /* opacity: .95; */
     min-height: calc(100vh - 5.5rem)
 }
 
 @media only screen and (min-width: 720px) {
     #root > div.page {
         max-width: var(--max-desktop-size);
+        margin: 15px 0;
     }
 
     .navbar-light .navbar-nav {
@@ -84,7 +85,7 @@
     }
 }
 
-.navbar {
+.navbar.header {
     box-shadow: 0px 3px 10px var(--primary-color-light);
     width: inherit;
     top: -1px;
@@ -93,6 +94,10 @@
     /*background: #FFEEB5 -moz-linear-gradient(top, #AE8913, #FFEEB5) no-repeat;*/
     /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#AE8913, endColorstr=#FFEEB5) no-repeat;*/
     /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#AE8913, endColorstr=#AE8913)" no-repeat;*/
+}
+.navbar.footer {
+    height: 76px;
+    justify-content: space-between;
 }
 
 .navbar-light .navbar-nav a.nav-link {
@@ -116,7 +121,8 @@
 }
 
 .navbar-light.bg-light {
-    background-color: var(--primary-color-light) !important;
+    /*background-color: var(--primary-color-light) !important;*/
+    background-color: var(--primary-color-new) !important;
 }
 
 .navbar-light.bg-light .nav-item a, .navbar-brand {
@@ -158,13 +164,13 @@ body {
 
 #root > div {
     margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
     /*border: 1px solid;*/
     /*padding: 10px;*/
     box-shadow: 0px 0px 15px;
     background: white;
-    margin-top: 15px !important;
+    /* margin-top: 15px !important; */
 }
 
 .app-footer {

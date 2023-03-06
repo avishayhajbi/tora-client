@@ -19,3 +19,16 @@ h2{
     font-weight: 900;
     font-size: 1.5rem;
 }
+
+.btn.btn-light{
+    color: $primary;
+    &:not(:hover){
+        background-color: white;
+    }
+}
+// .white-btn{
+    
+//     // @include /*button-variant($background, $border, $hover-background: darken($background, 7.5%), $hover-border: darken($border, 10%), $active-background: darken($background, 10%), $active-border: darken($border, 12.5%))*/
+//     @include button-variant($white, $white, darken($white, 7.5%),  darken($white, 10%),  darken($white, 10%), darken($white, 12.5%));
+//     color: $primary;
+//   }

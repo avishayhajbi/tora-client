@@ -68,7 +68,7 @@ class Home extends Component {
 
     render() {
         return (
-            <div className={'page flex-100'}>
+            <div className={'page flex-100 d-flex'}>
                 {
                     this.renderSteps()
                 }

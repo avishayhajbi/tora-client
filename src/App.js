@@ -19,6 +19,7 @@ import * as ICONS from "@fortawesome/free-solid-svg-icons";
 import {Cart} from "./components/Cart";
 import Badge from "react-bootstrap/Badge";
 import rest from "./rest";
+import HeaderIcon from "./assets/header-icon.svg"
 
 /*let { history } = this.props;
 history.push({
@@ -161,18 +162,19 @@ class App extends React.Component{
     render () {
         return (
             <React.Fragment>
-                <Navbar sticky="top" bg="light" expand="md" expanded={!this.state.collapsed}>
+                <Navbar className='header' sticky="top" bg="light" expand="md" expanded={!this.state.collapsed}>
                     {this.state.location !== '/' && <Navbar.Brand className='pointer' onClick={()=>window.history.back()}>
                         <FontAwesomeIcon icon={ICONS.faArrowRight}/>
                     </Navbar.Brand>}
-                    <Navbar.Brand className='pointer' onClick={this.onClickTopBar.bind(this)}>
-                        <span>רכישת אותיות בספר תורה</span>
-                    </Navbar.Brand>
                     <Navbar.Toggle ref={"navbartoggle"} aria-controls="basic-navbar-nav"
                                    children={
                                        <FontAwesomeIcon icon={ICONS.faBars}/>
                                    }
                                    onClick={this.toggleNavbar.bind(this)}/>
+                    <Navbar.Brand className='pointer' onClick={this.onClickTopBar.bind(this)}>
+                       <img src={HeaderIcon} alt="Header Icon" width="150px"/>
+                    </Navbar.Brand>
+
                     <Navbar.Collapse ref={"navbarcollapse"} id="basic-navbar-nav">
                         <Nav className="ml-auto" variant="pills" defaultActiveKey={window.location.pathname} onSelect={this.handleSelect.bind(this)}>
                         </Nav>
@@ -211,6 +213,24 @@ class App extends React.Component{
                       <Route component={NotFound} />
                  </Switch>
                 </BrowserRouter>
+    
+                <Navbar fixed='bottom' bg="light" className='footer'>
+                {this.state.location !== '/' && <Navbar.Brand className='pointer' onClick={()=>window.history.back()}>
+                        <FontAwesomeIcon icon={ICONS.faArrowRight}/>
+                    </Navbar.Brand>}
+                    <Nav>
+                            {false && !this.props.app.token && <Button variant="outline-light" onClick={this.goToLogin.bind(this)}>התחבר</Button>}
+                            {this.props.app.token && <Button variant="outline-light" onClick={this.logout.bind(this)}>התנתק</Button>}
+                            <div className='pointer' onClick={this.openCart.bind(this)}>
+                                <Badge text="white" style={{color: 'white'}}>({this.props.app.cart.length})</Badge>
+                                <FontAwesomeIcon className='marginLeft5px' icon={ICONS.faShoppingCart} color={'white'}></FontAwesomeIcon>
+                            </div>
+                    </Nav>
+                    <Navbar.Brand className='pointer' onClick={this.onClickTopBar.bind(this)}>
+                        <FontAwesomeIcon icon={ICONS.faHome}/>
+                    </Navbar.Brand>
+                </Navbar>
+
             </React.Fragment>
         )
     };

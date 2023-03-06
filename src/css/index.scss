@@ -1,5 +1,8 @@
+@import "./variables";
+
 body {
   font-weight: 500;
+  color: $grey-1;
   margin: 0;
   font-family: "Frank Ruhl Libre", -apple-system, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
