@@ -1,8 +1,8 @@
-@import "./variables";
+@import './variables';
 
 body {
   font-weight: 500;
-  color: $grey-1;
+  color: $primary;
   margin: 0;
   font-family: "Frank Ruhl Libre", -apple-system, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -19,4 +19,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.image-text {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+hr{
+  width: 100%;
+  border: 1px solid rgba(234, 234, 234, 1)
 }

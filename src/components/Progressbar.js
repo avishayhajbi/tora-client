@@ -10,7 +10,7 @@ export const Progressbar = ({
   className,
 }) => {
   return (
-    <div style={{ width, height }}>
+    <div style={{ width, height }} className="d-flex">
       <CircularProgressbar
         className={className}
         value={value}

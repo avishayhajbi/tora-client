@@ -25,7 +25,6 @@ export const Step0 = ({nextStep, actions}) => {
             <div className="width100">
                 <NextButton clicked={nextStep} text={'לחץ למצווה'}/>
             </div>
-            <button className="btn my-btn">Test</button>
         </div>
     )
 };

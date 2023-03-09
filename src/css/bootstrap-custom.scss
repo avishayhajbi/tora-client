@@ -1,6 +1,7 @@
+@import "./variables";
 
-$primary: #000A3D;
-$secondary: #018AC5;
+$primary: $primary;
+$secondary: $secondary;
 
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
@@ -20,10 +21,15 @@ h2{
     font-size: 1.5rem;
 }
 
-.btn.btn-light{
-    color: $primary;
-    &:not(:hover){
-        background-color: white;
+
+.btn{
+    font-weight: 500;
+    
+    &.btn-light{
+        color: $primary;
+        &:not(:hover){
+            background-color: white;
+        }
     }
 }
 // .white-btn{
@@ -32,3 +38,12 @@ h2{
 //     @include button-variant($white, $white, darken($white, 7.5%),  darken($white, 10%),  darken($white, 10%), darken($white, 12.5%));
 //     color: $primary;
 //   }
+
+.form-control{
+    background-color: $grey-2;
+    box-shadow: none;
+    border: 0;
+    &:focus{
+        box-shadow: 0 0 0 0.1rem rgba(0, 10, 61, 0.25);
+    }
+}

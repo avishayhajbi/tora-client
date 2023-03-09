@@ -447,6 +447,10 @@ body[dir="rtl"] .positionAbsoluteTopStart, body[dir="ltr"] .positionAbsoluteTopE
     font-weight: 800;
 }
 
+.fontWeight900 {
+    font-weight: 900;
+}
+
 .textLimitHeight {
     white-space: normal;
     overflow: hidden !important;

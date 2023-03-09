@@ -7,7 +7,7 @@ import {Form} from "react-bootstrap";
 
 export const VerseDisplay = ({val, showLength}) => {
     return (
-        <React.Fragment>
+        <div style={{boxShadow: "0px 0px 7px 0px rgba(0, 0, 0, 0.15)", borderRadius: "7px", padding: "10px"}}>
             <p className={`${val.taken && 'disabled-color'}`}> {val.text} </p>
             <ol style={{...styles.gray, ...styles.list}}>
                 <li><VerseLocation book={val.book} chapter={val.chapter} verse={val.verse}/>
@@ -21,7 +21,7 @@ export const VerseDisplay = ({val, showLength}) => {
                     {val.length}
                 </li>}
             </ol>
-        </React.Fragment>
+        </div>
     )
 };
 

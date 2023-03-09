@@ -83,7 +83,7 @@ input {
     color: white;
 }
 input, select, textarea {
-    box-shadow: 0 0 5px !important;
+    /* box-shadow: 0 0 5px !important; */
     border-color: var(--primary-color) !important;
 }
 input:before {
