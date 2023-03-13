@@ -41,7 +41,7 @@ export const VerseDisplay = ({ val, showLength, handleSearchInOtherBooks }) => {
           </>
         )}
         {/* </ol> */}
-        {(!val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && 
+        {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && 
             <div className="pt-1">
                 <span className="fontWeight900" style={{color: "black"}}>פסוק זה כבר נרכש</span>{' '}
                     <Button onClick={handleSearchInOtherBooks}

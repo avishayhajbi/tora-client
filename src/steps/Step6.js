@@ -16,8 +16,8 @@ export const Step6 = ({ nextStep, app, actions }) => {
     rest
       .getAllBooks()
       .then((res) => {
-        // setBooks(res.data);
-        setBooks(Array(12).fill(res.data[0]));
+        setBooks(res.data);
+        // setBooks(Array(12).fill(res.data[0]));
       })
       .catch(() => {})
       .finally(() => {});

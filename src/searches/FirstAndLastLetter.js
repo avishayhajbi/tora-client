@@ -120,11 +120,11 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
                 return (
                     // <div key={`_${val._id}`} className='flex-row'>
                     <Form.Group key={`_${val._id}`} className='margin15' controlId={`${val._id}}`}>
-                        <Form.Check className={`verse-checkbox flex-10 text-center`} type='checkbox' value={val.id}
+                        <Form.Check className={`verse-checkbox text-center`} type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}
                                     label={
-                                        <div className={`flex-90 flex-column text-right ${val.taken && 'disabled-color'}`} tabIndex={0}>
+                                        <div className={`text-right ${val.taken && 'disabled-color'}`} tabIndex={0}>
                                          <VerseDisplay val={val} showLength handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
                                         </div>
                                     }
