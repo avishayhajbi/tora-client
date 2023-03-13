@@ -117,23 +117,41 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
             />
             {error && <p>{error}</p>}
             {verses.map((val, index) => {
-                return (<div key={`_${val._id}`} className='marginTop30px flex-row'>
-                    <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${val._id}}`}>
-                        <Form.Check className={`flex-10 text-center`} type='checkbox' value={val.id}
+                return (
+                    // <div key={`_${val._id}`} className='flex-row'>
+                    <Form.Group key={`_${val._id}`} className='margin15' controlId={`${val._id}}`}>
+                        <Form.Check className={`verse-checkbox flex-10 text-center`} type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
-                                    disabled={val.taken}/>
-                        <Form.Label id={`_${val._id}}`}
-                                    className={`flex-90 flex-column text-right ${val.taken && 'disabled-color'}`}>
-                            <VerseDisplay val={val}/>
-                            {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && <React.Fragment>
-                                <Button onClick={searchInOtherBooks.bind(this, index, val)}
-                                        className='btn-outline-primary'>
-                                    חפש בספרי תורה אחרים
-                                </Button>
-                            </React.Fragment> || ''}
-                        </Form.Label>
+                                    disabled={val.taken}
+                                    label={
+                                        <div className={`flex-90 flex-column text-right ${val.taken && 'disabled-color'}`} tabIndex={0}>
+                                         <VerseDisplay val={val} showLength handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
+                                        </div>
+                                    }
+                                    />
+      
                     </Form.Group>
-                </div>)
+                // </div>
+
+                // <div key={`_${val._id}`} className='flex-row'>
+                //     <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${val._id}}`}>
+                //         <Form.Check className={`flex-10 text-center`} type='checkbox' value={val.id}
+                //                     onChange={(e) => selectedVerse(e, val)}
+                //                     disabled={val.taken}/>
+                //         <Form.Label id={`_${val._id}}`} 
+                //                     className={`flex-90 flex-column text-right ${val.taken && 'disabled-color'}`}>
+                //             <VerseDisplay val={val}/>
+                //             {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && <React.Fragment>
+                //                 <Button onClick={searchInOtherBooks.bind(this, index, val)}
+                //                         className='btn-outline-primary'>
+                //                     חפש בספרי תורה אחרים
+                //                 </Button>
+                //             </React.Fragment> || ''}
+                //         </Form.Label>
+                //     </Form.Group>
+                // </div>
+                
+                )
             })}
             {loading && <div
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>

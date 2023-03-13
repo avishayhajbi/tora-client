@@ -120,7 +120,8 @@
 
 .stickyFooter {
   position: fixed;
-  bottom: 0;
+  //bottom: 0;
+  bottom: 76px;
   margin: 0 auto;
   right: 0;
   background: white;
@@ -132,5 +133,36 @@
     &.hasBorder {
       border: 1px solid red;
     }
+  }
+}
+
+
+.verse-checkbox{
+  padding-left: 0;
+  //cursor: pointer;
+
+  &:focus{
+    border:#000 1px solid;
+  }
+  > .form-check-input{
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .form-check-input[disabled] ~ .form-check-label, .form-check-input:disabled ~ .form-check-label{
+    background-color: #DCDCDC;
+    color: $text-disabled;
+    .gray{
+      color: $text-disabled;
+    }
+    .spacer{
+      color: $text-disabled;
+      border-color: $text-disabled;
+    }
+  }
+
+  .form-check-input[checked] ~ .form-check-label,
+  .form-check-input:checked ~ .form-check-label{
+    background-color: aliceblue;
   }
 }
