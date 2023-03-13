@@ -173,11 +173,10 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
     const getVersesView = (values, index) => {
         return (<div className={`text-right`}>
             {
-                values.map((val, valIndex) => {
-                    return (<div key={`${index}_${valIndex}`} className="paddBottom10px">
-                        <VerseDisplay val={val} showLength={true} handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, valIndex, val)}/>
-                    </div>)
-                })
+                values.map((val, valIndex) => 
+                        <VerseDisplay val={val} showLength={true} 
+                            handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, valIndex, val)} key={`${index}_${valIndex}`}/>
+                )
             }
         </div>)
     }

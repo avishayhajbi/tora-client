@@ -155,23 +155,32 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
 
     }
 
+    // const getVersesView = (values, index) => {
+    //     return (<Form.Label id={`_${index}}`} className={`flex-90 flex-column text-right`}>
+    //         {
+    //             values.map((val, valIndex) => {
+    //                 return (<div key={`${index}_${valIndex}`} className="paddBottom10px">
+    //                     <VerseDisplay val={val} showLength={true} />
+    //                     {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) &&
+    //                     <React.Fragment>
+    //                         <Button onClick={searchInOtherBooks.bind(this, index, valIndex, val)}
+    //                                 className='btn-outline-primary'>
+    //                             חפש בספרי תורה אחרים
+    //                         </Button>
+    //                     </React.Fragment> || ''}
+    //                 </div>)
+    //             })
+    //         }
+    //     </Form.Label>)
+    // }
     const getVersesView = (values, index) => {
-        return (<Form.Label id={`_${index}}`} className={`flex-90 flex-column text-right`}>
+        return (<div className={`text-right`}>
             {
-                values.map((val, valIndex) => {
-                    return (<div key={`${index}_${valIndex}`} className="paddBottom10px">
-                        <VerseDisplay val={val} showLength={true} />
-                        {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) &&
-                        <React.Fragment>
-                            <Button onClick={searchInOtherBooks.bind(this, index, valIndex, val)}
-                                    className='btn-outline-primary'>
-                                חפש בספרי תורה אחרים
-                            </Button>
-                        </React.Fragment> || ''}
-                    </div>)
-                })
+                values.map((val, valIndex) => 
+                        <VerseDisplay val={val} showLength={true} key={`${index}_${valIndex}`} />
+                )
             }
-        </Form.Label>)
+        </div>)
     }
 
     return (
@@ -183,14 +192,18 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
             />
             {error && <p>{error}</p>}
             {verses.map((values, index) => {
-                return (<div key={`_${index}`} className='marginTop30px flex-row'>
-                    <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${index}`}>
-                        <Form.Check className={`flex-10 text-center`} type='radio' value={index}
+                return (
+                // <div key={`_${index}`} className='marginTop30px flex-row'>
+                    <Form.Group className='margin15 ' controlId={`${index}`}>
+                        <Form.Check className={`verse-checkbox text-center`} type='radio' value={index}
                                     onChange={(e) => selectedVerse(e, values)}
+                                    label={getVersesView(values, index)}
+
                         />
-                        {getVersesView(values, index)}
+                        {/* {getVersesView(values, index)} */}
                     </Form.Group>
-                </div>)
+                // </div>
+                )
             })}
             {loading && <div
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
