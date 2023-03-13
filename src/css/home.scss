@@ -163,6 +163,15 @@
 
   .form-check-input[checked] ~ .form-check-label,
   .form-check-input:checked ~ .form-check-label{
-    background-color: aliceblue;
+    background-color: $secondary;
+    color: white !important;
+    border-radius: 10px;
+    .gray{
+      color: white;
+    }
+    .spacer{
+      color: white;
+      border-color: white;
+    }
   }
 }
