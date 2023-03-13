@@ -121,7 +121,7 @@ export const Step5 = ({nextStep, app, actions}) => {
                     {name: 'לכל הישועות'},
                 ].map((v, vi) => {
                     return (
-                        <Form.Group key={vi} className='ml-3' controlId={`_${vi}`}>
+                        <Form.Group key={vi} className='ml-3' controlId={`${val._id}_${vi}`}>
                             <Form.Check className='text-center myCheckbox custom-checkbox'
                                         checked={val.bless?.find(t => t.name === v.name)}
                                         label={v.name} type='checkbox' value={v.name}
