@@ -7,6 +7,9 @@ import rest from "../rest";
 import {VersesRange} from "../components/VersesRange";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import * as ICONS from "@fortawesome/free-solid-svg-icons";
+import ShoppingCartIcon from "../assets/shopping-cart.svg"
+import { VerseLocation } from "../components/VerseLocation";
+import { VerseDisplay } from "../components/VerseDisplay";
 
 export const Step5 = ({nextStep, app, actions}) => {
     // const [blessFor, setBlessFor] = useState({});
@@ -103,23 +106,23 @@ export const Step5 = ({nextStep, app, actions}) => {
     }
 
     const getBlessElem = (val) => {
-        return <div className='width100 marginTop30px flex-column justify-content-center align-content-center align-items-center'>
-            <h4>
+        return <div className='mt-1 text-right'>
+            <h6>
                 התרומה מיועדת ל:
-            </h4>
+            </h6>
             <div
-                className='flex-row flex-wrap justify-content-around form-check-inline justify-content-center align-content-center align-items-center'>
+                className='d-flex flex-row flex-wrap'>
                 {[
                     {name: 'פרנסה'},
                     {name: 'עילוי שם'},
-                    {name: 'לרפואה שלימה'},
+                    {name: 'רפואה שלימה'},
                     {name: 'הצלחה'},
                     {name: 'זיווג הגון'},
                     {name: 'לכל הישועות'},
                 ].map((v, vi) => {
                     return (
-                        <Form.Group key={vi} className='margin15' controlId={`_${vi}`}>
-                            <Form.Check className='text-center myCheckbox'
+                        <Form.Group key={vi} className='ml-3' controlId={`_${vi}`}>
+                            <Form.Check className='text-center myCheckbox custom-checkbox'
                                         checked={val.bless?.find(t => t.name === v.name)}
                                         label={v.name} type='checkbox' value={v.name}
                                         name={v.name}
@@ -131,17 +134,19 @@ export const Step5 = ({nextStep, app, actions}) => {
     }
     return (
         <div
-            className='step5 d-flex flex-column flex-100 padd10 justify-content-start align-content-center align-items-center text-center height-inherit'>
-            <Hello donate={app.donate}/>
-
-            <ol className='width100'>
+            className='step5 d-flex flex-column flex-100 padd20 justify-content-start align-content-center align-items-center text-center height-inherit'>
+            {/* <Hello donate={app.donate}/> */}
+            <img src={ShoppingCartIcon} alt="Shopping Cart Icon" width="45px"/>
+            <h2>סיכום הזמנתכם:</h2>
+            <ol className='width100 p-0 list-unstyled'>
                 {selectedVerses && selectedVerses.map((val, index) => {
-                    return <li key={index}>
-                        <Form.Group controlId={'verse'} key={val._id}>
-                            <Form.Label className='d-flex flex-row align-content-center align-items-center'>
+                    return <li key={index} className="verse-box">
+                        {/* <Form.Group controlId={'verse'} key={val._id}>
+                            <Form.Label className='d-flex flex-row align-content-center align-items-center justify-content-between'>
+                                <span className="fontWeight900">אנא בדקו שזהו הפסוק שבחר לבכם:</span>
                                 <FontAwesomeIcon onClick={() => removeItem(val._id)} className='pointer marginLeft5px' icon={ICONS.faTrash}/>
-                                אנא בדוק שזהו הפסוק שבחר לבך
                             </Form.Label>
+                            <hr className="spacer"/>
                             {!val.range && <Form.Control className='text-center' as='textarea' placeholder={'הפסוק שנבחר'}
                                           value={val.text} name='verse' disabled={true}/>}
                             {val.range && <VersesRange val={val} withBook={true}/>}
@@ -161,7 +166,22 @@ export const Step5 = ({nextStep, app, actions}) => {
                             </div>
                         </div>}
                         {getBlessElem(val)}
-                        <hr/>
+                        <hr/> */}
+                        
+
+                        {/* <Form.Group controlId={'verse'} key={val._id}> */}
+                            <div className='d-flex flex-row align-content-center align-items-center justify-content-between'>
+                                <span className="fontWeight900">אנא בדקו שזהו הפסוק שבחר לבכם:</span>
+                                <FontAwesomeIcon onClick={() => removeItem(val._id)} className='pointer marginLeft5px' icon={ICONS.faTrash}/>
+                            </div>
+                            <hr className="spacer"/>
+                            {!val.range && <VerseDisplay val={val} showLength isCartDisplay={true}/>}
+                            {val.range && <VersesRange val={val} withBook={true}/>}
+                            <hr className="spacer"/>
+                        {/* </Form.Group> */}
+                        {getBlessElem(val)}
+                        {/* <hr/> */}
+
                     </li>
                 })}
             </ol>

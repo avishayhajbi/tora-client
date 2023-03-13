@@ -1,17 +1,18 @@
 import React, { Component, useEffect, useState } from "react";
-import { SPACE } from "../utils";
+import { Button, Form } from "react-bootstrap";
+
+import { SPACE, countWeight } from "../utils";
 import { VerseLocation } from "../components/VerseLocation";
 import { TakenBy } from "../components/TakenBy";
 import { AvailableBooks } from "../components/AvailableBooks";
-import { Button, Form } from "react-bootstrap";
+
 import '../css/verse-display.scss';
 
-export const VerseDisplay = ({ val, showLength, handleSearchInOtherBooks }) => {
+export const VerseDisplay = ({ val, showLength, handleSearchInOtherBooks, isCartDisplay=false }) => {
   return (
     <div
-      className="verse"
-    >
-      <p className={`mb-0 ${val.taken && "disabled-color"}`}> {val.text} </p>
+      className={`text-right ${isCartDisplay ? '': 'verse-box'}`} >
+      <p className={`mb-0 fontWeight900 ${val.taken && "disabled-color"}`}> {val.text} </p>
       {/* <ol style={{ ...styles.gray, ...styles.list }}> */}
       <div className="gray list">
         {/* <li> */}
@@ -22,26 +23,26 @@ export const VerseDisplay = ({ val, showLength, handleSearchInOtherBooks }) => {
         />
         <hr className="spacer"/>
         {/* </li> */}
-        {val.taken && (
+        {!isCartDisplay && val.taken && (
           //   <li>
           <TakenBy className="gray" donate={val.donate} bless={val.bless} />
           //   </li>
         )}
         {/* <li> */}
-        <AvailableBooks
+        {/* <AvailableBooks
           className="gray"
           availableBooks={val.availableBooks}
-        />
+        /> */}
         {/* </li> */}
         {val.bookInfo && <li>{val.bookInfo.address}</li>}
         {showLength && (
           <>
-             <span>{`סה״כ אותיות: ${val.length}`}</span>
-            <span className="pr-3">{`סה״כ לתשלום: ${val.length} ש״ח`}</span>
+             <span>{`סה״כ אותיות: ${countWeight(val.textWithout)}`}</span>
+            <span className="pr-3">{`סה״כ לתשלום: ${countWeight(val.textWithout)} ש״ח`}</span>
           </>
         )}
         {/* </ol> */}
-        {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && 
+        {!isCartDisplay && (val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && 
             <div className="pt-1">
                 <span className="fontWeight900" style={{color: "black"}}>פסוק זה כבר נרכש</span>{' '}
                     <Button onClick={handleSearchInOtherBooks}

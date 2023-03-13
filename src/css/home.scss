@@ -136,6 +136,40 @@
   }
 }
 
+.verse-box{
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.spacer{
+  margin: 6px 0;
+  // color: #000000;
+  border-color: #000000;
+}
+
+.custom-checkbox{
+
+  > .form-check-input{
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .form-check-input ~ .form-check-label{
+    background-color: $grey-1;
+    border-radius: 10px;
+    color: white !important;
+    padding: 5px;
+    font-weight: 900;
+    line-height: 18px;
+  }
+
+  .form-check-input[checked] ~ .form-check-label,
+  .form-check-input:checked ~ .form-check-label{
+    background-color: $secondary;
+    //border-radius: 10px;
+  }
+}
 
 .verse-checkbox{
   padding-left: 0;
@@ -156,7 +190,7 @@
       color: $text-disabled;
     }
     .spacer{
-      color: $text-disabled;
+      // color: $text-disabled;
       border-color: $text-disabled;
     }
   }
@@ -170,7 +204,7 @@
       color: white;
     }
     .spacer{
-      color: white;
+      // color: white;
       border-color: white;
     }
   }

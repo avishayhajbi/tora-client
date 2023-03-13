@@ -124,7 +124,7 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}
                                     label={
-                                        <div className={`text-right ${val.taken && 'disabled-color'}`} tabIndex={0}>
+                                        <div className={`${val.taken && 'disabled-color'}`} tabIndex={0}>
                                          <VerseDisplay val={val} showLength handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
                                         </div>
                                     }
