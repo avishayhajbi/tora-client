@@ -54,7 +54,50 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
             rest.search(searchType, {name, bookId: book?._id, skip})
                 .then(response => {
                     console.log(response.data);
-                    setVerses(verses.concat(response.data));
+                    
+                    //setVerses(verses.concat(response.data));
+                    setVerses(
+                        [
+                          {
+                            "_id": "0",
+                            "book": 1,
+                            "chapter": 47,
+                            "verse": 6,
+                            "part": 84,
+                            "text": "אֶרֶץ מִצְרַיִם לְפָנֶיךָ הִוא, בְּמֵיטַב הָאָרֶץ, הוֹשֵׁב אֶת־אָבִיךָ וְאֶת־אַחֶיךָ, יֵשְׁבוּ בְּאֶרֶץ גֹּשֶׁן, וְאִם־יָדַעְתָּ, וְיֶשׁ־בָּם אַנְשֵׁי־חַיִל, וְשַׂמְתָּם שָׂרֵי מִקְנֶה עַל־אֲשֶׁר־לִי",
+                            "textWithout": "ארץ מצרים לפניך הוא, במיטב הארץ, הושב את-אביך ואת-אחיך, ישבו בארץ גשן, ואם-ידעת, ויש-בם אנשי-חיל, ושמתם שרי מקנה על-אשר-לי",
+                            "gematriya": 6819,
+                            "length": 91,
+                            "bookId": "636d63ad1ef33ce1e412f8c9",
+                            "availableBooks": 1
+                          },
+                          {
+                            "_id": "1",
+                            "book": 1,
+                            "chapter": 47,
+                            "verse": 6,
+                            "part": 84,
+                            "text": "אֶרֶץ מִצְרַיִם לְפָנֶיךָ הִוא, בְּמֵיטַב הָאָרֶץ, הוֹשֵׁב אֶת־אָבִיךָ וְאֶת־אַחֶיךָ, יֵשְׁבוּ בְּאֶרֶץ גֹּשֶׁן, וְאִם־יָדַעְתָּ, וְיֶשׁ־בָּם אַנְשֵׁי־חַיִל, וְשַׂמְתָּם שָׂרֵי מִקְנֶה עַל־אֲשֶׁר־לִי",
+                            "textWithout": "ארץ מצרים לפניך הוא, במיטב הארץ, הושב את-אביך ואת-אחיך, ישבו בארץ גשן, ואם-ידעת, ויש-בם אנשי-חיל, ושמתם שרי מקנה על-אשר-לי",
+                            "gematriya": 6819,
+                            "length": 91,
+                            "bookId": "636d63ad1ef33ce1e412f8c9",
+                            "availableBooks": 1
+                          },                          {
+                            "_id": "44",
+                            "book": 1,
+                            "chapter": 47,
+                            "verse": 6,
+                            "part": 84,
+                            "text": "אֶרֶץ מִצְרַיִם לְפָנֶיךָ הִוא, בְּמֵיטַב הָאָרֶץ, הוֹשֵׁב אֶת־אָבִיךָ וְאֶת־אַחֶיךָ, יֵשְׁבוּ בְּאֶרֶץ גֹּשֶׁן, וְאִם־יָדַעְתָּ, וְיֶשׁ־בָּם אַנְשֵׁי־חַיִל, וְשַׂמְתָּם שָׂרֵי מִקְנֶה עַל־אֲשֶׁר־לִי",
+                            "textWithout": "ארץ מצרים לפניך הוא, במיטב הארץ, הושב את-אביך ואת-אחיך, ישבו בארץ גשן, ואם-ידעת, ויש-בם אנשי-חיל, ושמתם שרי מקנה על-אשר-לי",
+                            "gematriya": 6819,
+                            "length": 91,
+                            "bookId": "636d63ad1ef33ce1e412f8c9",
+                            "availableBooks": 1
+                          }
+                        ]
+                     );
                     setLoading(false);
                     setSearchLoading(false);
                     setSkip(() => {
@@ -117,12 +160,18 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
             />
             {error && <p>{error}</p>}
             {verses.map((val, index) => {
-                return (<div key={`_${val._id}`} className='marginTop30px flex-row'>
-                    <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${val._id}}`}>
-                        <Form.Check className={`flex-10 text-center`} type='checkbox' value={val.id}
+                return (
+                // <div key={`_${val._id}`} className='marginTop30px flex-row'>
+                    <Form.Group className='margin15' controlId={`${val._id}}`}>
+                        <Form.Check className={`verse-checkbox text-center`} type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
-                                    disabled={val.taken}/>
-                        <Form.Label id={`_${val._id}}`}
+                                    disabled={val.taken}
+                                    label={
+                                        <div className={`text-right ${val.taken && 'disabled-color'}`}>
+                                            <VerseDisplay val={val} showLength handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
+                                        </div>
+                                    }/>
+                        {/* <Form.Label id={`_${val._id}}`}
                                     className={`flex-90 flex-column text-right ${val.taken && 'disabled-color'}`}>
                             <VerseDisplay val={val} />
                             {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && <React.Fragment>
@@ -131,9 +180,10 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
                                     חפש בספרי תורה אחרים
                                 </Button>
                             </React.Fragment> || ''}
-                        </Form.Label>
+                        </Form.Label> */}
                     </Form.Group>
-                </div>)
+                // </div>
+                )
             })}
             {loading && <div
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
