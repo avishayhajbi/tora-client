@@ -175,7 +175,7 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
             {
                 values.map((val, valIndex) => 
                         <VerseDisplay val={val} showLength={true} 
-                            handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, valIndex, val)} key={`${index}_${valIndex}`}/>
+                        onSearchInOtherBooks={searchInOtherBooks.bind(this, index, valIndex, val)} key={`${index}_${valIndex}`}/>
                 )
             }
         </div>)

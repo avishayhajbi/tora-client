@@ -168,7 +168,7 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
                                     disabled={val.taken}
                                     label={
                                         <div className={`text-right ${val.taken && 'disabled-color'}`}>
-                                            <VerseDisplay val={val} showLength handleSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
+                                            <VerseDisplay val={val} showLength onSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
                                         </div>
                                     }/>
                         {/* <Form.Label id={`_${val._id}}`}

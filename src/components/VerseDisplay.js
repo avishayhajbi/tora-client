@@ -8,7 +8,7 @@ import { AvailableBooks } from "../components/AvailableBooks";
 
 import '../css/verse-display.scss';
 
-export const VerseDisplay = ({ val, showLength, handleSearchInOtherBooks, isCartDisplay=false }) => {
+export const VerseDisplay = ({ val, showLength, onSearchInOtherBooks, isCartDisplay=false }) => {
   return (
     <div
       className={`text-right ${isCartDisplay ? '': 'verse-box'}`} >
@@ -45,7 +45,7 @@ export const VerseDisplay = ({ val, showLength, handleSearchInOtherBooks, isCart
         {!isCartDisplay && (val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && 
             <div className="pt-1">
                 <span className="fontWeight900" style={{color: "black"}}>פסוק זה כבר נרכש</span>{' '}
-                    <Button onClick={handleSearchInOtherBooks}
+                    <Button onClick={onSearchInOtherBooks}
                         variant="secondary" size="sm">
                     מצא בספרי תורה אחרים
                 </Button>
