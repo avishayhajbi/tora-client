@@ -72,7 +72,7 @@
     height: inherit;
     /* opacity: .95; */
     min-height: calc(100vh - 5.5rem);
-    /* margin-bottom: 76px; */
+    margin-bottom: 76px;
 }
 
 @media only screen and (min-width: 720px) {

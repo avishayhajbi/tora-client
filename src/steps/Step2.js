@@ -29,22 +29,21 @@ export const Step2 = ({nextStep, actions, app}) => {
     }
 
     return (
-        <div className={`step2 flex-column flex-100 padd10 justify-content-center align-content-center text-center height-inherit`}>
-            <h4 className={"paddBottom10px"}>
-                פרטים אישיים לפני שנמשיך
-            </h4>
-            <div>
-                <h5>פרטי התורם:</h5>
-                <Form fields={donateForm}
-                      everyChangeUpdate={true}
-                      submitText={""}
-                      callback={submit}
-                      triggerSubmitOnCreate={true}
-                reff={inputEl1}/>
-            </div>
-            <div className="width100">
-                <NextButton clicked={nextStepButton} text={'לחץ למצווה'}/>
-            </div>
+      <div
+        className={`step2 flex-column flex-100 padd20 justify-content-center align-content-center text-center height-inherit`}
+      >
+        <h2>פרטים אישיים לפני שנמשיך... </h2>
+          <Form
+            fields={donateForm}
+            everyChangeUpdate={true}
+            submitText={""}
+            callback={submit}
+            triggerSubmitOnCreate={true}
+            reff={inputEl1}
+          />
+        <div className="width100">
+          <NextButton clicked={nextStepButton} text="שליחה" variant="secondary" block/>
         </div>
-    )
+      </div>
+    );
 };

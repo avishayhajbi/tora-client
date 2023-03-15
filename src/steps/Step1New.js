@@ -5,7 +5,7 @@ import { BooksCategoriesValues } from "../config";
 export const Step1New = ({ nextStep }) => {
 
   return (
-    <div className="step1-new d-flex flex-column flex-100 padd10 justify-content-center align-content-center align-items-center  text-center height-inherit">
+    <div className="step1-new text-center sidePadd20px">
       <p className="paddBottom10px">הסבר קצר על האתר / אפליציה</p>
       <p className="paddBottom10px">
         לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית נולום ארווס סאפיאן -

@@ -1,5 +1,10 @@
 @import "./variables";
 
+
+.step1-new {
+  margin-top: 60px;
+}
+
 .step1 {
   .list-title{
     border-bottom:$grey-1 4px solid;
@@ -188,6 +193,10 @@
   > .form-check-input{
     position: absolute;
     visibility: hidden;
+  }
+
+  > .form-check-label{
+    width: 100%;
   }
 
   // .form-check-input[disabled] ~ .form-check-label, 

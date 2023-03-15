@@ -47,7 +47,13 @@ h6{
     background-color: $grey-2;
     box-shadow: none;
     border: 0;
+    border-radius: 10px;
     &:focus{
         box-shadow: 0 0 0 0.1rem rgba(0, 10, 61, 0.25);
     }
+}
+
+.btn{
+    border-radius: 10px;
+    font-weight: 900;
 }

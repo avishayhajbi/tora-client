@@ -1,13 +1,11 @@
 import React, {Component, useState} from "react";
 import {Button} from 'react-bootstrap';
 
-const NextButton = ({disabled, text, clicked}) => {
+const NextButton = ({disabled, text, clicked, variant='light', block=false}) => {
     return (
-        <React.Fragment>
-            {<Button disabled={disabled} style={styles.nextButtonStyle} onClick={clicked} variant='light'>
+            <Button disabled={disabled} style={styles.nextButtonStyle} onClick={clicked} variant={variant} block={block}>
                 {text}
-            </Button>}
-        </React.Fragment>
+            </Button>
     );
 }
 

@@ -36,6 +36,7 @@ export const Step3 = ({ nextStep, app }) => {
       <hr />
       <h2>אשרייכם,</h2>
       <h6>לפניכם מספר אפשרויות לבחירת פסוק עבורך:</h6>
+      <div className="pb-4">
         {getSearchTypes().map((val, index) => {
           return (
             // <div className="box" key={`_${val.id}`}>
@@ -52,6 +53,7 @@ export const Step3 = ({ nextStep, app }) => {
             // </div>
           );
         })}
+        </div>
     </div>
       </div>
 
