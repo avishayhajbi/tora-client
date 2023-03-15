@@ -44,6 +44,11 @@ h6{
 //   }
 
 .form-control{
+    &:-webkit-autofill{
+        background-color: $grey-2!important;
+        -webkit-box-shadow: 0 0 0 30px $grey-2 inset !important;
+
+    }
     background-color: $grey-2;
     box-shadow: none;
     border: 0;
@@ -55,5 +60,5 @@ h6{
 
 .btn{
     border-radius: 10px;
-    font-weight: 900;
+    //font-weight: 900;
 }

@@ -185,10 +185,11 @@ export const Step5 = ({nextStep, app, actions}) => {
                     </li>
                 })}
             </ol>
+            <h2 className="pb-4">{`סה״כ לתשלום ${'---'} ש״ח`}</h2>
 
-            <div className="d-flex flex-row width100 marginTop30px layout-align-space-between">
-                <NextButton clicked={nextStepButton} text={'לחץ למצווה'}/>
-                <NextButton clicked={addToCart} text={'הוסף לסל והמשך בחיפוש'}/>
+            <div className="d-flex flex-column width100 ">
+                <NextButton clicked={addToCart} text={'המשך חיפוש'} variant="primary" block styles={{}}/>
+                <NextButton clicked={nextStepButton} text={'תשלום'} variant="secondary" block styles={{}}/>
             </div>
         </div>
     )

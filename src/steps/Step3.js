@@ -4,16 +4,17 @@ import { getSearchTypes } from "../config";
 import { Hello } from "../components/Hello";
 import { Progressbar } from "../components/Progressbar";
 
-export const Step3 = ({ nextStep, app }) => {
+export const Step3 = ({ nextStep, app, location }) => {
   const jumpToNextStep = (index) => {
     nextStep({ searchType: index });
   };
   const book = app.selectedBook;
+  const category = new URLSearchParams(location.search).get('category');
 
   return (
     <div className="step3 d-flex flex-column flex-100 align-content-center align-items-center text-center height-inherit">
       <div className="position-relative w-100">
-        <img src={"/assets/synagogues.png"} alt="Type Image" width="100%" />
+        <img src={`/assets/${category}.png`} alt="Category" width="100%" />
         <h2 className="image-text">
           {book.description}
           <br />
