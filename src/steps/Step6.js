@@ -5,15 +5,17 @@ import { Button, Form } from "react-bootstrap";
 import { Book } from "../components/Book";
 import rest from "../rest";
 import { BookSelect } from "../components/BookSelect";
+import { BooksCategoriesKeys, BooksCategoriesSingularValues } from "../config";
 
-export const Step6 = ({ nextStep, app, actions }) => {
+export const Step6 = ({ nextStep, app, actions, location }) => {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
 
   //TODO: get type by prop/state
-  const type = "synagogues";
+  const category = new URLSearchParams(location.search).get('category') ?? BooksCategoriesKeys.synagogues
   useEffect(() => {
     rest
+      // .getBooksByCategory(category)
       .getAllBooks()
       .then((res) => {
         setBooks(res.data);
@@ -44,15 +46,16 @@ export const Step6 = ({ nextStep, app, actions }) => {
     actions.setSelectedBook(book);
     nextStep();
   };
+  const categoryName = BooksCategoriesSingularValues[category];
 
   return (
     <div className="step6 flex-column flex-100 justify-content-center align-content-center align-items-center text-center height-inherit">
       <div className="position-relative">
         <img src={"/assets/synagogues.png"} alt="Type Image" width="100%" />
-        <h2 className="image-text">בתי כנסת</h2>
+        <h2 className="image-text">{categoryName}</h2>
       </div>
-      <h2 className="paddTop20px">בחרו בית כנסת</h2>
-      <p>בחרו בית כנסת בו תרצו לתרום פסוק לספר התורה</p>
+      <h2 className="paddTop20px">בחרו {categoryName}</h2>
+      <p>בחרו {categoryName} בו תרצו לתרום פסוק לספר התורה</p>
       <div className="text-right">
         {books.map((val, index) => {
           return (
@@ -70,6 +73,7 @@ export const Step6 = ({ nextStep, app, actions }) => {
               key={`_${index}`}
               book={val}
               onSelectBook={handleBookSelect}
+              categoryName={categoryName}
             />
           );
         })}

@@ -105,10 +105,18 @@ export const BooksCategoriesKeys = {
 }
 
 export const BooksCategoriesValues = {
-    [BooksCategoriesKeys.synagogues]: 'בתי כנסיות',
+    [BooksCategoriesKeys.synagogues]: 'בתי כנסת',
     [BooksCategoriesKeys.tombsOfTheRighteous]: 'קברות צדיקים',
     [BooksCategoriesKeys.hospitals]: 'בתי חולים',
     [BooksCategoriesKeys.IDF]: 'בסיסי צה״ל',
+    [BooksCategoriesKeys.other]: 'שונות',
+}
+
+export const BooksCategoriesSingularValues = {
+    [BooksCategoriesKeys.synagogues]: 'בית כנסת',
+    [BooksCategoriesKeys.tombsOfTheRighteous]: 'קבר צדיק',
+    [BooksCategoriesKeys.hospitals]: 'בית חולים',
+    [BooksCategoriesKeys.IDF]: 'בסיס צה״ל',
     [BooksCategoriesKeys.other]: 'שונות',
 }
 

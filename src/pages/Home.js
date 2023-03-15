@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import '../css/home.scss';
 import * as app_actions from '../store/app/actions';
 import {Step0} from "../steps/Step0";
+import {Step1New} from "../steps/Step1New";
 import {Step1} from "../steps/Step1";
 import {Step2} from "../steps/Step2";
 import {Step3} from "../steps/Step3";
@@ -43,6 +44,10 @@ class Home extends Component {
         if (data.hasOwnProperty('searchType')) {
             search += `&searchType=${data.searchType}`;
         }
+        const category = data.category ?? new URLSearchParams(this.props.location.search).get('category');
+        if (category) {
+            search += `&category=${category}`;
+        }
         history.push({
             pathname: `/${step}`,
             search: search,
@@ -54,14 +59,15 @@ class Home extends Component {
         const step = this.state.currStep;
         switch(step) {
             case 0: return <Step0 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 1: return <Step1 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 2: return <Step6 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 3: return <Step3 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 4: return <Step4 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 5: return <Step2 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 6: return <Step5 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 7: return <Step7 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 8: return <Step8 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 1: return <Step1New nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 2: return <Step1 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 3: return <Step6 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 4: return <Step3 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 5: return <Step4 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 6: return <Step2 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 7: return <Step5 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 8: return <Step7 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 9: return <Step8 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             default: return <div></div>
         }
     }
