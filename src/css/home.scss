@@ -31,12 +31,12 @@
     }
 
     .btn-primary {
-      color: #fff;
+      color: white;
       border-color: gray;
       background-color: gray;
 
       &:hover {
-        color: #000;
+        color: black;
         border-color: gray;
         background-color: white;
       }
@@ -144,8 +144,8 @@
 
 .spacer{
   margin: 6px 0;
-  // color: #000000;
-  border-color: #000000;
+  // color: black;
+  border-color: black;
 }
 
 .custom-checkbox{
@@ -164,11 +164,18 @@
     line-height: 18px;
   }
 
-  .form-check-input[checked] ~ .form-check-label,
+
   .form-check-input:checked ~ .form-check-label{
     background-color: $secondary;
     //border-radius: 10px;
   }
+  
+  .form-check-input:not(:checked) ~ .form-check-label{
+      background-color: $grey-1;
+      //border-radius: 10px;
+  }
+  
+
 }
 
 .verse-checkbox{
@@ -176,14 +183,15 @@
   //cursor: pointer;
 
   &:focus{
-    border:#000 1px solid;
+    border:black 1px solid;
   }
   > .form-check-input{
     position: absolute;
     visibility: hidden;
   }
 
-  .form-check-input[disabled] ~ .form-check-label, .form-check-input:disabled ~ .form-check-label{
+  // .form-check-input[disabled] ~ .form-check-label, 
+  .form-check-input:disabled ~ .form-check-label{
     background-color: #DCDCDC;
     color: $text-disabled;
     .gray{
@@ -195,7 +203,7 @@
     }
   }
 
-  .form-check-input[checked] ~ .form-check-label,
+  // .form-check-input[checked] ~ .form-check-label,
   .form-check-input:checked ~ .form-check-label{
     background-color: $secondary;
     color: white !important;
@@ -208,4 +216,9 @@
       border-color: white;
     }
   }
+
+  .form-check-input:not(:checked) ~ .form-check-label{
+    background-color: white;
+    //border-radius: 10px;
+}
 }
