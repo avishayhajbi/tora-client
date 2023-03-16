@@ -10,6 +10,7 @@ import * as ICONS from "@fortawesome/free-solid-svg-icons";
 import ShoppingCartIcon from "../assets/shopping-cart.svg"
 import { VerseLocation } from "../components/VerseLocation";
 import { VerseDisplay } from "../components/VerseDisplay";
+import Blubird from 'bluebird';
 
 export const Step5 = ({nextStep, app, actions}) => {
     // const [blessFor, setBlessFor] = useState({});
@@ -18,16 +19,17 @@ export const Step5 = ({nextStep, app, actions}) => {
 
     useEffect(() => {
         setSelectedVerses(app.selectedVerses);
-    }, [selectedVerses])
+    }, [])
 
     useEffect(() => {
-        Promise.all(selectedVerses && selectedVerses.filter(v => v.range).map(v => {
+        Blubird.map(selectedVerses, async v => {
             return rest.getSelectedVersesPriceAndAmount([v], app.selectedBook)
                 .then(res => {
+                    console.log(res)
                     v.price = res.price;
                     return res.price;
                 })
-        })).then((results) => {
+        }).then((results) => {
             console.log(results);
             if (results && results.length) {
                 setToUpdate(results);
@@ -48,6 +50,10 @@ export const Step5 = ({nextStep, app, actions}) => {
             val.bless.splice(index, 1);
         }
         actions.setSelectedVerses(selectedVerses);
+    }
+
+    const getPrice = () => {
+        return toUpdate.reduce((a,b)=> a+b,0);
     }
 
     const nextStepButton = () => {
@@ -100,7 +106,7 @@ export const Step5 = ({nextStep, app, actions}) => {
                 alert('המוצר כבר נמצא בסל');
             } else {
                 actions.addToCart(selectedVerses);
-                window.history.back();
+                window.location.href = '/4?step=4';
             }
         }
     }
@@ -185,7 +191,7 @@ export const Step5 = ({nextStep, app, actions}) => {
                     </li>
                 })}
             </ol>
-            <h2 className="pb-4">{`סה״כ לתשלום ${'---'} ש״ח`}</h2>
+            <h2 className="pb-4">{`סה״כ לתשלום ${ getPrice() } ש״ח`}</h2>
 
             <div className="d-flex flex-column width100 ">
                 <NextButton clicked={addToCart} text={'המשך חיפוש'} variant="primary" block styles={{}}/>
