@@ -212,7 +212,7 @@ class App extends React.Component{
                       <PrivateRoute path="/management" component={Management} {...this.props}/>
                       <Route path='/404' component={NotFound} />
                       <Route path='*' component={NotFound} />
-                 </Switch>˚
+                 </Switch>
                 </BrowserRouter>
     
                 <Navbar fixed='bottom' bg="light" className='footer'>
