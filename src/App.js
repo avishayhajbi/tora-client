@@ -197,7 +197,7 @@ class App extends React.Component{
                         body={this.props.app.modal && this.props.app.modal.body}
                         buttons={this.props.app.modal && this.props.app.modal.buttons}/>}
 
-                <BrowserRouter ref={'browserRef'} className={`App flex-100 layout layout-align-center-center`}>
+                <HashRouter ref={'browserRef'} className={`App flex-100 layout layout-align-center-center`}>
                   <Switch>
                       <Route exact path="/" key="default" component={Home} />
                       <Route path="/1" key="1" component={Home} />
@@ -213,7 +213,7 @@ class App extends React.Component{
                       <Route path='/404' component={NotFound} />
                       <Route path='*' component={NotFound} />
                  </Switch>
-                </BrowserRouter>
+                </HashRouter>
     
                 <Navbar fixed='bottom' bg="light" className='footer'>
                 {this.state.location !== '/' && <Navbar.Brand className='pointer' onClick={()=>window.history.back()}>
