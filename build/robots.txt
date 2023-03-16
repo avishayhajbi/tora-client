@@ -1,0 +1,2 @@
+# https://index.ts.robotstxt.org/robotstxt.html
+User-agent: *
