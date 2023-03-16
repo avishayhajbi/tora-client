@@ -2,7 +2,7 @@
   "name": "landing-page",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "/",
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^3.3.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
