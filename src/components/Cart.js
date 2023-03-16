@@ -44,8 +44,10 @@ export const Cart = ({verses, actions}) => {
                             {
                                 name: 'נקה הכל',
                                 callback: () => {
-                                    actions.clearCart();
-                                    setSelectedVerses([]);
+                                    cleanAll(() => {
+                                        actions.clearCart();
+                                        setSelectedVerses([]);
+                                    })
                                 }
                             }
                         ]
@@ -66,6 +68,13 @@ export const Cart = ({verses, actions}) => {
                 setSelectedVerses(() => tmp);
             }
             actions.removeFromCart(id);
+        }
+    }
+
+    const cleanAll = (callback) => {
+        const text = "האם אתה בטוח?";
+        if (window.confirm(text) == true) {
+            callback();
         }
     }
 
