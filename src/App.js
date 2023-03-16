@@ -210,7 +210,8 @@ class App extends React.Component{
                       <Route path="/8" key="8" component={Home} />
                       <Route exact path="/login" component={Login}/>
                       <PrivateRoute path="/management" component={Management} {...this.props}/>
-                      <Route component={NotFound} />
+                      <Route path='/404' component={NotFound} />
+                      <Route path='*' component={NotFound} />
                  </Switch>
                 </BrowserRouter>
     
