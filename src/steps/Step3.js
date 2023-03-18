@@ -13,7 +13,7 @@ export const Step3 = ({ nextStep, app }) => {
   return (
     <div className="step3 d-flex flex-column flex-100 align-content-center align-items-center text-center height-inherit">
       <div className="position-relative w-100">
-        <img src={book.image_url} alt="תמונת הספר" width="100%" className="book-image"/>
+        <img src={book.image_url} alt="תמונה" width="100%" className="book-image"/>
         <h2 className="image-text">
           {book.description}
           <br />

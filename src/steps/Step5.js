@@ -106,7 +106,7 @@ export const Step5 = ({nextStep, app, actions}) => {
                 alert('המוצר כבר נמצא בסל');
             } else {
                 actions.addToCart(selectedVerses);
-                window.location.href = '/4?step=4';
+                window.location.href = '/1?step=1';
             }
         }
     }

@@ -144,11 +144,11 @@
 
 
 body {
-    background: url("../assets/background6.jpeg");
+    /* background: url("../assets/background6.jpeg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed; */
     height: 100vh;
     /*background: var(--primary-color) !important;;*/
     /*background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(16,101,224,0.7035189075630253) 43%, rgba(0,212,255,1) 100%);*/
