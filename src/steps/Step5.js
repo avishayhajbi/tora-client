@@ -143,7 +143,7 @@ export const Step5 = ({nextStep, app, actions}) => {
             className='step5 d-flex flex-column flex-100 padd20 justify-content-start align-content-center align-items-center text-center height-inherit'>
             {/* <Hello donate={app.donate}/> */}
             <img src={ShoppingCartIcon} alt="Shopping Cart Icon" width="45px"/>
-            <h2>סיכום הזמנתכם:</h2>
+            <h2>הוספת פסוקים לעגלת הקניות:</h2>
             <ol className='width100 p-0 list-unstyled'>
                 {selectedVerses && selectedVerses.map((val, index) => {
                     return <li key={index} className="verse-box">
@@ -195,7 +195,7 @@ export const Step5 = ({nextStep, app, actions}) => {
 
             <div className="d-flex flex-column width100 ">
                 <NextButton clicked={addToCart} text={'המשך חיפוש'} variant="primary" block styles={{}}/>
-                <NextButton clicked={nextStepButton} text={'תשלום'} variant="secondary" block styles={{}}/>
+                <NextButton clicked={nextStepButton} text={'הוסף לעגלה ועבור לתשלום'} variant="secondary" block styles={{}}/>
             </div>
         </div>
     )

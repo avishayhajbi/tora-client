@@ -6,7 +6,7 @@ import { Progressbar } from "./Progressbar";
 export const BookSelect = ({ book, selectBtnLabel = "בחירה", onSelectBook, categoryName }) => {
 
   return (
-    <div className="mt-3 d-flex  mx-4 book-select">
+    <div className="mt-3 d-flex  mx-4 book-select pointer"  onClick={() => onSelectBook(book)} >
       <Progressbar
         width={30}
         height={30}
@@ -17,7 +17,7 @@ export const BookSelect = ({ book, selectBtnLabel = "בחירה", onSelectBook, 
         <span>{categoryName} {book.description}</span>
         <span className="address">{book.address}</span>
       </div>
-      <Button variant="secondary mr-auto" onClick={() => onSelectBook(book)} >{selectBtnLabel}</Button>
+      <Button variant="secondary mr-auto">{selectBtnLabel}</Button>
     </div>
   );
 };

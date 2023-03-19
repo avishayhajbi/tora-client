@@ -20,6 +20,7 @@ import {Cart} from "./components/Cart";
 import Badge from "react-bootstrap/Badge";
 import rest from "./rest";
 import HeaderIcon from "./assets/header-icon.svg"
+import ScrollToTop from './components/ScrollToTop';
 
 /*let { history } = this.props;
 history.push({
@@ -161,79 +162,157 @@ class App extends React.Component{
 
     render () {
         return (
-            <React.Fragment>
-                <Navbar className='header' sticky="top" bg="light" expand="md" expanded={!this.state.collapsed}>
-                    {this.state.location !== '/' && <Navbar.Brand className='pointer' onClick={()=>window.history.back()}>
-                        <FontAwesomeIcon icon={ICONS.faArrowRight}/>
-                    </Navbar.Brand>}
-                    <Navbar.Toggle ref={"navbartoggle"} aria-controls="basic-navbar-nav"
-                                   children={
-                                       <FontAwesomeIcon icon={ICONS.faBars}/>
-                                   }
-                                   onClick={this.toggleNavbar.bind(this)}/>
-                    <Navbar.Brand className='pointer' onClick={this.onClickTopBar.bind(this)}>
-                       <img src={HeaderIcon} alt="Header Icon" width="150px"/>
-                    </Navbar.Brand>
+          <React.Fragment>
+            <Navbar
+              className="header"
+              sticky="top"
+              bg="light"
+              expand="md"
+              expanded={!this.state.collapsed}
+            >
+              {this.state.location !== "/" && (
+                <Navbar.Brand
+                  className="pointer"
+                  onClick={() => window.history.back()}
+                >
+                  <FontAwesomeIcon icon={ICONS.faArrowLeft} />
+                </Navbar.Brand>
+              )}
+              <Navbar.Toggle
+                ref={"navbartoggle"}
+                aria-controls="basic-navbar-nav"
+                children={<FontAwesomeIcon icon={ICONS.faBars} />}
+                onClick={this.toggleNavbar.bind(this)}
+              />
+              <Navbar.Brand
+                className="pointer"
+                onClick={this.onClickTopBar.bind(this)}
+              >
+                <img src={HeaderIcon} alt="Header Icon" width="150px" />
+              </Navbar.Brand>
 
-                    <Navbar.Collapse ref={"navbarcollapse"} id="basic-navbar-nav">
-                        <Nav className="ml-auto" variant="pills" defaultActiveKey={window.location.pathname} onSelect={this.handleSelect.bind(this)}>
-                        </Nav>
-                        <Nav className="mr-auto">
-                            {false && !this.props.app.token && <Button variant="outline-light" onClick={this.goToLogin.bind(this)}>התחבר</Button>}
-                            {this.props.app.token && <Button variant="outline-light" onClick={this.logout.bind(this)}>התנתק</Button>}
-                            <div className='pointer' onClick={this.openCart.bind(this)}>
-                                <Badge text="white" style={{color: 'white'}}>({this.props.app.cart.length})</Badge>
-                                <FontAwesomeIcon className='marginLeft5px' icon={ICONS.faShoppingCart} color={'white'}></FontAwesomeIcon>
-                            </div>
-                        </Nav>
+              <Navbar.Collapse ref={"navbarcollapse"} id="basic-navbar-nav">
+                <Nav
+                  className="ml-auto"
+                  variant="pills"
+                  defaultActiveKey={window.location.pathname}
+                  onSelect={this.handleSelect.bind(this)}
+                ></Nav>
+                <Nav className="mr-auto">
+                  {false && !this.props.app.token && (
+                    <Button
+                      variant="outline-light"
+                      onClick={this.goToLogin.bind(this)}
+                    >
+                      התחבר
+                    </Button>
+                  )}
+                  {this.props.app.token && (
+                    <Button
+                      variant="outline-light"
+                      onClick={this.logout.bind(this)}
+                    >
+                      התנתק
+                    </Button>
+                  )}
+                  <div className="pointer" onClick={this.openCart.bind(this)}>
+                    <Badge text="white" style={{ color: "white" }}>
+                      ({this.props.app.cart.length})
+                    </Badge>
+                    <FontAwesomeIcon
+                      className="marginLeft5px"
+                      icon={ICONS.faShoppingCart}
+                      color={"white"}
+                    ></FontAwesomeIcon>
+                  </div>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
 
-                    </Navbar.Collapse>
-                </Navbar>
+            {
+              <Modal
+                show={this.props.app.modal && this.props.app.modal.show}
+                onHide={this.props.actions.resetModal}
+                onClose={this.props.actions.resetModal}
+                title={this.props.app.modal && this.props.app.modal.title}
+                body={this.props.app.modal && this.props.app.modal.body}
+                buttons={this.props.app.modal && this.props.app.modal.buttons}
+              />
+            }
 
-                {<Modal show={this.props.app.modal && this.props.app.modal.show}
-                        onHide={this.props.actions.resetModal}
-                        onClose={this.props.actions.resetModal}
-                        title={this.props.app.modal && this.props.app.modal.title}
-                        body={this.props.app.modal && this.props.app.modal.body}
-                        buttons={this.props.app.modal && this.props.app.modal.buttons}/>}
+            <BrowserRouter
+              ref={"browserRef"}
+              className={`App flex-100 layout layout-align-center-center`}
+            >
+              <ScrollToTop>
+                <Switch>
+                  <Route exact path="/" key="default" component={Home} />
+                  <Route path="/1" key="1" component={Home} />
+                  <Route path="/2" key="2" component={Home} />
+                  <Route path="/3" key="3" component={Home} />
+                  <Route path="/4" key="4" component={Home} />
+                  <Route path="/5" key="5" component={Home} />
+                  <Route path="/6" key="6" component={Home} />
+                  <Route path="/7" key="7" component={Home} />
+                  <Route path="/8" key="8" component={Home} />
+                  <Route exact path="/login" component={Login} />
+                  <PrivateRoute
+                    path="/management"
+                    component={Management}
+                    {...this.props}
+                  />
+                  <Route path="/404" component={NotFound} />
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </ScrollToTop>
+            </BrowserRouter>
 
-                <BrowserRouter ref={'browserRef'} className={`App flex-100 layout layout-align-center-center`}>
-                  <Switch>
-                      <Route exact path="/" key="default" component={Home} />
-                      <Route path="/1" key="1" component={Home} />
-                      <Route path="/2" key="2" component={Home} />
-                      <Route path="/3" key="3" component={Home} />
-                      <Route path="/4" key="4" component={Home} />
-                      <Route path="/5" key="5" component={Home} />
-                      <Route path="/6" key="6" component={Home} />
-                      <Route path="/7" key="7" component={Home} />
-                      <Route path="/8" key="8" component={Home} />
-                      <Route exact path="/login" component={Login}/>
-                      <PrivateRoute path="/management" component={Management} {...this.props}/>
-                      <Route path='/404' component={NotFound} />
-                      <Route path='*' component={NotFound} />
-                 </Switch>
-                </BrowserRouter>
-    
-                <Navbar fixed='bottom' bg="light" className='footer'>
-                {this.state.location !== '/' && <Navbar.Brand className='pointer' onClick={()=>window.history.back()}>
-                        <FontAwesomeIcon icon={ICONS.faArrowRight}/>
-                    </Navbar.Brand>}
-                    <Nav>
-                            {false && !this.props.app.token && <Button variant="outline-light" onClick={this.goToLogin.bind(this)}>התחבר</Button>}
-                            {this.props.app.token && <Button variant="outline-light" onClick={this.logout.bind(this)}>התנתק</Button>}
-                            <div className='pointer' onClick={this.openCart.bind(this)}>
-                                <Badge text="white" style={{color: 'white'}}>({this.props.app.cart.length})</Badge>
-                                <FontAwesomeIcon className='marginLeft5px' icon={ICONS.faShoppingCart} color={'white'}></FontAwesomeIcon>
-                            </div>
-                    </Nav>
-                    <Navbar.Brand className='pointer' onClick={this.onClickTopBar.bind(this)}>
-                        <FontAwesomeIcon icon={ICONS.faHome}/>
-                    </Navbar.Brand>
-                </Navbar>
-
-            </React.Fragment>
-        )
+            <Navbar fixed="bottom" bg="light" className="footer d-lg-none">
+              {this.state.location !== "/" && (
+                <Navbar.Brand
+                  className="pointer"
+                  onClick={() => window.history.back()}
+                >
+                  <FontAwesomeIcon icon={ICONS.faArrowLeft} />
+                </Navbar.Brand>
+              )}
+              <Nav>
+                {false && !this.props.app.token && (
+                  <Button
+                    variant="outline-light"
+                    onClick={this.goToLogin.bind(this)}
+                  >
+                    התחבר
+                  </Button>
+                )}
+                {this.props.app.token && (
+                  <Button
+                    variant="outline-light"
+                    onClick={this.logout.bind(this)}
+                  >
+                    התנתק
+                  </Button>
+                )}
+                <div className="pointer" onClick={this.openCart.bind(this)}>
+                  <Badge text="white" style={{ color: "white" }}>
+                    ({this.props.app.cart.length})
+                  </Badge>
+                  <FontAwesomeIcon
+                    className="marginLeft5px"
+                    icon={ICONS.faShoppingCart}
+                    color={"white"}
+                  ></FontAwesomeIcon>
+                </div>
+              </Nav>
+              <Navbar.Brand
+                className="pointer"
+                onClick={this.onClickTopBar.bind(this)}
+              >
+                <FontAwesomeIcon icon={ICONS.faHome} />
+              </Navbar.Brand>
+            </Navbar>
+          </React.Fragment>
+        );
     };
 }
 

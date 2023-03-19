@@ -121,7 +121,7 @@ export const Step4 = ({nextStep, app, location, actions}) => {
                         <div>סה"כ לתשלום:</div>
                         {<div>₪{amount}</div>}
                     </div>
-                    <NextButton disabled={versesSelected === 0} clicked={nextStepButton} text={'לחץ למצווה'}/>
+                    <NextButton disabled={versesSelected === 0} clicked={nextStepButton} variant='secondary' text={'לחץ למצווה'}/>
                 </div>
             </div>
         </div>

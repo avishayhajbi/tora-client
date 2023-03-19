@@ -11,7 +11,7 @@ import '../css/verse-display.scss';
 export const VerseDisplay = ({ val, showLength, onSearchInOtherBooks, isCartDisplay=false }) => {
   return (
     <div
-      className={`text-right ${isCartDisplay ? '': 'verse-box'}`} >
+      className={`pointer text-right ${isCartDisplay ? '': 'verse-box'}`} >
       <p className={`mb-0 fontWeight900 ${val.taken && "disabled-color"}`}> {val.text} </p>
       {/* <ol style={{ ...styles.gray, ...styles.list }}> */}
       <div className="gray list">
