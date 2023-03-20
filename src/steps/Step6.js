@@ -69,12 +69,15 @@ export const Step6 = ({ nextStep, app, actions, location }) => {
             //         </Form.Label>
             //     </Form.Group>
             // </div>
-            <BookSelect
-              key={`_${index}`}
-              book={val}
-              onSelectBook={handleBookSelect}
-              categoryName={categoryName}
-            />
+            <div className="mx-4">
+              <BookSelect
+                key={`_${index}`}
+                book={val}
+                onSelectBook={handleBookSelect}
+                categoryName={categoryName}
+              />
+            </div>
+
           );
         })}
       </div>

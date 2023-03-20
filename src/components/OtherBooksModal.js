@@ -5,6 +5,7 @@ import MyModal from "../components/Modal";
 import {Book} from "../components/Book";
 import Spinner from "react-bootstrap/Spinner";
 import {VerseLocation} from "../components/VerseLocation";
+import { BookSelect } from "./BookSelect";
 
 const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVerse}) => {
     const [loading, setLoading] = useState(true);
@@ -29,10 +30,13 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
     const updateSelected = (e, res) => {
         if (samePlace) {
             const verses = res.verses.filter(verseInSamePlace);
-            setSelectedBook(verses[0]);
+            // setSelectedBook(verses[0]);
+            callback(verses[0], originalVerse);
         } else {
-            setSelectedBook(res.verses[0]);
+            //setSelectedBook(res.verses[0]);
+            callback(res.verses[0], originalVerse);
         }
+        setShow(false);
     }
 
     const chooseSpecificPlace = (e) => {
@@ -65,12 +69,13 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
     }
 
     return (
-        <MyModal onHide={onHide.bind(this)} show={show} title={'בחר ספר תורה'}
-        buttons={[
-            {
-                name: 'בחר',
-            }
-        ]}>
+        <MyModal onHide={onHide.bind(this)} show={show} title={'הפסוק אשר חיפשתם ניתן לרכישה בספרי התורה הבאים:'}
+        // buttons={[
+        //     {
+        //         name: 'בחר',
+        //     }
+        // ]}
+        >
             {loading && <div
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
                 <Spinner animation="border"/>
@@ -94,7 +99,11 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
                     const verse = res.verses[0];
                     const id = Date.now().toString() + index;
                     return <div key={id}>
-                        <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${id}`}>
+                                <BookSelect
+                                book={verse.bookInfo}
+                                onSelectBook={(e) => {updateSelected(e, res)}}
+                            />
+                        {/* <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${id}`}>
                             <Form.Check className='flex-10 text-center'
                                         type='radio' value={verse._id} name={'sameGroup'}
                                         onChange={(e) => {
@@ -103,7 +112,7 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
                             <Form.Label id={`${id}`} className={`flex-90 flex-column text-right`} >
                                 <Book {...verse.bookInfo}/>
                             </Form.Label>
-                        </Form.Group>
+                        </Form.Group> */}
                     </div>
                 })}
                 </div>

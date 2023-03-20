@@ -54,7 +54,7 @@ class MyModal extends Component {
                    onHide={this.props.onHide || this.handleClose.bind(this)}>
                 <Modal.Header closeButton>
                     <Modal.Title className={'flex-100 layout layout-row layout-align-center-center'}>
-                        <h3 className={"primary"}>{this.props.title}</h3>
+                        <h3 className={"primary text-center"}>{this.props.title}</h3>
                     </Modal.Title>
                 </Modal.Header>
                 {(this.props.children) && <Modal.Body className={'text-right'}>{this.props.children}</Modal.Body>}
