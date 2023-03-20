@@ -108,7 +108,7 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}/>
                         <Form.Label id={`_${val._id}}`}
-                                    className={`flex-90 flex-column text-right ${val.taken && 'disabled-color'}`}>
+                                    className={`flex-90 flex-column text-right`}>
                             <VersesRange val={val}/>
                         </Form.Label>
                     </Form.Group>

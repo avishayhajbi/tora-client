@@ -125,7 +125,7 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}
                                     label={
-                                        <div className={`text-right ${val.taken && 'disabled-color'}`}>
+                                        <div className={`text-right`}>
                                             <VerseDisplay val={val} showLength onSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
                                         </div>
                                     }/>

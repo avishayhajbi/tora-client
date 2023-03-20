@@ -131,7 +131,7 @@ export const FreeSearch = ({donate, book, selectedVerses, searchType, callback, 
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}/>
                         <Form.Label id={`_${val._id}}`}
-                                    className={`flex-90 flex-column text-right ${val.taken && 'disabled-color'}`}>
+                                    className={`flex-90 flex-column text-right`}>
                             <VerseDisplay val={val} />
                             {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && <React.Fragment>
                                 <Button onClick={searchInOtherBooks.bind(this, index, val)}
