@@ -84,7 +84,7 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
                                 }}/>
                     <Form.Label className={`flex-90 flex-column text-right`}>
                         חפש באותו מיקום בדיוק
-                        <span style={styles.gray}>
+                        <span className="pr-2" style={styles.gray}>
                             <VerseLocation {...originalVerse} />
                         </span>
                     </Form.Label>

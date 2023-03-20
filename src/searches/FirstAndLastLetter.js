@@ -54,8 +54,6 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
             rest.search(searchType, {name, bookId: book?._id, skip})
                 .then(response => {
                     console.log(response.data);
-                    response.data[0].taken= true;
-                    response.data[0].availableBooks= 2;
                     setVerses(verses.concat(response.data));
                     setLoading(false);
                     setSearchLoading(false);
