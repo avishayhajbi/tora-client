@@ -64,8 +64,8 @@ class Home extends Component {
             case 3: return <Step6 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 4: return <Step3 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 5: return <Step4 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 6: return <Step2 nextStep={this.nextStep.bind(this)} {...this.props}/>;
-            case 7: return <Step5 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 6: return <Step5 nextStep={this.nextStep.bind(this)} {...this.props}/>;
+            case 7: return <Step2 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 8: return <Step7 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             case 9: return <Step8 nextStep={this.nextStep.bind(this)} {...this.props}/>;
             default: return <div></div>

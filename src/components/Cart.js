@@ -39,7 +39,7 @@ export const Cart = ({verses, actions}) => {
                         (${price})
                     `,
                                 callback: () => {
-                                    window.location.href = '/8?step=8';
+                                    window.location.href = '/7?step=7';
                                 }
                             },
                             {
