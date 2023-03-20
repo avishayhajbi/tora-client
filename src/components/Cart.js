@@ -3,6 +3,7 @@ import {VersesRange} from "../components/VersesRange";
 import * as ICONS from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import rest from "../rest";
+import { VerseDisplay } from "./VerseDisplay";
 
 export const Cart = ({verses, actions}) => {
     const [selectedVerses, setSelectedVerses] = useState([]);
@@ -83,19 +84,20 @@ export const Cart = ({verses, actions}) => {
             {!selectedVerses.length && <h3 className='d-flex'>
                 לא נבחרו פסוקים
             </h3>}
-            <ol>
+            <ol className="list-unstyled p-0">
                 {selectedVerses.map((val, index) => {
                     return <li key={val._id}>
-                        <div className='marginBottom30px'>
+                        <div className='marginBottom30px verse-box'>
                             <div className='pointer marginBottom5px' onClick={() => removeItem(val._id)} >
                                 <FontAwesomeIcon className='marginLeft5px marginRight5px' icon={ICONS.faTrash}/>
                                 <span>
                                     הסר מהעגלה
                                 </span>
                             </div>
-                            {!val.range && <p>{val.text}</p>}
+                            {/* {!val.range && <p>{val.text}</p>} */}
+                            {!val.range && <VerseDisplay val={val} showLength isCartDisplay={true}/>}
                             {val.range && <VersesRange val={val} withBook={true}/>}
-                            <p>- {val.bless.map(v => v.name).join(', ')}</p>
+                            <h6>- {val.bless.map(v => v.name).join(', ')}</h6>
                         </div>
                     </li>
                 })}
