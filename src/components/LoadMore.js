@@ -4,7 +4,7 @@ import {Button} from "react-bootstrap";
 export const LoadMore = ({callback, show}) => {
     return (
         <React.Fragment>
-            {show && <Button variant="outline-secondary" style={style} onClick={callback}>
+            {show && <Button variant="secondary" style={style} onClick={callback}>
                 הצג עוד תוצאות
             </Button>}
         </React.Fragment>
@@ -12,5 +12,6 @@ export const LoadMore = ({callback, show}) => {
 };
 
 const style = {
-    margin: '20px'
+    marginTop: '20px',
+    marginBottom: '30px'
 }

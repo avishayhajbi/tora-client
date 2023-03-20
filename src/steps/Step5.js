@@ -1,7 +1,7 @@
 import React, {Component, useEffect, useState} from "react";
 import NextButton from "../components/NextButton";
 import {Hello} from "../components/Hello";
-import {Button, Form, Navbar} from "react-bootstrap";
+import {Button, Form, Navbar, Alert} from "react-bootstrap";
 import {countWeight} from "../utils";
 import rest from "../rest";
 import {VersesRange} from "../components/VersesRange";
@@ -37,6 +37,8 @@ export const Step5 = ({nextStep, app, actions}) => {
         })
     }, [selectedVerses])
 
+    const hasVerseWithoutBless = selectedVerses.some(v => !v.bless?.length);
+
     const updateSelected = (e, v, val) => {
         const name = e.target.name;
         const value = e.target.checked;
@@ -57,8 +59,7 @@ export const Step5 = ({nextStep, app, actions}) => {
     }
 
     const nextStepButton = () => {
-        const canContinue = selectedVerses.find(v => !v.bless?.length);
-        if (!canContinue && selectedVerses.length) {
+        if (selectedVerses.length) {
             const selectedIds = selectedVerses.map(v => v._id);
             if (app.cart.find(v => selectedIds.includes(v._id))) {
                 actions.updateModal({
@@ -99,15 +100,12 @@ export const Step5 = ({nextStep, app, actions}) => {
     }
 
     const addToCart = () => {
-        const canContinue = selectedVerses.find(v => !v.bless?.length);
-        if (!canContinue) {
-            const selectedIds = selectedVerses.map(v => v._id);
-            if (app.cart.find(v => selectedIds.includes(v._id))) {
-                alert('המוצר כבר נמצא בסל');
-            } else {
-                actions.addToCart(selectedVerses);
-                window.location.href = '/1?step=1';
-            }
+        const selectedIds = selectedVerses.map((v) => v._id);
+        if (app.cart.find((v) => selectedIds.includes(v._id))) {
+            alert("המוצר כבר נמצא בסל");
+        } else {
+            actions.addToCart(selectedVerses);
+            window.location.href = "/1?step=1";
         }
     }
 
@@ -138,15 +136,18 @@ export const Step5 = ({nextStep, app, actions}) => {
             </div>
         </div>
     }
+
+
     return (
         <div
             className='step5 d-flex flex-column flex-100 padd20 justify-content-start align-content-center align-items-center text-center height-inherit'>
             {/* <Hello donate={app.donate}/> */}
             <img src={ShoppingCartIcon} alt="Shopping Cart Icon" width="45px"/>
             <h2>הוספת פסוקים לעגלת הקניות:</h2>
+            <h6 className="text-right">יש לבחור ייעוד לתרומה עבור כל פסוק</h6>
             <ol className='width100 p-0 list-unstyled'>
                 {selectedVerses && selectedVerses.map((val, index) => {
-                    return <li key={index} className="verse-box">
+                    return <li key={index} className="verse-box mb-4">
                         {/* <Form.Group controlId={'verse'} key={val._id}>
                             <Form.Label className='d-flex flex-row align-content-center align-items-center justify-content-between'>
                                 <span className="fontWeight900">אנא בדקו שזהו הפסוק שבחר לבכם:</span>
@@ -193,9 +194,9 @@ export const Step5 = ({nextStep, app, actions}) => {
             </ol>
             <h2 className="pb-4">{`סה״כ לתשלום ${ getPrice() } ש״ח`}</h2>
 
-            <div className="d-flex flex-column width100 ">
-                <NextButton clicked={addToCart} text={'המשך חיפוש'} variant="primary" block styles={{}}/>
-                <NextButton clicked={nextStepButton} text={'הוסף לעגלה ועבור לתשלום'} variant="secondary" block styles={{}}/>
+            <div className="d-flex flex-column width100">
+                <NextButton disabled={hasVerseWithoutBless} clicked={addToCart} text={'המשך חיפוש'} variant="primary" block styles={{}}/>
+                <NextButton disabled={hasVerseWithoutBless} clicked={nextStepButton} text={'הוסף לעגלה ועבור לתשלום'} variant="secondary" block styles={{}}/>
             </div>
         </div>
     )

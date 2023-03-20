@@ -75,7 +75,7 @@
     margin-bottom: 76px;
 }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 992px) {
     #root > div.page {
         max-width: var(--max-desktop-size);
         margin: 15px 0;

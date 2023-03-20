@@ -167,17 +167,17 @@ class App extends React.Component{
               className="header"
               sticky="top"
               bg="light"
-              expand="md"
+              expand="lg"
               expanded={!this.state.collapsed}
             >
-              {this.state.location !== "/" && (
+              {/* {this.state.location !== "/" && (
                 <Navbar.Brand
                   className="pointer"
                   onClick={() => window.history.back()}
                 >
                   <FontAwesomeIcon icon={ICONS.faArrowLeft} />
                 </Navbar.Brand>
-              )}
+              )} */}
               <Navbar.Toggle
                 ref={"navbartoggle"}
                 aria-controls="basic-navbar-nav"
