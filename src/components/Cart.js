@@ -4,9 +4,15 @@ import * as ICONS from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import rest from "../rest";
 import { VerseDisplay } from "./VerseDisplay";
+import Modal from '../components/Modal';
+
+const removeItemModalDefaultState ={ isShow:false, id: null};
 
 export const Cart = ({verses, actions}) => {
     const [selectedVerses, setSelectedVerses] = useState([]);
+    const [removeItemModal, setRemoveItemModal] = useState(removeItemModalDefaultState);
+    const [showRemoveAllModal, setShowRemoveAllModal] = useState(false);
+
     useEffect(() => {
         setSelectedVerses(verses);
     }, []);
@@ -44,12 +50,13 @@ export const Cart = ({verses, actions}) => {
                             },
                             {
                                 name: 'נקה הכל',
-                                callback: () => {
-                                    cleanAll(() => {
-                                        actions.clearCart();
-                                        setSelectedVerses([]);
-                                    })
-                                }
+                                callback:() => setShowRemoveAllModal(true)
+                                // callback: () => {
+                                //     cleanAll(() => {
+                                //         actions.clearCart();
+                                //         setSelectedVerses([]);
+                                //     })
+                                // }
                             }
                         ]
                     })
@@ -60,8 +67,9 @@ export const Cart = ({verses, actions}) => {
     }
 
     const removeItem = (id) => {
-        const text = "האם אתה בטוח?";
-        if (window.confirm(text) == true) {
+        // const text = "האם אתה בטוח?";
+
+        // if (window.confirm(text) == true) {
             const index = selectedVerses.findIndex(v => v._id === id);
             if (index !== -1) {
                 const tmp = [...selectedVerses];
@@ -69,18 +77,19 @@ export const Cart = ({verses, actions}) => {
                 setSelectedVerses(() => tmp);
             }
             actions.removeFromCart(id);
-        }
+        // }
     }
 
-    const cleanAll = (callback) => {
-        const text = "האם אתה בטוח?";
-        if (window.confirm(text) == true) {
-            callback();
-        }
-    }
+    // const cleanAll = (callback) => {
+    //     const text = "האם אתה בטוח?";
+    //     if (window.confirm(text) == true) {
+    //         callback();
+    //     }
+    // }
 
     return (
         <React.Fragment>
+            { (removeItemModal.isShow || showRemoveAllModal) &&  <div className="fade modal-backdrop show"></div>}
             {!selectedVerses.length && <h3 className='d-flex'>
                 לא נבחרו פסוקים
             </h3>}
@@ -88,7 +97,7 @@ export const Cart = ({verses, actions}) => {
                 {selectedVerses.map((val, index) => {
                     return <li key={val._id}>
                         <div className='marginBottom30px verse-box'>
-                            <div className='pointer marginBottom5px' onClick={() => removeItem(val._id)} >
+                            <div className='pointer marginBottom5px' onClick={() => setRemoveItemModal({isShow:true, id: val._id})} >
                                 <FontAwesomeIcon className='marginLeft5px marginRight5px' icon={ICONS.faTrash}/>
                                 <span>
                                     הסר מהעגלה
@@ -102,6 +111,47 @@ export const Cart = ({verses, actions}) => {
                     </li>
                 })}
             </ol>
+
+             <Modal
+                show={removeItemModal.isShow}
+                onHide={()=> setRemoveItemModal(removeItemModalDefaultState)}
+                onClose={()=> setRemoveItemModal(removeItemModalDefaultState)}
+                title={'הסרת פריט מהעגלה'}
+                body={'האם להסיר את הפריט?'}
+                buttons={[
+                    {
+                        name: 'אישור',
+                        callback: () => {
+                            removeItem(removeItemModal.id);
+                            setRemoveItemModal(removeItemModalDefaultState);
+                        }
+                    },
+                    {
+                        name: 'ביטול'
+                    }
+                ]}
+              />
+
+            <Modal
+                show={showRemoveAllModal}
+                onHide={()=> setShowRemoveAllModal(false)}
+                onClose={()=> setShowRemoveAllModal(false)}
+                title={'הסרת פריטים מהעגלה'}
+                body={'האם להסיר את כל הפריטים?'}
+                buttons={[
+                    {
+                        name: 'אישור',
+                        callback: () => {
+                            actions.clearCart();
+                            setSelectedVerses([]);
+                            setShowRemoveAllModal(false)
+                        }
+                    },
+                    {
+                        name: 'ביטול'
+                    }
+                ]}
+              />
         </React.Fragment>
     )
 };
