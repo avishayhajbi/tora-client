@@ -220,6 +220,7 @@ export function setBlessFor(data) {
 
 export function setSelectedBook(data) {
     return (dispatch, getState) => {
+        delete data.image_url;
         window.sessionStorage.setItem(LOCAL_STORAGE.BOOK_INFO, JSON.stringify(data));
         dispatch({
             type: APP.SET_SELECTED_BOOK,

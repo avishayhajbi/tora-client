@@ -255,6 +255,7 @@ class App extends React.Component{
                   <Route path="/6" key="6" component={Home} />
                   <Route path="/7" key="7" component={Home} />
                   <Route path="/8" key="8" component={Home} />
+                  <Route path="/9" key="9" component={Home} />
                   <Route exact path="/login" component={Login} />
                   <PrivateRoute
                     path="/management"
