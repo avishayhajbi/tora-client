@@ -24,7 +24,7 @@ export const Step3 = ({ nextStep, app }) => {
         className="pt-3"
         width={72}
         height={72}
-        value={(book.versesAmount / book.totalVerses) * 100}
+        value={Number(((book.versesAmount / book.totalVerses) * 100).toFixed(2))}
         isWithText
       />
       <h6 className="paddBottom10px fontWeight900">

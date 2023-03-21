@@ -10,7 +10,7 @@ export const Step8 = ({history, app, actions}) => {
             setTimeout(() => {
                 actions.clearAll();
                 actions.resetAppData();
-            }, 5000);
+            }, 1500);
         }
     }, []);
 

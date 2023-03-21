@@ -40,7 +40,7 @@ export const Step7 = ({nextStep, actions, app}) => {
     useEffect(() => {
         setTimeout(() => {
             loadPaymentScripts();
-        }, 2500);
+        }, 3000);
     }, [amount]);
 
     useEffect(() => {
