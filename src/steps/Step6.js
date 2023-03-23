@@ -15,8 +15,7 @@ export const Step6 = ({ nextStep, app, actions, location }) => {
   const category = new URLSearchParams(location.search).get('category') ?? BooksCategoriesKeys.synagogues
   useEffect(() => {
     rest
-      // .getBooksByCategory(category)
-      .getAllBooks()
+      .getBooksByCategory(category)
       .then((res) => {
         setBooks(res.data);
         // setBooks(Array(12).fill(res.data[0]));
