@@ -6,6 +6,7 @@ import { Book } from "../components/Book";
 import rest from "../rest";
 import { BookSelect } from "../components/BookSelect";
 import { BooksCategoriesKeys, BooksCategoriesSingularValues } from "../config";
+import {SPACE} from "../utils";
 
 export const Step6 = ({ nextStep, app, actions, location }) => {
   const [books, setBooks] = useState([]);
@@ -47,27 +48,32 @@ export const Step6 = ({ nextStep, app, actions, location }) => {
   };
   const categoryName = BooksCategoriesSingularValues[category];
 
+  const goBack = () => {
+    window.history.back();
+  }
+
   return (
     <div className="step6 flex-column flex-100 justify-content-center align-content-center align-items-center text-center height-inherit">
       <div className="position-relative">
         <img src={"/assets/synagogues.png"} alt="Type Image" width="100%" />
         <h2 className="image-text">{categoryName}</h2>
       </div>
+      {books.length === 0 && <div className="paddTop10px mx-4 flex-column flex-100 justify-content-center">
+        <p>
+          לא נמצאו ספרים זמינים
+        </p>
+        <p>
+          {SPACE}<Button className='btn' variant="primary" onClick={goBack}>
+          לחצו כדי לחפש שנית
+          </Button>{SPACE}
+        </p>
+      </div>}
+      {books.length > 0 && <React.Fragment>
       <h2 className="paddTop20px">בחרו {categoryName}</h2>
       <p>בחרו {categoryName} בו תרצו לתרום פסוק לספר התורה</p>
       <div className="text-right">
         {books.map((val, index) => {
           return (
-            // <div key={`_${index}`} className='marginTop30px flex-row'>
-            //     <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${index}`}>
-            //         <Form.Check className='flex-10 text-center' checked={selectedBook && selectedBook._id === val._id}
-            //                     type='radio' value={val._id} name={'sameGroup'}
-            //                     onChange={(e) => updateSelected(e, val)}/>
-            //         <Form.Label id={`${index}`} className={`flex-90 flex-column text-right`}>
-            //             <Book {...val}/>
-            //         </Form.Label>
-            //     </Form.Group>
-            // </div>
             <div className="mx-4">
               <BookSelect
                 key={`_${index}`}
@@ -80,6 +86,7 @@ export const Step6 = ({ nextStep, app, actions, location }) => {
           );
         })}
       </div>
+      </React.Fragment>}
       {/* <div className="width100 marginTop30px">
         <NextButton clicked={nextStepButton} text={"לחץ למצווה"} />
       </div> */}
