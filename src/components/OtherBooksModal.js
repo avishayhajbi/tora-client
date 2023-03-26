@@ -31,9 +31,11 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
         if (samePlace) {
             const verses = res.verses.filter(verseInSamePlace);
             // setSelectedBook(verses[0]);
+            delete verses[0]?.bookInfo?.image_url;
             callback(verses[0], originalVerse);
         } else {
             //setSelectedBook(res.verses[0]);
+            delete res.verses[0]?.bookInfo?.image_url;
             callback(res.verses[0], originalVerse);
         }
         setShow(false);
