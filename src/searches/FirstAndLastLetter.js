@@ -27,14 +27,16 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
     let timeoutRef = null;
 
     const submit = (data) => {
-        clearTimeout(timeoutRef);
-        setSearchLoading(true);
-        setVerses([]);
-        setHasMoreAnswers(true);
-        setSkip(0)
-        timeoutRef = setTimeout(() => {
-            setSearch(data.search.value);
-        }, 1000);
+        if (search !== data.search.value) {
+            clearTimeout(timeoutRef);
+            setSearchLoading(true);
+            setVerses([]);
+            setHasMoreAnswers(true);
+            setSkip(0)
+            timeoutRef = setTimeout(() => {
+                setSearch(data.search.value);
+            }, 1000);
+        }
     }
 
     useEffect(() => {
@@ -50,25 +52,23 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
     const fetchVerses = () => {
         const name = search.trim();
         if (name) {
-            setLoading(true);
+            setError('');
             rest.search(searchType, {name, bookId: book?._id, skip})
                 .then(response => {
                     console.log(response.data);
                     setVerses(verses.concat(response.data));
                     setLoading(false);
                     setSearchLoading(false);
-                    setSkip(() => {
-                        return skip + 1;
-                    })
                     if (!response.hasMore) {
                         setHasMoreAnswers(false);
                     }
                     if (!response.data.length && !verses.length) {
-                        throw new Error('');
+                        setError('לא נמצאו תוצאות');
                     }
-                    setError('');
                 })
                 .catch(err => {
+                    setLoading(false);
+                    setSearchLoading(false);
                     setError('לא נמצאו תוצאות');
                 })
         }
@@ -106,6 +106,14 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
             setVerses(prevVerses);
             console.log('prevVerses', prevVerses)
         }
+    }
+
+    const fetchVersesWrapper = () => {
+        setSkip(() => {
+            return skip + 1;
+        })
+        setLoading(true);
+        fetchVerses();
     }
 
     return (
@@ -155,7 +163,7 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
                 <Loader/>
             </div>}
-            {!loading && verses.length && <LoadMore callback={fetchVerses} show={hasMoreAnswers}/> || ''}
+            {!loading && verses.length && <LoadMore callback={() => fetchVersesWrapper} show={hasMoreAnswers}/> || ''}
             {replaceVerse && <OtherBooksModal searchType={searchType}
                  callback={onVerseReplaced.bind(this)}
                  bookId={replaceVerse.bookId}

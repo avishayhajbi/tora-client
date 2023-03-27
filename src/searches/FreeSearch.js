@@ -41,25 +41,24 @@ export const FreeSearch = ({donate, book, selectedVerses, searchType, callback, 
     const fetchVerses = () => {
         const text = search.trim();
         if (text) {
+            setError('');
             rest.search(searchType, {text, bookId: book?._id, skip})
                 .then(response => {
                     console.log(response.data);
                     setVerses(verses.concat(response.data));
                     setLoading(false);
                     setSearchLoading(false);
-                    setSkip(() => {
-                        return skip + 1;
-                    })
                     if (!response.hasMore) {
                         setHasMoreAnswers(false);
                     }
                     if (!response.data.length && !verses.length) {
-                        throw new Error('');
+                        setError('לא נמצאו תוצאות');
                     }
-                    setError('');
                 })
                 .catch(err => {
-
+                    setLoading(false);
+                    setSearchLoading(false);
+                    setError('לא נמצאו תוצאות');
                 })
         } else {
             setSearchLoading(false);
@@ -67,6 +66,9 @@ export const FreeSearch = ({donate, book, selectedVerses, searchType, callback, 
     }
 
     const fetchVersesWrapper = () => {
+        setSkip(() => {
+            return skip + 1;
+        })
         setLoading(true);
         fetchVerses();
     }

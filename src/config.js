@@ -283,8 +283,8 @@ export const getSearchTypes = () => cloneDeep([
     {id: SearchTypes.verseYourName, name: 'פסוק עם שמך'},
     {id: SearchTypes.amount, name: 'מציאת פסוק ע״פ סכום'},
     {id: SearchTypes.random, name: 'רנדומלי'},
-    // {id: SearchTypes.freeSearch, name: 'חיפוש חופשי'},
-    // {id: SearchTypes.aliya, name: 'עליה'},
+    {id: SearchTypes.freeSearch, name: 'חיפוש חופשי'},
+    {id: SearchTypes.aliya, name: 'עליה'},
 ]);
 
 export const BooksMap = {

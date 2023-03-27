@@ -15,7 +15,6 @@ export const RandomSearch = ({donate, book, selectedVerses, searchType, callback
     const [skip, setSkip] = useState(0);
     const [verses, setVerses] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [search, setSearch] = useState(0);
     const [chosenVerses, setChosenVerses] = useState([]);
     const [replaceVerse, setReplaceVerse] = useState(null);
     const [error, setError] = useState('');
@@ -23,40 +22,32 @@ export const RandomSearch = ({donate, book, selectedVerses, searchType, callback
 
     useEffect(() => {
         actions.setSelectedVerses([]);
+        fetchVersesWrapper()
     }, [])
 
     useEffect(() => {
         if (reachedToBottom) {
-            fetchVerses();
+            fetchVersesWrapper();
         }
     }, [reachedToBottom]);
 
-    useEffect(() => {
-        if (!loading) {
-            fetchVerses();
-        }
-    }, [search]);
-
     const fetchVerses = () => {
-        setLoading(true);
+        setError('');
         rest.search(searchType, {bookId: book?._id, skip})
             .then(response => {
                 console.log(response.data);
                 setVerses(verses.concat(response.data));
                 setLoading(false);
-                setSkip(() => {
-                    return skip + 1;
-                })
                 if (!response.hasMore) {
                     setHasMoreAnswers(false);
                 }
                 if (!response.data.length && !verses.length) {
-                    throw new Error('');
+                    setError('לא נמצאו תוצאות');
                 }
-                setError('');
             })
             .catch(err => {
-
+                setError('לא נמצאו תוצאות');
+                setLoading(false);
             })
     }
 
@@ -92,6 +83,14 @@ export const RandomSearch = ({donate, book, selectedVerses, searchType, callback
             setVerses(prevVerses);
             console.log('prevVerses', prevVerses)
         }
+    }
+
+    const fetchVersesWrapper = () => {
+        setSkip(() => {
+            return skip + 1;
+        })
+        setLoading(true);
+        fetchVerses();
     }
 
     return (
@@ -134,7 +133,7 @@ export const RandomSearch = ({donate, book, selectedVerses, searchType, callback
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
                 <Loader/>
             </div>}
-            {!loading && verses.length && <LoadMore callback={fetchVerses} show={hasMoreAnswers}/> || ''}
+            {!loading && verses.length && <LoadMore callback={fetchVersesWrapper} show={hasMoreAnswers}/> || ''}
             {replaceVerse && <OtherBooksModal searchType={searchType}
                  callback={onVerseReplaced.bind(this)}
                  bookId={replaceVerse.bookId}

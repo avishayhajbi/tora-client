@@ -41,7 +41,6 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
     const fetchVerses = () => {
         const name = search.trim();
         if (name) {
-            setLoading(true);
             setError('');
             setGematri(gematriyaLetters(name));
             rest.search(searchType, {name, bookId: book?._id, skip, radioValue})
@@ -50,9 +49,6 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
                     setVerses(prev => ([...prev, ...response.data]));
                     setLoading(false);
                     setSearchLoading(false);
-                    setSkip(() => {
-                        return skip + 1;
-                    })
                     if (!response.hasMore) {
                         setHasMoreAnswers(false);
                     }
@@ -61,6 +57,8 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
                     }
                 })
                 .catch(err => {
+                    setLoading(false);
+                    setSearchLoading(false);
                     setError('לא נמצאו תוצאות');
                 })
         }
@@ -181,6 +179,13 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
         </div>)
     }
 
+    const fetchVersesWrapper = () => {
+        setSkip(() => {
+            return skip + 1;
+        })
+        setLoading(true);
+        fetchVerses();
+    }
     return (
         <div className='d-flex flex-column flex-100 justify-content-center align-content-center'>
             <h6>
@@ -209,7 +214,7 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
                 <Loader/>
             </div>}
-            {!loading && verses.length && <LoadMore callback={fetchVerses} show={hasMoreAnswers}/> || ''}
+            {!loading && verses.length && <LoadMore callback={fetchVersesWrapper} show={hasMoreAnswers}/> || ''}
             {replaceVerse && <OtherBooksModal searchType={searchType}
                                               callback={onVerseReplaced.bind(this)}
                                               bookId={replaceVerse.bookId}

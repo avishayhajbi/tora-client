@@ -73,11 +73,6 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
         }
     }
 
-    const fetchVersesWrapper = () => {
-        setLoading(true);
-        fetchVerses();
-    }
-
     const selectedVerse = (e, val) => {
         const value = e.target.checked;
         const prevVerses = chosenVerses;
@@ -178,7 +173,6 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
                 <Loader/>
             </div>}
-            {!loading && verses.length && <LoadMore callback={fetchVersesWrapper} show={hasMoreAnswers}/> || ''}
             {replaceVerse && <OtherBooksModal searchType={searchType}
                  callback={onVerseReplaced.bind(this)}
                  bookId={replaceVerse.bookId}

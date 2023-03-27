@@ -27,14 +27,16 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
     let timeoutRef = null;
 
     const submit = (data) => {
-        clearTimeout(timeoutRef);
-        setSearchLoading(true);
-        setVerses([]);
-        setHasMoreAnswers(true);
-        setSkip(0);
-        timeoutRef = setTimeout(() => {
-            setSearch(data.search.value);
-        }, 1000);
+        if (search !== data.search.value) {
+            clearTimeout(timeoutRef);
+            setSearchLoading(true);
+            setVerses([]);
+            setHasMoreAnswers(true);
+            setSkip(0);
+            timeoutRef = setTimeout(() => {
+                setSearch(data.search.value);
+            }, 1000);
+        }
     }
 
     useEffect(() => {
@@ -50,26 +52,23 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
     const fetchVerses = () => {
         const name = search.trim();
         if (name) {
-            setLoading(true);
+            setError('');
             rest.search(searchType, {name, bookId: book?._id, skip})
                 .then(response => {
                     console.log(response.data);
-                    
                     setVerses(verses.concat(response.data));
                     setLoading(false);
                     setSearchLoading(false);
-                    setSkip(() => {
-                        return skip + 1;
-                    })
                     if (!response.hasMore) {
                         setHasMoreAnswers(false);
                     }
                     if (!response.data.length && !verses.length) {
-                        throw new Error('');
+                        setError('לא נמצאו תוצאות');
                     }
-                    setError('');
                 })
                 .catch(err => {
+                    setLoading(false);
+                    setSearchLoading(false);
                     setError('לא נמצאו תוצאות');
                 })
         }
@@ -109,6 +108,14 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
         }
     }
 
+    const fetchVersesWrapper = () => {
+        setSkip(() => {
+            return skip + 1;
+        })
+        setLoading(true);
+        fetchVerses();
+    }
+
     return (
         <div className='d-flex flex-column flex-100 justify-content-center align-content-center'>
             <MyForm fields={freeSearchForm}
@@ -120,7 +127,7 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
             {verses.map((val, index) => {
                 return (
                 // <div key={`_${val._id}`} className='marginTop30px flex-row'>
-                    <Form.Group className='margin15' controlId={`${val._id}}`}>
+                    <Form.Group className='margin15' key={`_${index}`} controlId={`${val._id}}`}>
                         <Form.Check className={`verse-checkbox text-center`} type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}
@@ -147,7 +154,7 @@ export const VerseYourName = ({donate, book, selectedVerses, searchType, callbac
                 className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
                 <Loader/>
             </div>}
-            {!loading && verses.length && <LoadMore callback={fetchVerses} show={hasMoreAnswers}/> || ''}
+            {!loading && verses.length && <LoadMore callback={fetchVersesWrapper} show={hasMoreAnswers}/> || ''}
             {replaceVerse && <OtherBooksModal searchType={searchType}
                  callback={onVerseReplaced.bind(this)}
                  bookId={replaceVerse.bookId}

@@ -46,6 +46,7 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     const fetchVerses = () => {
         const amount = Number(search) || 0;
         if (amount) {
+            setError('');
             rest.search(searchType, {amount, bookId: book?._id, skip, radioValue})
                 .then(response => {
                     console.log(response.data);
@@ -56,12 +57,13 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
                         setHasMoreAnswers(false);
                     }
                     if (!response.data.length && !verses.length) {
-                        throw new Error('');
+                        setError('לא נמצאו תוצאות');
                     }
-                    setError('');
                 })
                 .catch(err => {
-
+                    setLoading(false);
+                    setSearchLoading(false);
+                    setError('לא נמצאו תוצאות');
                 })
         } else {
             setSearchLoading(false);
@@ -69,7 +71,9 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     }
 
     const fetchVersesWrapper = () => {
-        setSkip(skip + 1);
+        setSkip(() => {
+            return skip + 1;
+        })
         setLoading(true);
         fetchVerses();
     }
