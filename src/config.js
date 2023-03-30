@@ -32,6 +32,12 @@ export const getLoginForm = () => {
 
 export const getDonateForm = () => {
     let form = {
+        contributionName: {
+            value: '',
+            title: 'מצווה זאת לזכות (במידה והתרומה לזכותו של אדם אחר)',
+            type: 'text',
+            settings: {placeholder: 'שם ושם משפחה'},
+        },
         name: {
             value: '',
             title: 'שם פרטי',
