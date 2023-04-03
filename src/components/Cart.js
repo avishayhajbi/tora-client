@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import rest from "../rest";
 import { VerseDisplay } from "./VerseDisplay";
 import Modal from '../components/Modal';
+import {SPACE} from "../utils";
 
 const removeItemModalDefaultState ={ isShow:false, id: null};
 
@@ -106,7 +107,7 @@ export const Cart = ({verses, actions}) => {
                             {/* {!val.range && <p>{val.text}</p>} */}
                             {!val.range && <VerseDisplay val={val} showLength isCartDisplay={true}/>}
                             {val.range && <VersesRange val={val} withBook={true}/>}
-                            <h6>- {val.bless.map(v => v.name).join(', ')}</h6>
+                            <h6>- {val.bless.map(v => v.name).join(', ')} {SPACE} {val.bless.find(v => v.value)?.value}</h6>
                         </div>
                     </li>
                 })}

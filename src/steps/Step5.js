@@ -54,6 +54,14 @@ export const Step5 = ({nextStep, app, actions}) => {
         actions.setSelectedVerses(selectedVerses);
     }
 
+    const updateDonateForValue = (e, val) => {
+        if (val.bless) {
+            val.bless.forEach(v => {
+                v.value = e?.target?.value;
+            });
+        }
+    }
+
     const getPrice = () => {
         return toUpdate.reduce((a,b)=> a+b,0);
     }
@@ -148,34 +156,6 @@ export const Step5 = ({nextStep, app, actions}) => {
             <ol className='width100 p-0 list-unstyled'>
                 {selectedVerses && selectedVerses.map((val, index) => {
                     return <li key={index} className="verse-box mb-4">
-                        {/* <Form.Group controlId={'verse'} key={val._id}>
-                            <Form.Label className='d-flex flex-row align-content-center align-items-center justify-content-between'>
-                                <span className="fontWeight900">אנא בדקו שזהו הפסוק שבחר לבכם:</span>
-                                <FontAwesomeIcon onClick={() => removeItem(val._id)} className='pointer marginLeft5px' icon={ICONS.faTrash}/>
-                            </Form.Label>
-                            <hr className="spacer"/>
-                            {!val.range && <Form.Control className='text-center' as='textarea' placeholder={'הפסוק שנבחר'}
-                                          value={val.text} name='verse' disabled={true}/>}
-                            {val.range && <VersesRange val={val} withBook={true}/>}
-                        </Form.Group>
-                        {!val.range && <div className='d-flex flex-row layout-align-space-around align-items-center'>
-                            <div
-                                className='d-flex flex-column justify-content-center align-content-center align-items-center'>
-                                <div>
-                                    סה"כ אותיות:
-                                </div>
-                                {<div>{countWeight(val.textWithout)}</div>}
-                            </div>
-                            <div
-                                className='d-flex flex-column justify-content-center align-content-center align-items-center'>
-                                <div>סה"כ לתשלום:</div>
-                                {<div>₪{countWeight(val.textWithout)}</div>}
-                            </div>
-                        </div>}
-                        {getBlessElem(val)}
-                        <hr/> */}
-                        
-
                         {/* <Form.Group controlId={'verse'} key={val._id}> */}
                             <div className='d-flex flex-row align-content-center align-items-center justify-content-between'>
                                 <span className="fontWeight900">אנא בדקו שזהו הפסוק שבחר לבכם:</span>
@@ -188,7 +168,17 @@ export const Step5 = ({nextStep, app, actions}) => {
                         {/* </Form.Group> */}
                         {getBlessElem(val)}
                         {/* <hr/> */}
-
+                        {val?.bless?.length > 0 && <div className='ml-12'>
+                            <Form.Group key={val._id + index} className='ml-3' controlId={`${val._id}`}>
+                                <Form.Control
+                                    type={'text'}
+                                    placeholder={"במידה והתרומה בשביל מישהו אחר"}
+                                    name={'donate_for'}
+                                    value={val.bless.find(v => v.value)?.value}
+                                    onChange={(e) => updateDonateForValue(e, val)}
+                                />
+                            </Form.Group>
+                        </div>}
                     </li>
                 })}
             </ol>
