@@ -5,7 +5,6 @@ import OtherBooksModal from "../components/OtherBooksModal";
 import {getByDateForm} from "../config";
 import {default as MyForm} from "../components/Form";
 import {Loader} from "../components/Loader";
-import {LoadMore} from "../components/LoadMore";
 import {gematriyaNumbers} from "../utils";
 import moment from "moment";
 import {VersesRange} from "../components/VersesRange";
@@ -22,6 +21,7 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
     const [replaceVerse, setReplaceVerse] = useState(null);
     const [error, setError] = useState('');
     const [hasMoreAnswers, setHasMoreAnswers] = useState(true);
+    const [newAliya, setNewAliya] = useState(null);
 
 
     const byDateForm = getByDateForm();
@@ -71,6 +71,38 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
         } else {
             setSearchLoading(false);
         }
+    }
+
+
+    useEffect(() => {
+        setNewAliya(null);
+        if (parasha && parasha.aliya.length) {
+            const newValues = [];
+            Promise.all(parasha.aliya.map(async (value, index) => {
+                await checkAvail(value, (response) => {
+                    newValues[index] = value;
+                }, (err) => {
+                    newValues[index] = {...value, taken: true};
+                })
+            })).then(() => {
+                setNewAliya(newValues);
+            })
+        }
+    }, [parasha]);
+
+    const checkAvail = async (value, callback, callbackError) => {
+        await rest.checkAvailability(
+            book._id,
+            [],
+            [{...value, bookId: book._id}],
+            false,
+        )
+            .then(response => {
+                callback(response);
+            })
+            .catch(err => {
+                callbackError(err);
+            })
     }
 
     const selectedVerse = (e, val) => {
@@ -155,12 +187,13 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
             {error && <p>{error}</p>}
             <h5>{parasha && parasha.title}</h5>
             <ol>
-            {parasha && parasha.aliya.map((val, index) => {
+            {parasha && newAliya && parasha.aliya.map((val, index) => {
                 return (<li key={`_${index}`} className='marginTop30px flex-row'>
                     <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${index}}`}>
-                        <Form.Check className={`flex-10 text-center`} type='checkbox' value={val.id}
+                        <Form.Check className={`flex-10 text-center ${(val.taken || newAliya && newAliya[index]?.taken) ? 'disabled' : ''}`}
+                                    type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
-                                    disabled={val.taken}/>
+                                    disabled={val.taken || newAliya && newAliya[index]?.taken}/>
                         <Form.Label id={`_${val._id}}`}
                                     className={`flex-90 flex-column text-right`}>
                            <VersesRange val={val}/>

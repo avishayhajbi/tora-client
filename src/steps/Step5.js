@@ -77,23 +77,19 @@ export const Step5 = ({nextStep, app, actions}) => {
                     hideFooter: true,
                 });
             } else {
-                actions.addToCart(selectedVerses);
-                rest.checkAvailability(
-                    app.selectedBook._id,
-                    selectedVerses.filter(v => !v.range).map(v => v._id),
-                    selectedVerses.filter(v => v.range),
-                    true,
-                )
-                    .then(response => {
-                        if (response.success) {
-                            nextStep();
-                        } else if (response.data) {
-
-                        }
-                    })
-                    .catch(err => {
-
-                    })
+                checkAvail((response) => {
+                    if (response.success) {
+                        actions.addToCart(selectedVerses);
+                        nextStep();
+                    }
+                }, (err) => {
+                    actions.updateModal({
+                        show: true,
+                        title: 'שים לב',
+                        body: 'חלק מהפסוקים שבחרת כבר נתפסו',
+                        hideFooter: true,
+                    });
+                })
             }
         }
     }
@@ -107,14 +103,42 @@ export const Step5 = ({nextStep, app, actions}) => {
         }
     }
 
-    const addToCart = () => {
+    const checkAvail = (callback, callbackError) => {
+        rest.checkAvailability(
+            app.selectedBook._id,
+            selectedVerses.filter(v => !v.range).map(v => v._id),
+            selectedVerses.filter(v => v.range),
+            true,
+        )
+            .then(response => {
+                callback(response);
+            })
+            .catch(err => {
+                callbackError(err);
+            })
+    }
+
+    const addToCart = (callback) => {
         const selectedIds = selectedVerses.map((v) => v._id);
         if (app.cart.find((v) => selectedIds.includes(v._id))) {
             alert("המוצר כבר נמצא בסל");
         } else {
-            actions.addToCart(selectedVerses);
-            window.location.href = "/2?step=2";
+            checkAvail((response) => {
+                if (response.success) {
+                    actions.addToCart(selectedVerses);
+                    window.location.href = "/2?step=2";
+                }
+            }, (err) => {
+                actions.updateModal({
+                    show: true,
+                    title: 'שים לב',
+                    body: 'חלק מהפסוקים שבחרת כבר נתפסו',
+                    hideFooter: true,
+                });
+            })
         }
+
+
     }
 
     const getBlessElem = (val) => {

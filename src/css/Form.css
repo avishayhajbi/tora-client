@@ -108,3 +108,7 @@ input::-webkit-calendar-picker-indicator {
     color: black;
     opacity: 1;
 }
+
+div.disabled > input[type="checkbox"], div.disabled > input[type="radio"] {
+    cursor: not-allowed;
+}

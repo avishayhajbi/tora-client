@@ -1,17 +1,7 @@
 import React, {Component, useEffect, useState} from "react";
 import {Button, Form} from 'react-bootstrap';
 import rest, {getToken} from '../rest';
-import {TakenBy} from "../components/TakenBy";
-import {AvailableBooks} from "../components/AvailableBooks";
-import {VerseLocation} from "../components/VerseLocation";
-import OtherBooksModal from "../components/OtherBooksModal";
-import {getAmountForm} from "../config";
-import {default as MyForm} from "../components/Form";
 import {gematriyaNumbers, SPACE} from "../utils";
-import {Loader} from "../components/Loader";
-import {LoadMore} from "../components/LoadMore";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import {VersesRange} from "../components/VersesRange";
 const Tora = require('../aliyot_client');
 
@@ -26,9 +16,41 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
     const [selectedAliyaBook, setSelectedAliyaBook] = useState(null);
     const [parasha, setParasha] = useState(null);
     const [aliya, setAliya] = useState(null);
+    const [newAliya, setNewAliya] = useState(null);
 
     const fetchVersesWrapper = () => {
         setLoading(true);
+    }
+
+    useEffect(() => {
+        setNewAliya(null);
+        if (aliya && aliya.length) {
+            const newValues = [];
+            Promise.all(aliya.map(async (value, index) => {
+                await checkAvail(value, (response) => {
+                    newValues[index] = value;
+                }, (err) => {
+                    newValues[index] = {...value, taken: true};
+                })
+            })).then(() => {
+                setNewAliya(newValues);
+            })
+        }
+    }, [aliya]);
+
+    const checkAvail = async (value, callback, callbackError) => {
+        await rest.checkAvailability(
+            book._id,
+            [],
+            [{...value, bookId: book._id}],
+            false,
+        )
+            .then(response => {
+                callback(response);
+            })
+            .catch(err => {
+                callbackError(err);
+            })
     }
 
     const selectedVerse = (e, val) => {
@@ -63,7 +85,6 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
             };
         })
         setAliya(aliyot)
-
     }
 
     return (
@@ -101,12 +122,13 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
             {error && <p>{error}</p>}
 
             <ol>
-            {aliya && aliya.map((val, index) => {
+            {aliya && newAliya && aliya.map((val, index) => {
                 return (<li key={`_${index}`} className='marginTop30px flex-row'>
                     <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${index}}`}>
-                        <Form.Check className={`flex-10 text-center`} type='checkbox' value={val.id}
+                        <Form.Check className={`flex-10 text-center ${(val.taken || newAliya && newAliya[index]?.taken) ? 'disabled' : ''}`}
+                                    type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
-                                    disabled={val.taken}/>
+                                    disabled={val.taken || newAliya && newAliya[index]?.taken}/>
                         <Form.Label id={`_${val._id}}`}
                                     className={`flex-90 flex-column text-right`}>
                             <VersesRange val={val}/>
