@@ -128,20 +128,15 @@ export const FreeSearch = ({donate, book, selectedVerses, searchType, callback, 
             {error && <p>{error}</p>}
             {verses.map((val, index) => {
                 return (<div key={`_${val._id}`} className='marginTop30px flex-row'>
-                    <Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`${val._id}}`}>
-                        <Form.Check className={`flex-10 text-center`} type='checkbox' value={val.id}
+                    <Form.Group key={`_${val._id}`} className='margin15' controlId={`${val._id}}`}>
+                        <Form.Check className={`verse-checkbox text-center`} type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
-                                    disabled={val.taken}/>
-                        <Form.Label id={`_${val._id}}`}
-                                    className={`flex-90 flex-column text-right`}>
-                            <VerseDisplay val={val} />
-                            {(val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && <React.Fragment>
-                                <Button onClick={searchInOtherBooks.bind(this, index, val)}
-                                        className='btn-outline-primary'>
-                                    חפש בספרי תורה אחרים
-                                </Button>
-                            </React.Fragment> || ''}
-                        </Form.Label>
+                                    disabled={val.taken}
+                                    label={
+                                        <VerseDisplay val={val} showLength onSearchInOtherBooks={searchInOtherBooks.bind(this, index, val)}/>
+                                    }
+                        />
+
                     </Form.Group>
                 </div>)
             })}
