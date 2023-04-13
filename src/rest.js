@@ -241,7 +241,7 @@ const REST = {
             .then(responseMiddleware)
     },
     sendContactUs: (data) => {
-        return axios.post(`${DOMAIN}/contact-us`, {
+        return axios.post(`${DOMAIN}/contactUs`, {
             ...data,
         },
             {
@@ -253,7 +253,7 @@ const REST = {
             .then(responseMiddleware)
     },
     updateContactUs: (data) => {
-        return axios.put(`${DOMAIN}/contact-us`, {
+        return axios.put(`${DOMAIN}/contactUs`, {
             ...data,
         },
             {
@@ -265,7 +265,7 @@ const REST = {
             .then(responseMiddleware)
     },
     getContactUs: () => {
-        return axios.get(`${DOMAIN}/contact-us`, {
+        return axios.get(`${DOMAIN}/contactUs`, {
             headers: {...headers}
         })
             .then(response => {
