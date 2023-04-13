@@ -3,6 +3,8 @@ import {Button, Form} from 'react-bootstrap';
 import rest, {getToken} from '../rest';
 import {gematriyaNumbers, SPACE} from "../utils";
 import {VersesRange} from "../components/VersesRange";
+import {Loader} from "../components/Loader";
+import {setSelectedVerses} from "../store/app/actions";
 const Tora = require('../aliyot_client');
 
 export const Aliya = ({donate, book, selectedVerses, searchType, callback, actions}) => {
@@ -19,12 +21,18 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
     const [newAliya, setNewAliya] = useState(null);
 
     const fetchVersesWrapper = () => {
-        setLoading(true);
+
     }
+
+    useEffect(() => {
+        actions.setSelectedVerses([]);
+    }, [aliya])
 
     useEffect(() => {
         setNewAliya(null);
         if (aliya && aliya.length) {
+            setChosenVerses([]);
+            setLoading(true);
             const newValues = [];
             Promise.all(aliya.map(async (value, index) => {
                 await checkAvail(value, (response) => {
@@ -137,6 +145,11 @@ export const Aliya = ({donate, book, selectedVerses, searchType, callback, actio
                 </li>)
             })}
             </ol>
+
+            {loading && <div
+                className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
+                <Loader/>
+            </div>}
         </div>
     )
 }

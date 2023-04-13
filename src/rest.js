@@ -239,6 +239,39 @@ const REST = {
                 return response.data;
             })
             .then(responseMiddleware)
+    },
+    sendContactUs: (data) => {
+        return axios.post(`${DOMAIN}/contact-us`, {
+            ...data,
+        },
+            {
+                headers: {...headers},
+            })
+            .then(response => {
+                return response.data;
+            })
+            .then(responseMiddleware)
+    },
+    updateContactUs: (data) => {
+        return axios.put(`${DOMAIN}/contact-us`, {
+            ...data,
+        },
+            {
+                headers: {...headers},
+            })
+            .then(response => {
+                return response.data;
+            })
+            .then(responseMiddleware)
+    },
+    getContactUs: () => {
+        return axios.get(`${DOMAIN}/contact-us`, {
+            headers: {...headers}
+        })
+            .then(response => {
+                return response.data;
+            })
+            .then(responseMiddleware)
     }
 }
 

@@ -193,10 +193,47 @@ export const getEnterYourNameForm = () => {
     }
     return cloneDeep(form);
 };
-export const freeSearchFormWithButtons = () => {
-    const tmp = getEnterYourNameForm();
+export const getContactForm = () => {
     let form = {
-        ...tmp,
+        name: {
+            value: '',
+            title: 'שם:',
+            placeholder: 'שם',
+            type: 'name',
+            settings: {required: true}
+        },
+        tel: {
+            value: '',
+            title: 'טלפון:',
+            placeholder: 'טלפון',
+            type: 'tel',
+            settings: {required: true}
+        },
+        email: {
+            value: '',
+            title: 'אימייל:',
+            placeholder: 'אימייל',
+            type: 'email',
+        },
+        message: {
+            value: '',
+            title: 'הודעה:',
+            placeholder: 'הזינו את שאלתכם',
+            type: 'textarea',
+            settings: {required: true}
+        },
+    }
+    return cloneDeep(form);
+};
+export const freeSearchFormWithButtons = () => {
+    let form = {
+        search: {
+            value: '',
+            title: 'שם:',
+            placeholder: 'הזינו את שמכם..',
+            type: 'search',
+            settings: {required: true}
+        },
         // todo: adding complex buttons here
         radioValue: {
             type: 'radio',

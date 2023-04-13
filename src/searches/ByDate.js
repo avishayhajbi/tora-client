@@ -29,10 +29,11 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
 
     useEffect(() => {
         actions.setSelectedVerses([]);
-    }, [])
+    }, [search])
 
     useEffect(() => {
         if (!loading) {
+            setChosenVerses([]);
             fetchVerses();
         }
     }, [search]);
@@ -40,6 +41,7 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
     const fetchVerses = () => {
         const date = search.trim();
         if (date) {
+            setParasha(null);
             rest.getParashaByDate(date)
                 .then(res => {
                     if (res.items.length) {
@@ -77,6 +79,7 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
     useEffect(() => {
         setNewAliya(null);
         if (parasha && parasha.aliya.length) {
+            setLoading(true);
             const newValues = [];
             Promise.all(parasha.aliya.map(async (value, index) => {
                 await checkAvail(value, (response) => {
@@ -86,6 +89,7 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
                 })
             })).then(() => {
                 setNewAliya(newValues);
+                setLoading(false);
             })
         }
     }, [parasha]);

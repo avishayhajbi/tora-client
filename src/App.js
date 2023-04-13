@@ -21,6 +21,8 @@ import Badge from "react-bootstrap/Badge";
 import rest from "./rest";
 import HeaderIcon from "./assets/header-icon.svg"
 import ScrollToTop from './components/ScrollToTop';
+import ContactUs from "./pages/ContactUs";
+import ContactUsAdmin from "./pages/ContactUsAdmin";
 
 /*let { history } = this.props;
 history.push({
@@ -197,7 +199,19 @@ class App extends React.Component{
                   variant="pills"
                   defaultActiveKey={window.location.pathname}
                   onSelect={this.handleSelect.bind(this)}
-                ></Nav>
+                >
+                    <Nav.Link className='text-right' href="contact-us">
+                        <FontAwesomeIcon
+                            className="marginLeft5px"
+                            icon={ICONS.faEnvelopeOpen}
+                            color={"white"}
+                        ></FontAwesomeIcon>
+                        <span className='text-white'>
+                            צור קשר
+                        </span>
+                    </Nav.Link>
+
+                </Nav>
                 <Nav className="mr-auto">
                   {false && !this.props.app.token && (
                     <Button
@@ -215,7 +229,8 @@ class App extends React.Component{
                       התנתק
                     </Button>
                   )}
-                  <div className="pointer" onClick={this.openCart.bind(this)}>
+
+                  <div className="pointer hide-sm hide-xs hide-md" onClick={this.openCart.bind(this)}>
                     <Badge text="white" style={{ color: "white" }}>
                       ({this.props.app.cart.length})
                     </Badge>
@@ -257,6 +272,9 @@ class App extends React.Component{
                   <Route path="/8" key="8" component={Home} />
                   <Route path="/9" key="9" component={Home} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/contact-us" component={
+                      this.props.app.token ? ContactUsAdmin : ContactUs
+                  } />
                   <PrivateRoute
                     path="/management"
                     component={Management}
