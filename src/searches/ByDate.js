@@ -41,28 +41,38 @@ export const ByDate = ({donate, book, selectedVerses, searchType, callback, acti
     const fetchVerses = () => {
         const date = search.trim();
         if (date) {
+            setError(null);
             setParasha(null);
-            rest.getParashaByDate(date)
+            rest.getParashaByDate(date) // date
                 .then(res => {
                     if (res.items.length) {
-                        const parasha = res.items.find(v => v.category === 'parashat');
-                        setParasha({
-                            title: parasha.title,
-                            aliya: Object.keys(parasha.leyning).map((v, vi) => {
-                                if (['1', '2', '3', '4', '5', '6', '7'].includes(v)) {
-                                    const bookName = parasha.leyning[v].split(' ')[0];
-                                    const tmp = parasha.leyning[v].split(' ')[1];
-                                    const code = transformAliya(tmp);
-                                    return {
-                                        range: true,
-                                        _id: `${book._id}_${code.start.chapter}:${code.start.verse}-${code.end.chapter}:${code.end.verse}`,
-                                        book: booksMap[bookName],
-                                        code,
-                                        transformed: [`פרק ${gematriyaNumbers(code.start.chapter)} פסוק ${gematriyaNumbers(code.start.verse)}`, `פרק ${gematriyaNumbers(code.end.chapter)} פסוק ${gematriyaNumbers(code.end.verse)}`],
-                                    };
-                                }
-                            }).filter(v => v),
-                        });
+                        let parasha = res.items.find(v => v.category === 'parashat');
+                        if (!parasha) {
+                            parasha = res.items.find(v => v.category === 'holiday' && v.leyning && v.date === date.replace(/\//g, '-'));
+                        }
+                        if (parasha) {
+                            setParasha({
+                                title: parasha.title,
+                                aliya: Object.keys(parasha.leyning).map((v, vi) => {
+                                    if (['1', '2', '3', '4', '5', '6', '7'].includes(v)) {
+                                        const bookName = parasha.leyning[v].split(' ')[0];
+                                        const tmp = parasha.leyning[v].split(' ')[1];
+                                        const code = transformAliya(tmp);
+                                        return {
+                                            range: true,
+                                            _id: `${book._id}_${code.start.chapter}:${code.start.verse}-${code.end.chapter}:${code.end.verse}`,
+                                            book: booksMap[bookName],
+                                            code,
+                                            transformed: [`פרק ${gematriyaNumbers(code.start.chapter)} פסוק ${gematriyaNumbers(code.start.verse)}`, `פרק ${gematriyaNumbers(code.end.chapter)} פסוק ${gematriyaNumbers(code.end.verse)}`],
+                                        };
+                                    }
+                                }).filter(v => v),
+                            });
+                        } else {
+                            setError('לא נמצאו תוצאות');
+                        }
+                    } else {
+                        setError('לא נמצאו תוצאות');
                     }
                     setLoading(false);
                     setSearchLoading(false);

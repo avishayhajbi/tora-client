@@ -53,7 +53,7 @@ class ContactUs extends Component {
                 </h3>
                 <div className='flex-100 padd15'>
                     <Form fields={getContactForm()} callback={this.submit.bind(this)} loading={this.state.loading}
-                          hidePolicy={true} submitText={"שלח"}
+                          hidePolicy={true} submitText={"שלח"} removeSearchIcon={true}
                     />
                 </div>
                 <h4 className='flex-100 padd15'>

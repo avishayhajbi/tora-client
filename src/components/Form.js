@@ -405,7 +405,7 @@ class MyForm extends Component {
                 type="submit"
               >
                 {this.props.submitText}
-                <img className="mr-3" src="/assets/search.svg" alt= "" width="24" />
+                {!this.props.removeSearchIcon && <img className="mr-3" src="/assets/search.svg" alt= "" width="24" />}
               </Button>
             )}
           </div>

@@ -48,6 +48,7 @@ class Login extends Component {
                 <div className='flex-100 padd15'>
                 <Form fields={getLoginForm()} callback={this.submit.bind(this)} loading={this.state.loading}
                       forgetPass={true} history={this.props.history} hidePolicy={true} submitText={"התחבר"}
+                      removeSearchIcon={true}
                 />
                 </div>
             </div>

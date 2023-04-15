@@ -45,6 +45,9 @@ class Management extends Component {
         this.bookFormCallback = this.addBook.bind(this);
         this.toggleBookModal();
     }
+    goToContacts() {
+        window.location.href = '/contact-us';
+    }
 
     toggleBookModal() {
         this.setState({showBookModal: !this.state.showBookModal, showBookModalLoading: false});
@@ -233,6 +236,12 @@ class Management extends Component {
                         tooltip="הוסף ספר"
                         children={
                             <div onClick={this.addBookAction.bind(this)}><FontAwesomeIcon icon={ICONS.faBook}/></div>
+                        }
+                    />
+                    <ActionButton.Link
+                        tooltip="צור קשר"
+                        children={
+                            <div onClick={this.goToContacts.bind(this)}><FontAwesomeIcon icon={ICONS.faPhone}/></div>
                         }
                     />
                     <ActionButton.Button

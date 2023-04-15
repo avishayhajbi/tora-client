@@ -202,9 +202,11 @@ const REST = {
     },
     getParashaByDate: (date) => {
         const tmp = moment(date, 'YYYY/MM/DD');
+        const start = tmp.format('YYYY-MM-DD');
+        const end = tmp.endOf('week').format('YYYY-MM-DD');
         // https://www.hebcal.com/home/195/jewish-calendar-rest-api
         // &maj=on&min=on&mod=on&nx=on&ss=on&mf=on&c=on&M=on&D=on
-        return axios.get(`https://www.hebcal.com/hebcal?v=1&yt=G&cfg=json&start=${tmp.format('YYYY-MM-DD')}&end=${tmp.endOf('week').format('YYYY-MM-DD')}&s=on&lg=he`, {
+        return axios.get(`https://www.hebcal.com/hebcal?v=1&yt=G&cfg=json&start=${start}&end=${end}&s=on&lg=he&maj=on&min=on&mod=on&nx=on&ss=on&mf=on&c=on&M=on&D=on`, {
             cors: true,
             headers: {},
         })
@@ -257,7 +259,7 @@ const REST = {
             ...data,
         },
             {
-                headers: {...headers},
+                headers: {...headers, token: store.getState().app.token},
             })
             .then(response => {
                 return response.data;
@@ -266,7 +268,7 @@ const REST = {
     },
     getContactUs: () => {
         return axios.get(`${DOMAIN}/contactUs`, {
-            headers: {...headers}
+            headers: {...headers, token: store.getState().app.token},
         })
             .then(response => {
                 return response.data;
