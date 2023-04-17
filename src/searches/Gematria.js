@@ -74,7 +74,9 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
         const value = e.target.checked;
         const prevVerses = [];
          if (value === true) {
-            document.querySelectorAll('input[type="radio"]').forEach(v=> v.checked = false);
+            document.querySelectorAll('input[type="radio"]').forEach(v => {
+                v.checked = false
+            });
             e.currentTarget.checked = true;
              if (values.find(v => v.taken)) {
                  actions.updateModal({

@@ -8,20 +8,22 @@
 }
 
 .step1 {
-  .list-title{
-    border-bottom:$grey-1 4px solid;
+  .list-title {
+    border-bottom: $grey-1 4px solid;
     width: 100%;
     margin: 0;
   }
-  
-  ol{
+
+  ol {
     list-style-type: none;
     padding-right: 0;
-    > li{
-      border-bottom:$grey-1 1px solid;
+
+    > li {
+      border-bottom: $grey-1 1px solid;
       padding: 8px 0;
-      &:last-child{
-        border-bottom:$grey-1 4px solid;
+
+      &:last-child {
+        border-bottom: $grey-1 4px solid;
       }
     }
   }
@@ -50,7 +52,7 @@
     }
   }
 
-  .book-image{
+  .book-image {
     min-height: 200px;
     min-width: 100%;
     background-color: #DCDCDC;
@@ -60,8 +62,8 @@
 .step4 {
   padding-bottom: 70px;
 
-  @include media-breakpoint-up(lg) { 
-    .stickyFooter.totalToPay{
+  @include media-breakpoint-up(lg) {
+    .stickyFooter.totalToPay {
       bottom: 0;
     }
   }
@@ -74,19 +76,23 @@
       margin-right: 3px;
     }
   }
-  .myCheckbox{
+
+  .myCheckbox {
     &.form-check {
       padding: 0;
     }
   }
+
   .hideCheckbox {
     input {
       display: none;
     }
+
     .btn-outline-info {
       padding: 15px;
       color: black;
       border-color: var(--primary-color);
+
       &.active, &:hover {
         color: white;
         border-color: var(--primary-color);
@@ -105,7 +111,8 @@
       margin-right: 3px;
     }
   }
-  .myCheckbox{
+
+  .myCheckbox {
     &.form-check {
       padding: 0;
     }
@@ -155,26 +162,26 @@
   }
 }
 
-.verse-box{
+.verse-box {
   box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   padding: 10px;
 }
 
-.spacer{
+.spacer {
   margin: 6px 0;
   // color: black;
   border-color: black;
 }
 
-.custom-checkbox{
+.custom-checkbox {
 
-  > .form-check-input{
+  > .form-check-input {
     position: absolute;
     visibility: hidden;
   }
 
-  .form-check-input ~ .form-check-label{
+  .form-check-input ~ .form-check-label {
     background-color: $grey-1;
     border-radius: 10px;
     color: white !important;
@@ -185,64 +192,74 @@
   }
 
 
-  .form-check-input:checked ~ .form-check-label{
+  .form-check-input:checked ~ .form-check-label {
     background-color: $secondary;
     //border-radius: 10px;
   }
-  
-  .form-check-input:not(:checked) ~ .form-check-label{
-      background-color: $grey-1;
-      //border-radius: 10px;
+
+  .form-check-input:not(:checked) ~ .form-check-label {
+    background-color: $grey-1;
+    //border-radius: 10px;
   }
-  
+
 
 }
 
-.verse-checkbox{
+.verse-checkbox {
   padding-left: 0;
   //cursor: pointer;
 
-  &:focus{
-    border:black 1px solid;
+  &:focus {
+    border: black 1px solid;
   }
-  > .form-check-input{
+
+  > .form-check-input {
     position: absolute;
     visibility: hidden;
   }
 
-  > .form-check-label{
+  > .form-check-label {
     width: 100%;
   }
 
   // .form-check-input[disabled] ~ .form-check-label, 
-  .form-check-input:disabled ~ .form-check-label{
+  .form-check-input:disabled ~ .form-check-label {
     background-color: #DCDCDC;
     color: $text-disabled;
-    .gray{
+
+    .gray {
       color: $text-disabled;
     }
-    .spacer{
+
+    .spacer {
       // color: $text-disabled;
       border-color: $text-disabled;
     }
   }
 
   // .form-check-input[checked] ~ .form-check-label,
-  .form-check-input:checked ~ .form-check-label{
+  .form-check-input:checked ~ .form-check-label {
     background-color: $secondary;
     color: white !important;
     border-radius: 10px;
-    .gray{
+
+    .gray {
       color: white;
     }
-    .spacer{
+
+    .spacer {
       // color: white;
       border-color: white;
     }
+
+    .findInOtherBooks {
+      background: white;
+      color: $secondary;
+    }
   }
 
-  .form-check-input:not(:checked) ~ .form-check-label{
+  .form-check-input:not(:checked) ~ .form-check-label {
     background-color: white;
     //border-radius: 10px;
-}
+  }
 }

@@ -45,7 +45,7 @@ export const VerseDisplay = ({ val, showLength, onSearchInOtherBooks, isCartDisp
         {!isCartDisplay && (val.taken && val.availableBooks || val.bookInfo && val.availableBooks > 1) && 
             <div className="pt-1">
                 <span className="fontWeight900" style={{color: "black"}}>פסוק זה כבר נרכש</span>{' '}
-                    <Button onClick={onSearchInOtherBooks} className="mr-2"
+                    <Button onClick={onSearchInOtherBooks} className="mr-2 findInOtherBooks"
                         variant="secondary" size="sm">
                     מצא בספרי תורה אחרים
                 </Button>
