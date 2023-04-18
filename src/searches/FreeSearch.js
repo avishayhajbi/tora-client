@@ -127,8 +127,8 @@ export const FreeSearch = ({donate, book, selectedVerses, searchType, callback, 
             />
             {error && <p>{error}</p>}
             {verses.map((val, index) => {
-                return (<div key={`_${val._id}`} className='marginTop30px flex-row'>
-                    <Form.Group key={`_${val._id}`} className='margin15' controlId={`${val._id}}`}>
+                return (<div key={`_${index}`} className='marginTop30px flex-row'>
+                    <Form.Group className='margin15' controlId={`${val._id}}`}>
                         <Form.Check className={`verse-checkbox text-center`} type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}

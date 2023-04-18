@@ -127,7 +127,7 @@ export const FirstAndLastLetter = ({donate, book, selectedVerses, searchType, ca
             {verses.map((val, index) => {
                 return (
                     // <div key={`_${val._id}`} className='flex-row'>
-                    <Form.Group key={`_${val._id}`} className='margin15' controlId={`${val._id}}`}>
+                    <Form.Group key={`_${index}`} className='margin15' controlId={`${val._id}}`}>
                         <Form.Check className={`verse-checkbox text-center`} type='checkbox' value={val.id}
                                     onChange={(e) => selectedVerse(e, val)}
                                     disabled={val.taken}

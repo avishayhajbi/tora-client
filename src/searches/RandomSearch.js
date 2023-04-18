@@ -98,7 +98,7 @@ export const RandomSearch = ({donate, book, selectedVerses, searchType, callback
             {error && <p>{error}</p>}
             {verses.map((val, index) => {
                 return (
-                    <Form.Group key={`_${val._id}`} className='margin15' controlId={`${val._id}}`}>
+                    <Form.Group key={`_${index}`} className='margin15' controlId={`${val._id}}`}>
                     <Form.Check className={`verse-checkbox text-center`} type='checkbox' value={val.id}
                                 onChange={(e) => selectedVerse(e, val)}
                                 disabled={val.taken}

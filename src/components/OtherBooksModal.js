@@ -28,16 +28,12 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
     }, []);
 
     const updateSelected = (e, res) => {
+        let verses = res.verses;
         if (samePlace) {
-            const verses = res.verses.filter(verseInSamePlace);
-            // setSelectedBook(verses[0]);
-            delete verses[0]?.bookInfo?.image_url;
-            callback(verses[0], originalVerse);
-        } else {
-            //setSelectedBook(res.verses[0]);
-            delete res.verses[0]?.bookInfo?.image_url;
-            callback(res.verses[0], originalVerse);
+            verses = res.verses.filter(verseInSamePlace);
         }
+        delete verses[0]?.bookInfo?.image_url;
+        callback(verses[0], originalVerse);
         setShow(false);
     }
 
@@ -78,10 +74,7 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
         //     }
         // ]}
         >
-            {loading && <div
-                className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
-                <Spinner animation="border"/>
-            </div>}
+
             <Form onClick={onFormClick.bind(this)}>
                 {<Form.Group className='d-flex flex-100 margin15 flex-row' controlId={`sameGroup1`}>
                     <Form.Check className='flex-10 text-center'
@@ -119,6 +112,10 @@ const OtherBooksModal = ({searchType, callback, bookId, textWithout, originalVer
                 })}
                 </div>
             </Form>
+            {loading && <div
+                className='d-flex flex-column flex-100 layout-align-center-center justify-content-center align-content-center'>
+                <Spinner animation="border"/>
+            </div>}
         </MyModal>
     )
 }

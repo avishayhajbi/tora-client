@@ -198,7 +198,7 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
             {verses.map((values, index) => {
                 return (
                 // <div key={`_${index}`} className='marginTop30px flex-row'>
-                    <Form.Group className='margin15 ' controlId={`${index}`}>
+                    <Form.Group key={`_${index}`} className='margin15 ' controlId={`${index}`}>
                         <Form.Check className={`verse-checkbox text-center`} type='radio' value={index}
                                     onChange={(e) => selectedVerse(e, values)}
                                     label={getVersesView(values, index)}
