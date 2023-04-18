@@ -181,7 +181,7 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
         return (<div className={`text-right`}>
             {
                 values.map((val, valIndex) => 
-                        <VerseDisplay val={val} showLength={true} key={`${index}_${valIndex}`} />
+                        <VerseDisplay val={val} showLength={true} onSearchInOtherBooks={searchInOtherBooks.bind(this, index, valIndex, val)} key={`${index}_${valIndex}`} />
                 )
             }
         </div>)
