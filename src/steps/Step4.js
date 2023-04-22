@@ -33,6 +33,25 @@ export const Step4 = ({nextStep, app, location, actions}) => {
         getTotalAmount();
     }, [versesSelected])
 
+    useEffect(() => {
+        if (!app.selectedBook || !app.selectedBook._id) {
+            actions.updateModal({
+                show: true,
+                title: 'שים לב',
+                body: 'אנא בחר ספר',
+                buttons: [
+                    {
+                        name: 'לחץ כאן לבחירת ספר',
+                        callback: () => {
+                            window.location = '/2?step=2';
+                        }
+                    },
+                ],
+
+            });
+        }
+    }, [])
+
     const getSelectedSearchType = () => {
         switch (searchType) {
             case SearchTypes.firstAndLastLetter: {
