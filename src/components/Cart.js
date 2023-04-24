@@ -46,7 +46,7 @@ export const Cart = ({verses, actions}) => {
                         (${price})
                     `,
                                 callback: () => {
-                                    window.location.href = '/7?step=7';
+                                    window.location.href = '/6?step=6';
                                 }
                             },
                             {

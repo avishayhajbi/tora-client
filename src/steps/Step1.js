@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import NextButton from "../components/NextButton";
+import {BooksCategoriesValues} from "../config";
+import {Button} from "react-bootstrap";
 
 export const Step1 = ({nextStep}) => {
     return (
@@ -33,11 +35,24 @@ export const Step1 = ({nextStep}) => {
                 </li>
             </ol>
             <p className="paddBottom10px">
-                בלחיצה המשך אני מתנה בזה שאני שותפ/ה עם כל המשתתפים/ות בספר תורה זו.
+                בהמשך התהליך אני מתנה בזה שאני שותפ/ה עם כל המשתתפים/ות בספר תורה זו.
             </p>
-            <div className="width100">
+            {/*<div className="width100">
                 <NextButton clicked={nextStep} text={'לחץ למצווה'}/>
-            </div>
+            </div>*/}
+
+            {Object.keys(BooksCategoriesValues).map((key, i) => {
+                return (
+                    <Button
+                        key={key}
+                        variant="secondary"
+                        className="btn-block"
+                        onClick={() => nextStep({category: key})}
+                    >
+                        {BooksCategoriesValues[key]}
+                    </Button>
+                );
+            })}
         </div>
     )
 };

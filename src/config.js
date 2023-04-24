@@ -315,10 +315,10 @@ export const SearchTypes = {
 
 export const getSearchTypes = () => cloneDeep([
     {id: SearchTypes.firstAndLastLetter, name: 'לפי אות ראשונה ואות אחרונה של שמך בפסוק'},
-    {id: SearchTypes.byDate, name: 'פרשת עליה לתורה (חיפוש לפי תאריך)'},
     {id: SearchTypes.gematria, name: 'פסוק בגימטריה של שמך'},
-    {id: SearchTypes.verseYourName, name: 'פסוק עם שמך'},
     {id: SearchTypes.amount, name: 'מציאת פסוק ע״פ סכום'},
+    {id: SearchTypes.byDate, name: 'פרשת עליה לתורה (חיפוש לפי תאריך)'},
+    {id: SearchTypes.verseYourName, name: 'פסוק עם שמך'},
     {id: SearchTypes.random, name: 'רנדומלי'},
     {id: SearchTypes.freeSearch, name: 'חיפוש חופשי'},
     {id: SearchTypes.aliya, name: 'עליה'},

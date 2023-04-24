@@ -57,14 +57,14 @@ class ContactUs extends Component {
                     />
                 </div>
                 <h4 className='flex-100 padd15'>
-                    <a href='tel:0509031148'>
+                    <a href='tel:03-7788777'>
                         <FontAwesomeIcon
                             className="marginLeft5px"
                             icon={ICONS.faPhone}
                             color={"black"}
                         ></FontAwesomeIcon>
                         צור קשר -
-                        0509031148
+                        03-7788777
                     </a>
                 </h4>
             </div>

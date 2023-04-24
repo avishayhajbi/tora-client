@@ -126,7 +126,7 @@ export const Step5 = ({nextStep, app, actions}) => {
             checkAvail((response) => {
                 if (response.success) {
                     actions.addToCart(selectedVerses);
-                    window.location.href = "/2?step=2";
+                    window.location.href = "/1?step=1";
                 }
             }, (err) => {
                 actions.updateModal({

@@ -43,7 +43,7 @@ export const Step4 = ({nextStep, app, location, actions}) => {
                     {
                         name: 'לחץ כאן לבחירת ספר',
                         callback: () => {
-                            window.location = '/2?step=2';
+                            window.location = '/1?step=1';
                         }
                     },
                 ],
