@@ -74,10 +74,8 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
         const value = e.target.checked;
         const prevVerses = [];
          if (value === true) {
-            document.querySelectorAll('input[type="radio"]').forEach(v => {
-                v.checked = false
-            });
-            e.currentTarget.checked = true;
+             document.querySelectorAll('input[type="radio"]').forEach(v=> v.checked = false);
+             e.currentTarget.checked = true;
              if (values.find(v => v.taken)) {
                  actions.updateModal({
                      show: true,
@@ -85,6 +83,7 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
                      body: 'אחד מהפסוקים שבחרת כבר תפוס, אנא בחר ספר תורה אחר שבו תוכל לרכוש את הפסוק',
                      hideFooter: true,
                  });
+                 e.target.checked = false;
              } else {
                  prevVerses.push(...values);
              }
