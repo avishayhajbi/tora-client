@@ -19,12 +19,13 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     const [verses, setVerses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchLoading, setSearchLoading] = useState(false);
-    const [search, setSearch] = useState(100);
+    // const [search, setSearch] = useState(100);
     const [chosenVerses, setChosenVerses] = useState([]);
     const [replaceVerse, setReplaceVerse] = useState(null);
     const [error, setError] = useState('');
     const [hasMoreAnswers, setHasMoreAnswers] = useState(true);
-    const [radioValue, setRadioValue] = useState('1');
+    // const [radioValue, setRadioValue] = useState('1');
+    const [formValue, setFormValue] = useState({radioValue: '1', search: 100});
 
     const amountForm = getAmountForm();
     let timeoutRef = null;
@@ -41,13 +42,13 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
             setSkip(0);
             fetchVerses();
         }
-    }, [radioValue, search]);
+    }, [formValue]);
 
     const fetchVerses = () => {
-        const amount = Number(search) || 0;
+        const amount = Number(formValue.search) || 0;
         if (amount) {
             setError('');
-            rest.search(searchType, {amount, bookId: book?._id, skip, radioValue})
+            rest.search(searchType, {amount, bookId: book?._id, skip, radioValue: formValue.radioValue})
                 .then(response => {
                     console.log(response.data);
                     setVerses(prev => ([...prev, ...response.data]));
@@ -140,20 +141,21 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
 
     const submit = (data) => {
         if (
-            data.search.value !== String(search) ||
-            data.radioValue.value !== radioValue
+            data.search.value !== String(formValue.search) ||
+            data.radioValue.value !== formValue.radioValue
         ) {
             setSearchLoading(true);
             setVerses([]);
             setHasMoreAnswers(true);
             setSkip(0);
             setTimeout(() => {
-                if (data.search.value !== String(search)) {
-                    setSearch(() => data.search.value);
-                }
-                if (data.radioValue.value !== radioValue) {
-                    setRadioValue(() => data.radioValue.value);
-                }
+                setFormValue({
+                    search: data.search.value,
+                    radioValue: data.radioValue.value,
+                });
+                setChosenVerses([]);
+                actions.setSelectedVerses([]);
+                callback(0);
             }, 1000)
         }
 

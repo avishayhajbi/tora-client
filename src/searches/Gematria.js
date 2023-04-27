@@ -14,13 +14,14 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
     const [verses, setVerses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchLoading, setSearchLoading] = useState(false);
-    const [search, setSearch] = useState('');
+    // const [search, setSearch] = useState('');
     const [chosenVerses, setChosenVerses] = useState([]);
     const [replaceVerse, setReplaceVerse] = useState(null);
     const [gematri, setGematri] = useState(0);
     const [error, setError] = useState('');
     const [hasMoreAnswers, setHasMoreAnswers] = useState(true);
-    const [radioValue, setRadioValue] = useState('3');
+    // const [radioValue, setRadioValue] = useState('3');
+    const [formValue, setFormValue] = useState({radioValue: '1', search: ''});
 
     const freeSearchFormWithButtonsForm = freeSearchFormWithButtons();
     let timeoutRef = null;
@@ -36,14 +37,14 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
             setSkip(0);
             fetchVerses();
         }
-    }, [radioValue, search]);
+    }, [formValue]);
 
     const fetchVerses = () => {
-        const name = search.trim();
+        const name = formValue.search.trim();
         if (name) {
             setError('');
             setGematri(gematriyaLetters(name));
-            rest.search(searchType, {name, bookId: book?._id, skip, radioValue})
+            rest.search(searchType, {name, bookId: book?._id, skip, radioValue: formValue.radioValue})
                 .then(response => {
                     console.log(response.data);
                     setVerses(prev => ([...prev, ...response.data]));
@@ -61,12 +62,6 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
                     setSearchLoading(false);
                     setError('לא נמצאו תוצאות');
                 })
-        }
-    }
-
-    const getNewComplex = (e) => {
-        if (!loading) {
-            setRadioValue(e.currentTarget.value);
         }
     }
 
@@ -132,8 +127,8 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
 
     const submit = (data) => {
         if (
-            data.search.value !== search ||
-            data.radioValue.value !== radioValue
+            data.search.value !== formValue.search ||
+            data.radioValue.value !== formValue.radioValue
         ) {
             clearTimeout(timeoutRef);
             setSearchLoading(true);
@@ -141,12 +136,13 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
             setHasMoreAnswers(true);
             setSkip(0);
             timeoutRef = setTimeout(() => {
-                if (data.search.value !== search) {
-                    setSearch(data.search.value);
-                }
-                if (data.radioValue.value !== radioValue) {
-                    setRadioValue(data.radioValue.value);
-                }
+                setFormValue({
+                    search: data.search.value,
+                    radioValue: data.radioValue.value,
+                });
+                setChosenVerses([]);
+                actions.setSelectedVerses([]);
+                callback(0);
             }, 1000);
         }
     }

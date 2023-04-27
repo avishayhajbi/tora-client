@@ -24,11 +24,7 @@ export const Step4 = ({nextStep, app, location, actions}) => {
         const params = new URLSearchParams(location.search);
         setSearchType(params.get('searchType'));
     }, []);
-    useEffect(() => {
-        if (!app.donate.name) {
-            console.log('bad access');
-        }
-    }, [])
+
     useEffect(() => {
         getTotalAmount();
     }, [versesSelected])
