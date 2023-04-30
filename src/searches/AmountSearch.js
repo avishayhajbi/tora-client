@@ -15,7 +15,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import {VerseDisplay} from "../components/VerseDisplay";
 
 export const AmountSearch = ({donate, book, selectedVerses, searchType, callback, actions}) => {
-    const [skip, setSkip] = useState(0);
+    // const [skip, setSkip] = useState(0);
     const [verses, setVerses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchLoading, setSearchLoading] = useState(false);
@@ -30,6 +30,11 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     const amountForm = getAmountForm();
     let timeoutRef = null;
     // let axiosSession;
+
+    let skip = 0;
+    const setSkip = (newVal) => {
+        skip = newVal;
+    }
 
     useEffect(() => {
         actions.setSelectedVerses([]);
@@ -72,9 +77,7 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     }
 
     const fetchVersesWrapper = () => {
-        setSkip(() => {
-            return skip + 1;
-        })
+        setSkip(skip + 1);
         setLoading(true);
         fetchVerses();
     }

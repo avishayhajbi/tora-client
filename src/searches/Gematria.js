@@ -10,7 +10,7 @@ import {freeSearchFormWithButtons} from "../config";
 import MyForm from "../components/Form";
 
 export const Gematria = ({donate, book, selectedVerses, searchType, callback, actions}) => {
-    const [skip, setSkip] = useState(0);
+    // const [skip, setSkip] = useState(0);
     const [verses, setVerses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchLoading, setSearchLoading] = useState(false);
@@ -25,6 +25,11 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
 
     const freeSearchFormWithButtonsForm = freeSearchFormWithButtons();
     let timeoutRef = null;
+
+    let skip = 0;
+    const setSkip = (newVal) => {
+        skip = newVal;
+    }
 
     useEffect(() => {
         actions.setSelectedVerses([]);
@@ -177,9 +182,7 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
     }
 
     const fetchVersesWrapper = () => {
-        setSkip(() => {
-            return skip + 1;
-        })
+        setSkip(skip + 1);
         setLoading(true);
         fetchVerses();
     }
