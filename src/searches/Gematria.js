@@ -9,6 +9,7 @@ import {VerseDisplay} from "../components/VerseDisplay";
 import {freeSearchFormWithButtons} from "../config";
 import MyForm from "../components/Form";
 
+let skip = 0;
 export const Gematria = ({donate, book, selectedVerses, searchType, callback, actions}) => {
     // const [skip, setSkip] = useState(0);
     const [verses, setVerses] = useState([]);
@@ -26,7 +27,6 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
     const freeSearchFormWithButtonsForm = freeSearchFormWithButtons();
     let timeoutRef = null;
 
-    let skip = 0;
     const setSkip = (newVal) => {
         skip = newVal;
     }

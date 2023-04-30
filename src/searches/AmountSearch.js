@@ -14,6 +14,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import {VerseDisplay} from "../components/VerseDisplay";
 
+let skip = 0;
 export const AmountSearch = ({donate, book, selectedVerses, searchType, callback, actions}) => {
     // const [skip, setSkip] = useState(0);
     const [verses, setVerses] = useState([]);
@@ -31,7 +32,6 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     let timeoutRef = null;
     // let axiosSession;
 
-    let skip = 0;
     const setSkip = (newVal) => {
         skip = newVal;
     }
