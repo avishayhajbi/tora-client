@@ -26,7 +26,11 @@ export const Step4 = ({nextStep, app, location, actions}) => {
     }, []);
 
     useEffect(() => {
-        getTotalAmount();
+        if (versesSelected) {
+            getTotalAmount();
+        } else {
+            setAmount(0);
+        }
     }, [versesSelected])
 
     useEffect(() => {
