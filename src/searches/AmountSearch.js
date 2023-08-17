@@ -26,7 +26,7 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
     const [error, setError] = useState('');
     const [hasMoreAnswers, setHasMoreAnswers] = useState(true);
     // const [radioValue, setRadioValue] = useState('1');
-    const [formValue, setFormValue] = useState({radioValue: '1', search: 100});
+    const [formValue, setFormValue] = useState({radioValue: '1', search: ''});
 
     const amountForm = getAmountForm();
     let timeoutRef = null;

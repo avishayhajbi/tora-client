@@ -236,17 +236,21 @@ export const freeSearchFormWithButtons = () => {
         },
         // todo: adding complex buttons here
         radioValue: {
-            type: 'radio',
             value: '',
-            title: '',
-            settings: {multiple: false},
-            selected: '3',
+            title: 'מספר צירופים',
+            type: 'select',
+            settings: {},
             options: [
                 { value: 'צירוף 1', key: '1' },
                 { value: '2 צירופים', key: '2' },
                 { value: '3 צירופים', key: '3' },
                 { value: '4 צירופים', key: '4' },
                 { value: '5 צירופים', key: '5' },
+                { value: '6 צירופים', key: '6' },
+                { value: '7 צירופים', key: '7' },
+                { value: '8 צירופים', key: '8' },
+                { value: '9 צירופים', key: '9' },
+                { value: '10 צירופים', key: '10' },
             ]
         }
     }
@@ -255,13 +259,13 @@ export const freeSearchFormWithButtons = () => {
 export const getAmountForm = () => {
     let form = {
         search: {
-            value: '100',
+            value: '',
             title: 'חפש לפי סכום',
             placeholder: 'חפש לפי סכום',
             type: 'number',
             settings: {min: 0, required: true}
         },
-        radioValue: {
+       /* radioValue: {
             type: 'radio',
             value: '',
             title: '',
@@ -273,6 +277,24 @@ export const getAmountForm = () => {
                 { value: '3 צירופים', key: '3' },
                 { value: '4 צירופים', key: '4' },
                 { value: '5 צירופים', key: '5' },
+            ]
+        },*/
+        radioValue: {
+            value: '',
+            title: 'מספר צירופים',
+            type: 'select',
+            settings: {},
+            options: [
+                { value: 'צירוף 1', key: '1' },
+                { value: '2 צירופים', key: '2' },
+                { value: '3 צירופים', key: '3' },
+                { value: '4 צירופים', key: '4' },
+                { value: '5 צירופים', key: '5' },
+                { value: '6 צירופים', key: '6' },
+                { value: '7 צירופים', key: '7' },
+                { value: '8 צירופים', key: '8' },
+                { value: '9 צירופים', key: '9' },
+                { value: '10 צירופים', key: '10' },
             ]
         }
     }
