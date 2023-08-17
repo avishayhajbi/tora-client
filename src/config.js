@@ -237,20 +237,20 @@ export const freeSearchFormWithButtons = () => {
         // todo: adding complex buttons here
         radioValue: {
             value: '',
-            title: 'מספר צירופים',
+            title: 'מספר פסוקים',
             type: 'select',
             settings: {},
             options: [
-                { value: 'צירוף 1', key: '1' },
-                { value: '2 צירופים', key: '2' },
-                { value: '3 צירופים', key: '3' },
-                { value: '4 צירופים', key: '4' },
-                { value: '5 צירופים', key: '5' },
-                { value: '6 צירופים', key: '6' },
-                { value: '7 צירופים', key: '7' },
-                { value: '8 צירופים', key: '8' },
-                { value: '9 צירופים', key: '9' },
-                { value: '10 צירופים', key: '10' },
+                { value: 'פסוק 1', key: '1' },
+                { value: '2 פסוקים', key: '2' },
+                { value: '3 פסוקים', key: '3' },
+                { value: '4 פסוקים', key: '4' },
+                { value: '5 פסוקים', key: '5' },
+                { value: '6 פסוקים', key: '6' },
+                { value: '7 פסוקים', key: '7' },
+                { value: '8 פסוקים', key: '8' },
+                { value: '9 פסוקים', key: '9' },
+                { value: '10 פסוקים', key: '10' },
             ]
         }
     }
@@ -281,20 +281,20 @@ export const getAmountForm = () => {
         },*/
         radioValue: {
             value: '',
-            title: 'מספר צירופים',
+            title: 'מספר פסוקים',
             type: 'select',
             settings: {},
             options: [
-                { value: 'צירוף 1', key: '1' },
-                { value: '2 צירופים', key: '2' },
-                { value: '3 צירופים', key: '3' },
-                { value: '4 צירופים', key: '4' },
-                { value: '5 צירופים', key: '5' },
-                { value: '6 צירופים', key: '6' },
-                { value: '7 צירופים', key: '7' },
-                { value: '8 צירופים', key: '8' },
-                { value: '9 צירופים', key: '9' },
-                { value: '10 צירופים', key: '10' },
+                { value: 'פסוק 1', key: '1' },
+                { value: '2 פסוקים', key: '2' },
+                { value: '3 פסוקים', key: '3' },
+                { value: '4 פסוקים', key: '4' },
+                { value: '5 פסוקים', key: '5' },
+                { value: '6 פסוקים', key: '6' },
+                { value: '7 פסוקים', key: '7' },
+                { value: '8 פסוקים', key: '8' },
+                { value: '9 פסוקים', key: '9' },
+                { value: '10 פסוקים', key: '10' },
             ]
         }
     }
