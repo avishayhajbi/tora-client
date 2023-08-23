@@ -143,7 +143,7 @@ export const Gematria = ({donate, book, selectedVerses, searchType, callback, ac
             timeoutRef = setTimeout(() => {
                 setFormValue({
                     search: data.search.value,
-                    radioValue: data.radioValue.value,
+                    radioValue: data.radioValue.value || '1',
                 });
                 setChosenVerses([]);
                 actions.setSelectedVerses([]);

@@ -154,7 +154,7 @@ export const AmountSearch = ({donate, book, selectedVerses, searchType, callback
             setTimeout(() => {
                 setFormValue({
                     search: data.search.value,
-                    radioValue: data.radioValue.value,
+                    radioValue: data.radioValue.value || '1',
                 });
                 setChosenVerses([]);
                 actions.setSelectedVerses([]);
