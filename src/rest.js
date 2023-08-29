@@ -165,11 +165,15 @@ const REST = {
             .then(responseMiddleware)
     },
     updateBuyingVerses: (data) => {
-        return axios.post(`${DOMAIN}/verses`, data)
+        let token = '';
+        try {
+            token = store.getState().app.token
+        } catch (err) {}
+        return axios.post(`${DOMAIN}/verses`, data, {
+            headers: {...headers, token}
+        })
             .then(response => {
                 return response.data;
-            }, {
-                headers: {...headers}
             })
             .then(responseMiddleware)
     },
